@@ -43,3 +43,10 @@ if (isset($_POST['login'])){
         $connexion=null;
     }
 }
+
+//set admin var = true if user is logged
+$admin = false;
+if (isset($_SESSION["login"])){
+    $admin = true;
+}
+
