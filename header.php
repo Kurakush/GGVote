@@ -58,7 +58,7 @@ if (isset($_SESSION["login"])){
 <head>
     <meta charset="utf-8">
     <title>GGVote</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ggvote.css">
     <script>
     /**
      * Display authentication modal form : 
