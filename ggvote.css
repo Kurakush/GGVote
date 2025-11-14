@@ -4,9 +4,9 @@
     background-size: cover;
     position: fixed;
     top: 0;
-    left: 2.5%;
-    right: 2.5%;
-    width: 95%;
+    left:0;
+    right: 0;
+    width: 100%;
     z-index: 100;
     padding: 0px;
     align-items: center;
@@ -22,4 +22,12 @@
 .navbar li {
     float: left;
     border-right: 1px solid #bbb;
+}
+
+.logoGG{
+    border-radius: 15px;   /* arrondit les coins */
+    overflow: hidden;      /* évite que l’image déborde */
+    margin-top: 10px;
+    margin-left:20px;
+    margin-bottom: 10px;
 }
