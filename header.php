@@ -48,5 +48,7 @@ if (isset($_POST['login'])){
 $admin = false;
 if (isset($_SESSION["login"])){
     $admin = true;
+
+    //coucou
 }
 
