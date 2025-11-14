@@ -16,3 +16,4 @@ function dbconnect(){
     }
     return $connexion;
 }
+?>
