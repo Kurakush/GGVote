@@ -15,7 +15,7 @@ if (isset($_GET["disconnect"])){
 if (isset($_POST['login'])){
     if (isset($_POST["password"])){
         
-        $sql="SELECT COUNT(*) FROM admins"; 
+        $sql="SELECT COUNT(*) FROM admin"; 
 
         $connexion=dbconnect(); 
         if(!$connexion->query($sql)) {
@@ -24,7 +24,7 @@ if (isset($_POST['login'])){
         else{
             
             /* Query Prepare */
-            $sql = "SELECT * FROM admins WHERE login = :login AND password=:password";
+            $sql = "SELECT * FROM admin WHERE login_admin = :login AND mot_de_passe =:password";
             $query = $connexion->prepare($sql);
             $query->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
             $query->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
@@ -98,8 +98,30 @@ if (isset($_SESSION["login"])){
             ?>
         </ul>
     </div>
+
+    <!-- Authentication pour les différents espaces -->
+    <div id="loginModal" class="modal">
+  
+        <form id="loginForm" class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <div class="dlgheadcontainer">
+                <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <h1>Connectez vous !</h1>
+            </div>
+
+            <div class="dlgcontainer">
+                <label for="uname"><b>Login</b></label>
+                <input type="text" placeholder="Entrez votre identifiant" name="login" id="login" required>
+
+                <label for="psw"><b>Mot de passe</b></label>
+                <input type="password" placeholder="Entrez votre mot de passe" name="password" id="password" required>
+                    
+                <button type="submit" class="okbtn">Connexion</button>
+                <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
+
+            </div>
+
+        </form>
+    </div>
         
 </body>
 
-
-</html>
