@@ -82,6 +82,23 @@ if (isset($_SESSION["login"])){
     <!-- Barre d'header -->
     <div class="navbar">
         <ul>
+            <li class="logoGG"><img src="ggvoteSansFond.png" alt = "Logo GGVOTE" height="40px"></li>
+            <li class="title">GGVote</li>
+
+            <?php
+            if ($admin){
+                ?>
+                <li style="float:right"><a href="#" onclick="disconnect()">Déconnexion</a></li>
+                <?php
+            }
+            else{
+                ?>
+                <li style="float:right"><a href="#" onclick="authenticate()">Connexion</a></li>
+                <?php
+            }
+            ?>
+        </ul>
+    </div>
         
 </body>
 
