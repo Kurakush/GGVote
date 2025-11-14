@@ -52,3 +52,38 @@ if (isset($_SESSION["login"])){
     //coucou
 }
 
+?>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GGVote</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+    /**
+     * Display authentication modal form : 
+     */
+    function authenticate() {
+        // Display loginModal div and display it
+        let modal = document.getElementById('loginModal');
+        modal.style.display='block';
+    }
+
+    /**
+     * Disconnection
+     */
+    function disconnect() {
+        window.location.href = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" + '?disconnect=1';
+    }
+  </script>
+</head>
+
+<body>
+    <!-- Barre d'header -->
+    <div class="navbar">
+        <ul>
+        
+</body>
+
+
+</html>
