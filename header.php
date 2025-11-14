@@ -82,8 +82,7 @@ if (isset($_SESSION["login"])){
     <!-- Barre d'header -->
     <div class="navbar">
         <ul>
-            <li class="logoGG"><img src="ggvoteSansFond.png" alt = "Logo GGVOTE" height="40px"></li>
-            <li class="title">GGVote</li>
+            <li class="logoGG"><img src="ggvoteSansFond.png" alt = "Logo GGVOTE" height="100px"></li>
 
             <?php
             if ($admin){
