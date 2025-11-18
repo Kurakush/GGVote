@@ -1,6 +1,6 @@
 .navbar {
     overflow: hidden;
-    background-image:url(bannière.png);
+    background-image:url(images/bannière.png);
     background-size: cover;
     position: fixed;
     top: 0;
@@ -86,4 +86,8 @@
 span.psw {
     float: right;
     padding-top: 16px;
+}
+
+body{
+    background-color: #D9D9D9;
 }
