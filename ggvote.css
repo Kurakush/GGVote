@@ -90,7 +90,7 @@ span.psw {
 }
 
 body{
-    background-color: #303030;
+    background-color: #545454;
 }
 
 /* carousel */
@@ -122,14 +122,14 @@ body{
     display: inline-block;
     width: 16px;
     height: 16px;
-    background: #fff;
+    background: #D9D9D9;
     border-radius: 50px;
     margin: 0 0.2em 1em;
 }
 
 .carousel label:hover,
 .carousel label:focus {
-    background: #1c87c9;
+    background: #e31919;
 }
 
 .slide{
