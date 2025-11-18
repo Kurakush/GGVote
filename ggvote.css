@@ -1,6 +1,7 @@
 .navbar {
     overflow: hidden;
-    background-image:url(images/bannière.png);
+    /*background-image:url(images/bannière.png);*/
+    background-color: #303030;
     background-size: cover;
     position: fixed;
     top: 0;
