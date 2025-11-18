@@ -1,3 +1,5 @@
+/* header */
+
 .navbar {
     overflow: hidden;
     /*background-image:url(images/bannière.png);*/
@@ -167,10 +169,10 @@ body{
 
 footer {
     text-align: center;
-    background-color: #2d2d30;
+    background-color: #303030;
     color: #f5f5f5;
     padding: 32px;
-    font-family: Exo2, sans-serif;
+    font-family: 'Exo 2', sans-serif;
 }
 
 footer a {
