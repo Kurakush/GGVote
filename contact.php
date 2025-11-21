@@ -8,6 +8,9 @@ $query = $connexion->prepare($sql);
 $query->execute();
 $row_count = $query->rowCount();
 
+$message_ok ="";
+$message_erreur="";
+
 // Check the number of rows that match the SELECT statement 
 if($row_count!=1) 
 {
@@ -16,6 +19,37 @@ if($row_count!=1)
 else{ 
     $row = $query->fetch();
     $email = $row["email"];
+
+    // Traitement du formulaire
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        // récupération et validation des données
+        $nom = htmlspecialchars($_POST['nom']);
+        $email_user = htmlspecialchars($_POST['email']);
+        $sujet = htmlspecialchars($_POST['sujet']);
+        $message = htmlspecialchars($_POST['message']);
+        
+        // Validation des champs
+        if (empty($nom) || empty($email_user) || empty($sujet) || empty($message)) {
+            $message_erreur = "Tous les champs doivent être remplis.";
+        } else {
+            // Envoyer l'email
+            $to = $email;
+            $subject = "Contact GGVote: " . $sujet;
+            $body = "Nom: " . $nom . "\n";
+            $body .= "Email: " . $email_user . "\n\n";
+            $body .= "Message:\n" . $message;
+
+            $headers = "From: " . $email_user . "\r\n";
+            $headers .= "Reply-To: " . $email_user . "\r\n";
+
+            if (mail($to, $subject, $body, $headers)) {
+                $message_ok = "Votre message a été envoyé avec succès.";
+            } else {
+                $message_erreur = "Une erreur est survenue lors de l'envoi de votre message.";
+            }
+        }
+    }
 
     $connexion = null;
   ?> 
@@ -26,22 +60,22 @@ else{
     <p align="center">Avez-vous des questions sur GGVote ?</p>
 
         <div class="formcontact">
-            <form action="/action_page.php">
+            <form action="contact.php" method="post">
                 <label for="fname">Votre nom : </label>
-                <input type="text" id="fname" name="firstname" placeholder="Votre nom..">
+                <input type="text" id="fname" name="nom" placeholder="Votre nom..">
 
-                <label for="lname">Votre email : </label>
-                <input type="text" id="lname" name="lastname" placeholder="Votre email..">
-
-
-                <label for="lname">Sujet : </label>
-                <input type="text" id="lname" name="lastname" placeholder="Le sujet de votre message..">
+                <label for="email">Votre email : </label>
+                <input type="email" id="email" name="email" placeholder="Votre email..">
 
 
-                <label for="subject">Votre message : </label>
-                <textarea id="subject" name="subject" placeholder="Ecrivez ici.." style="height:200px"></textarea>
+                <label for="sujet">Sujet : </label>
+                <input type="text" id="sujet" name="sujet" placeholder="Le sujet de votre message..">
 
-                <input type="submit" class="okbtn" value="Submit">
+
+                <label for="message">Votre message : </label>
+                <textarea id="message" name="message" placeholder="Ecrivez ici.." style="height:200px"></textarea>
+
+                <input type="submit" class="okbtn" value="Envoyer">
             </form>
         </div>
 &nbsp;
