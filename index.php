@@ -48,8 +48,13 @@ require('header.php');
         </div>
 
         <div class="tuiles">
-            <img src="images/fortnite.jpg" alt="Fortnite">
+            <img src="images/fortnite1.png" alt="Fortnite">
             <h3>Fortnite</h3>
+        </div>
+
+        <div class="tuiles">
+            <img src="images/rocketleague.jpg" alt="Rocket League">
+            <h3>Rocket League</h3>
         </div>
     </div>
     
