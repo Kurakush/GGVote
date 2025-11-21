@@ -99,7 +99,7 @@ if (isset($_SESSION["login"])){
             ?>
             <li style ="float:right"><a href="contact.php">CONTACT</a></li>
             <li style="float:right"><a href="resultat.php">RÉSULTATS</a></li>
-            <li style="float:right"><a href="vote.php">VOTER</a></li>
+            <li style="float:right"><a href="voter.php">VOTER</a></li>
             <li style="float:right"><a href="index.php">ACCUEIL</a></li>
         </ul>
     </div>
