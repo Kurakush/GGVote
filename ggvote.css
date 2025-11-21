@@ -201,14 +201,15 @@
 }
 
 .okbtn:hover {
-    box-shadow: 0 0 14px rgba(0, 255, 198, 0.7);
+    box-shadow: 0 0 15px rgba(227, 25, 25, 0,8);
     transform: translateY(-1px);
     filter: brightness(1.05);
+    background : #ff2222;
 }
 
 .cancelbtn {
-    background: #261020;
-    color: #ff4b81;
+    background: #545454;
+    color: #D9D9D9;
     padding: 11px;
     border: 1px solid rgba(255, 75, 129, 0.7);
     border-radius: 8px;
@@ -222,7 +223,7 @@
 }
 
 .cancelbtn:hover {
-    background: #3a1025;
+    background: #707070;
     box-shadow: 0 0 10px rgba(255, 75, 129, 0.6);
 }
 
