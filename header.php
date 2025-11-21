@@ -123,6 +123,21 @@ if (isset($_SESSION["login"])){
 
         </form>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const radios = Array.from(document.querySelectorAll('input[id^="slide"]'));
+    if (radios.length === 0) return;
+
+    setInterval(() => {
+        // On cherche le slide actuellement sélectionné
+        const currentIndex = radios.findIndex(r => r.checked);
+        const nextIndex = (currentIndex + 1) % radios.length;
+        radios[nextIndex].checked = true;
+    }, 4000); // 4000 ms = 4 secondes entre chaque image
+});
+</script>
+
         
 </body>
 
