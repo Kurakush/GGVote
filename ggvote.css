@@ -243,6 +243,22 @@ p{
     margin-bottom: 15px;
 }
 
+/* compet section*/
+.compet {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #D9D9D9;
+    color: #303030;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+.compet h2 {
+    color: #303030;
+    font-family: 'Exo 2', sans-serif;
+}
+
 /* games section */
 
 .sections-jeux {
