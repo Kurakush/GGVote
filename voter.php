@@ -17,7 +17,7 @@ require('header.php');
 
 <div class="sections-jeux">
 
-    <a href="valorant.php" class="tuiles">
+    <a href="voter_valo.php" class="tuiles">
         <img src="images/valorant.jpg" alt="Valorant">
         <h3>Valorant</h3>
     </a>
@@ -27,17 +27,17 @@ require('header.php');
         <h3>League of Legends</h3>
     </a>
 
-    <a href="csgo.php" class="tuiles">
+    <a href="voter_csgo.php" class="tuiles">
         <img src="images/csgo.jpg" alt="CSGO">
         <h3>CSGO:2</h3>
     </a>
 
-    <a href="fortnite.php" class="tuiles">
+    <a href="voter_fortnite.php" class="tuiles">
         <img src="images/fortnite1.png" alt="Fortnite">
         <h3>Fortnite</h3>
     </a>
 
-    <a href="rocketleague.php" class="tuiles">
+    <a href="voter_rl.php" class="tuiles">
         <img src="images/rocketleague.jpg" alt="Rocket League">
         <h3>Rocket League</h3>
     </a>
