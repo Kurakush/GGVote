@@ -23,7 +23,7 @@ else{
     <div class="main">
 
     <h3>Nous contacter</h3>
-    <p align="center">Do you have any questions? You need a quote ?</p>
+    <p align="center">Avez-vous des questions sur GGVote</p>
 
         <div class="formcontact">
             <form action="/action_page.php">
