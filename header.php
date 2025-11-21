@@ -138,7 +138,7 @@ if (isset($_SESSION["login"])){
         const currentIndex = radios.findIndex(r => r.checked);
         const nextIndex = (currentIndex + 1) % radios.length;
         radios[nextIndex].checked = true;
-    }, 4000); // 4000 ms = 4 secondes entre chaque image
+    }, 5000); // 4000 ms = 4 secondes entre chaque image
 });
 </script>
 
