@@ -194,6 +194,8 @@ p{
     font-size: 16px;
 }
 
+/* about us section */
+
 .about-us {
     max-width: 800px;
     margin: 60px auto;
@@ -212,4 +214,42 @@ p{
     margin-bottom: 15px;
 }
 
+/* games section */
+
+.sections-jeux {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.tuiles{
+    width: 220px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default; /* pas clinique */
+}
+
+.tuiles:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.tuiles img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.tuiles h3 {
+    margin: 12px 0 15px;
+    font-size: 1.2em;
+    font-family : 'Exo 2', sans-serif;
+}
 
