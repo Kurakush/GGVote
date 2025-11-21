@@ -22,8 +22,8 @@ else{
 
     <div class="main">
 
-    <h3>Nous contacter</h3>
-    <p align="center">Avez-vous des questions sur GGVote</p>
+    <h1>Nous contacter</h1>
+    <p align="center">Avez-vous des questions sur GGVote ?</p>
 
         <div class="formcontact">
             <form action="/action_page.php">
@@ -45,26 +45,6 @@ else{
             </form>
         </div>
 &nbsp;
-
-        <div class="contactbar">
-            <table style="border:none;">
-                <tr>
-                    <td>
-                        <i class="fas fa-map-marker-alt fa-2x"></i>
-                        <p>My Garage, CA 94126, USA</p>
-                    </td>
-                    <td>
-                        <i class="fas fa-phone mt-4 fa-2x"></i>
-                        <p>+ 01 234 555 89</p>
-                    </td>
-                    <td>
-                        <i class="fas fa-envelope mt-4 fa-2x"></i>
-                        <p><?php echo $email ;?></p>
-                    </td>
-                </tr>
-            </table>
-            
-        </div>
     </div>
 
 <!--Section: Contact v.2-->
