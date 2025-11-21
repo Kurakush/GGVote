@@ -356,6 +356,25 @@ p{
     margin-bottom: 15px;
 }
 
+/* mode vote section */
+.modeVote{
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #121212;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.modeVote p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
 /* compet section*/
 .compet {
     max-width: 600px;
@@ -412,6 +431,55 @@ p{
     font-family : 'Exo 2', sans-serif;
 }
 
+/* call to action section */
+.cta-vote {
+    margin: 40px auto;
+    padding: 25px 30px;
+    max-width: 900px;
+    background: #303030;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    border: 1px solid #545454;
+}
+
+.cta-vote-text h2 {
+    margin: 0 0 10px 0;
+    color: #D9D9D9;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.6rem;
+}
+
+.cta-vote-text p {
+    margin: 0;
+    color: #D9D9D9;
+    font-family: 'Exo 2', sans-serif;
+    opacity: 0.9;
+}
+
+.cta-vote-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #e31919;
+    color: #D9D9D9;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+}
+
+.cta-vote-btn:hover {
+    background: #ff2525;
+    box-shadow: 0 0 12px rgba(227,25,25,0.8);
+    transform: translateY(-2px);
+}
 /* formulaire de contact */
 .formcontact input[type=text],
 select,
@@ -453,4 +521,41 @@ h3 {
     color : white;
     font-family : 'Exo 2', sans-serif;
 }
+
+/* modal video */
+.modal-video {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-video-content {
+    background: #000;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+}
+
+#gameVideo {
+    width: 800px;
+    height: 450px;
+    border: none;
+}
+
+.video-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+}
+
 

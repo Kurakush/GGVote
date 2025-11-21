@@ -32,32 +32,83 @@ require('header.php');
 
     <h1>Jeux disponibles</h1>
     <div class="sections-jeux">
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/vlcIs06x7A8')">
             <img src="images/valorant.jpg" alt="Valorant">
             <h3>Valorant</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/SwlBTktgMM4')">
             <img src="images/lol.png" alt="League of Legends">
             <h3>League of Legends</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/2S6vYJl6nkA')">
             <img src="images/csgo.jpg" alt="CSGO">
             <h3>CSGO:2</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/yaenw0_QBhQ')">
             <img src="images/fortnite1.png" alt="Fortnite">
             <h3>Fortnite</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/kctwBwN-ht0')">
             <img src="images/rocketleague.jpg" alt="Rocket League">
             <h3>Rocket League</h3>
+            <p>Cliquez ici</p>
         </div>
     </div>
+
+    <div id="videoModal" class="modal-video">
+    <div class="modal-video-content">
+        <span class="video-close" onclick="closeVideo()">&times;</span>
+        <iframe id="gameVideo" width="560" height="315"
+            src=""
+            title="Gameplay"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+    </div>
+
+    <br><br>
     
+    <div class="modeVote">
+        <h1>Comment est élu le meilleur joueur ?</h1>
+        <p>Dans GGVote, nous avons retenu un <strong>scrutin uninominal majoritaire à un tour</strong>, un mode de vote simple, transparent et parfaitement adapté aux compétitions e-sport. Chaque électeur dispose d’un unique vote, qu’il attribue au joueur qu’il considère comme le meilleur. À la fin de la période de vote, le candidat ayant obtenu le plus grand nombre de voix est déclaré vainqueur. Ce système garantit une compréhension immédiate des résultats, une participation intuitive pour les utilisateurs, et respecte les principes fondamentaux d’un vote sécurisé : unicité, anonymat, et intégrité du dépouillement.
+    </div>
+
+    <div class="cta-vote">
+    <div class="cta-vote-text">
+        <h2>Prêt à voter pour votre champion ?</h2>
+        <p>
+            Connectez-vous, choisissez votre jeu préféré et soutenez le joueur 
+            qui mérite le titre de MVP. Chaque vote compte&nbsp;!
+        </p>
+    </div>
+    <a href="voter.php" class="cta-vote-btn">Aller voter</a>
+</div>
+
+
+    <script>
+    function openVideo(url) {
+        // on ajoute ?autoplay=1 pour lancer la vidéo direct
+        const urlAvecAutoplay = url + '?autoplay=1&rel=0';
+
+        document.getElementById("videoModal").style.display = "flex";
+        document.getElementById("gameVideo").src = urlAvecAutoplay;
+    }
+
+    function closeVideo() {
+        document.getElementById("videoModal").style.display = "none";
+        document.getElementById("gameVideo").src = "";
+    }
+    </script>
 </div>
 
 
