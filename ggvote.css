@@ -247,7 +247,7 @@ p{
 
 .sections-jeux {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 30px;
@@ -262,7 +262,8 @@ p{
     color: white;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    cursor: default; /* pas clinique */
+    text-decoration: none;
+    display: block;
 }
 
 .tuiles:hover {
