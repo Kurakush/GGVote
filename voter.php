@@ -22,7 +22,7 @@ require('header.php');
         <h3>Valorant</h3>
     </a>
 
-    <a href="lol.php" class="tuiles">
+    <a href="voter_lol.php" class="tuiles">
         <img src="images/lol.png" alt="League of Legends">
         <h3>League of Legends</h3>
     </a>
