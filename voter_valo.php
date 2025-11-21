@@ -51,7 +51,7 @@ require('header.php');
             <h3>RieNs</h3>
             <p> Joueur pro chez HERETICS </p>
         </div>
-    </div>
+    
 
     <div class="tuiles">
             <img src="images/hyunmin.jpg" alt="hyunmin">
@@ -60,10 +60,11 @@ require('header.php');
         </div>
 
     <div class="tuiles">
-            <img src="images/jawgemo.jpeg" alt="jawgemo">
+            <img src="images/jawgemo.jpg" alt="jawgemo">
             <h3>Jawgemo</h3>
             <p> Joueur pro chez G2 </p>
         </div>
+</div>
     
 </div>
 
