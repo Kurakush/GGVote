@@ -15,23 +15,27 @@ require('header.php');
 </div>
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/valorant.jpg" alt="Valorant">
-            <h3>Valorant</h3>
+            <img src="images/aspas.webp" alt="aspas">
+            <h3>Aspas</h3>
+            <p> Joueur pro chez MIBR </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/lol.png" alt="League of Legends">
-            <h3>League of Legends</h3>
+            <img src="images/brawk.webp" alt="brawk">
+            <h3>Brawk</h3>
+            <p> Joueur pro chez NRG </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/csgo.jpg" alt="CSGO">
-            <h3>CSGO:2</h3>
+            <img src="images/kaajak.jpg" alt="kaajak">
+            <h3>Kaajak</h3>
+            <p> Joueur pro chez FNATIC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/fortnite1.png" alt="Fortnite">
-            <h3>Fortnite</h3>
+            <img src="images/cortezia.jpg" alt="cortezia">
+            <h3>Cortezia</h3>
+            <p> Joueur pro chez MIBR </p>
         </div>
 
         <div class="tuiles">
