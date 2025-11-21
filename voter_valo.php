@@ -37,12 +37,34 @@ require('header.php');
             <h3>Cortezia</h3>
             <p> Joueur pro chez MIBR </p>
         </div>
+</div>
+<div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/rocketleague.jpg" alt="Rocket League">
-            <h3>Rocket League</h3>
+            <img src="images/noman.jpg" alt="noman">
+            <h3>NoMan</h3>
+            <p> Joueur pro chez XLG </p>
         </div>
-    </div>
+
+        <div class="tuiles">
+            <img src="images/riens.jpg" alt="riens">
+            <h3>RieNs</h3>
+            <p> Joueur pro chez HERETICS </p>
+        </div>
+    
+
+    <div class="tuiles">
+            <img src="images/hyunmin.jpg" alt="hyunmin">
+            <h3>HYUNMIN</h3>
+            <p> Joueur pro chez DRX </p>
+        </div>
+
+    <div class="tuiles">
+            <img src="images/jawgemo.jpg" alt="jawgemo">
+            <h3>Jawgemo</h3>
+            <p> Joueur pro chez G2 </p>
+        </div>
+</div>
     
 </div>
 
