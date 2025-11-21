@@ -76,13 +76,20 @@ require('header.php');
     </div>
     </div>
 
+    <br><br>
+    
+    <div class="modeVote">
+        <h1>Comment est élu le meilleur joueur ?</h1>
+        <p>Dans GGVote, nous avons retenu un scrutin uninominal majoritaire à un tour, un mode de vote simple, transparent et parfaitement adapté aux compétitions e-sport. Chaque électeur dispose d’un unique vote, qu’il attribue au joueur qu’il considère comme le meilleur. À la fin de la période de vote, le candidat ayant obtenu le plus grand nombre de voix est déclaré vainqueur. Ce système garantit une compréhension immédiate des résultats, une participation intuitive pour les utilisateurs, et respecte les principes fondamentaux d’un vote sécurisé : unicité, anonymat, et intégrité du dépouillement.
+    </div>
+
     <script>
     function openVideo(url) {
-        const videoId = url.split("v=")[1]; // récupère l'ID après v=
-        const embedUrl = "https://www.youtube.com/embed/" + videoId;
+        // on ajoute ?autoplay=1 pour lancer la vidéo direct
+        const urlAvecAutoplay = url + '?autoplay=1&rel=0';
 
         document.getElementById("videoModal").style.display = "flex";
-        document.getElementById("gameVideo").src = url;
+        document.getElementById("gameVideo").src = urlAvecAutoplay;
     }
 
     function closeVideo() {

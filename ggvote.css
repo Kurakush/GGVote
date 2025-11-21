@@ -356,6 +356,25 @@ p{
     margin-bottom: 15px;
 }
 
+/* mode vote section */
+.modeVote{
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #121212;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.modeVote p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
 /* compet section*/
 .compet {
     max-width: 600px;
