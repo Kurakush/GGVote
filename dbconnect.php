@@ -1,6 +1,6 @@
 <?php 
 define('USER',"root");
-define('PASSWD',"Totoeve147");
+define('PASSWD',"");
 define('SERVER',"localhost");
 define('BASE',"ggvote");
 
