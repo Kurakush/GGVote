@@ -64,116 +64,167 @@
     margin-bottom: 10px;
 }
 
+/* --- MODAL OVERLAY --- */
 .modal {
-    display: none; 
+    display: none; /* caché par défaut */
     position: fixed;
     z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(120, 60, 255, 0.3), rgba(0, 0, 0, 0.95));
+    backdrop-filter: blur(6px);
     justify-content: center;
     align-items: center;
 }
 
-/* Contenu du modal */
+/* --- CONTENU DU MODAL --- */
 .modal-content {
-    background: #ececec;
+    background: radial-gradient(circle at top left, #1b1b2f 0%, #0b0b13 45%, #050509 100%);
     margin: auto;
-    border-radius: 10px;
+    border-radius: 16px;
     width: 420px;
     padding: 0;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.25);
+    border: 1px solid rgba(0, 255, 200, 0.4);
     animation: showModal 0.3s ease-out;
     font-family: 'Exo 2', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* léger effet néon sur les bords */
+.modal-content::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #00f2ff, #ff00ff, #00ff9f);
+    opacity: 0.12;
+    pointer-events: none;
 }
 
 /* Animation */
 @keyframes showModal {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from { transform: translateY(-20px) scale(0.97); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-/* Header du modal */
+/* --- HEADER DU MODAL --- */
 .dlgheadcontainer {
-    background: #444;
-    color: white;
-    padding: 20px;
+    background: linear-gradient(135deg, #141427, #3b1f5c);
+    color: #f5f5f5;
+    padding: 20px 24px;
     text-align: center;
-    border-radius: 10px 10px 0 0;
+    border-radius: 16px 16px 0 0;
     position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+}
+
+.dlgheadcontainer h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Croix pour fermer */
 .close {
     position: absolute;
-    right: 20px;
-    top: 12px;
-    font-size: 28px;
+    right: 18px;
+    top: 10px;
+    font-size: 26px;
     cursor: pointer;
-    color: #ffffff;
+    color: #f0f0f0;
+    transition: transform 0.15s ease, color 0.15s ease;
 }
 
 .close:hover {
-    color: #ff5050;
+    color: #ff4b81;
+    transform: scale(1.15);
 }
 
-/* Corps */
+/* --- CORPS --- */
 .dlgcontainer {
-    padding: 25px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
+    color: #e0e0e0;
+}
+
+.dlgcontainer label {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #bbbbff;
 }
 
 /* Inputs */
 .dlgcontainer input[type=text],
 .dlgcontainer input[type=password] {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
+    padding: 11px 12px;
+    border-radius: 8px;
+    border: 1px solid #232341;
+    background: #050510;
+    color: #f5f5f5;
     font-size: 15px;
     outline: none;
-    transition: 0.2s;
+    transition: 0.18s ease;
 }
 
-.dlgcontainer input:focus {
-    border-color: #04AA6D;
+.dlgcontainer input[type=text]::placeholder,
+.dlgcontainer input[type=password]::placeholder {
+    color: #666a90;
 }
 
-/* Boutons */
+.dlgcontainer input[type=text]:focus,
+.dlgcontainer input[type=password]:focus {
+    border-color: #00ffc6;
+    box-shadow: 0 0 8px rgba(0, 255, 198, 0.6);
+}
+
+/* --- BOUTONS --- */
 .okbtn {
-    background: #04AA6D;
-    color: white;
-    padding: 12px;
+    background: linear-gradient(135deg, #00ffc6, #00b2ff);
+    color: #050510;
+    padding: 11px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
 .okbtn:hover {
-    background: #028d58;
+    box-shadow: 0 0 14px rgba(0, 255, 198, 0.7);
+    transform: translateY(-1px);
+    filter: brightness(1.05);
 }
 
 .cancelbtn {
-    background: #d9534f;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
+    background: #261020;
+    color: #ff4b81;
+    padding: 11px;
+    border: 1px solid rgba(255, 75, 129, 0.7);
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    transition: 0.15s ease;
 }
 
 .cancelbtn:hover {
-    background: #bb2e2b;
+    background: #3a1025;
+    box-shadow: 0 0 10px rgba(255, 75, 129, 0.6);
 }
+
 
 span.psw {
     float: right;
