@@ -65,54 +65,114 @@
 }
 
 .modal {
-    display: none;
-    /* Hidden by default */
+    display: none; 
     position: fixed;
-    /* Stay in place */
-    z-index: 200;
-    /* Sit on top */
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-    padding-top: 60px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
 }
 
-
-/* Modal Content/Box */
-
+/* Contenu du modal */
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto;
-    /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 500px;
-    /* Could be more or less, depending on screen size */
+    background: #ececec;
+    margin: auto;
+    border-radius: 10px;
+    width: 420px;
+    padding: 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    animation: showModal 0.3s ease-out;
+    font-family: 'Exo 2', sans-serif;
 }
 
-/* Center the image and position the close button */
+/* Animation */
+@keyframes showModal {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
+/* Header du modal */
 .dlgheadcontainer {
-    text-align: center;
-    margin: 24px 12px 12px 12px;
-    position: relative;
-    background-color: #333;
-}
-
-.dlgheadcontainer h1 {
+    background: #444;
     color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    position: relative;
 }
 
+/* Croix pour fermer */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.close:hover {
+    color: #ff5050;
+}
+
+/* Corps */
 .dlgcontainer {
-    padding: 16px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Inputs */
+.dlgcontainer input[type=text],
+.dlgcontainer input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.dlgcontainer input:focus {
+    border-color: #04AA6D;
+}
+
+/* Boutons */
+.okbtn {
+    background: #04AA6D;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.okbtn:hover {
+    background: #028d58;
+}
+
+.cancelbtn {
+    background: #d9534f;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.cancelbtn:hover {
+    background: #bb2e2b;
 }
 
 span.psw {
