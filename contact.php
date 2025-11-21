@@ -58,6 +58,11 @@ else{
 
     <h1>Nous contacter</h1>
     <p align="center">Avez-vous des questions sur GGVote ?</p>
+        <?php if ($message_ok): ?>
+            <p class="msg-ok"><?= $message_ok ?></p>
+        <?php elseif ($message_erreur): ?>
+            <p class="msg-erreur"><?= $message_erreur ?></p>
+        <?php endif; ?>
 
         <div class="formcontact">
             <form action="contact.php" method="post">
@@ -65,8 +70,7 @@ else{
                 <input type="text" id="fname" name="nom" placeholder="Votre nom..">
 
                 <label for="email">Votre email : </label>
-                <input type="email" id="email" name="email" placeholder="Votre email..">
-
+                <input type="text" id="email" name="email" placeholder="Votre email..">
 
                 <label for="sujet">Sujet : </label>
                 <input type="text" id="sujet" name="sujet" placeholder="Le sujet de votre message..">
