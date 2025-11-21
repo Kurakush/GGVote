@@ -27,19 +27,19 @@ else{
 
         <div class="formcontact">
             <form action="/action_page.php">
-                <label for="fname">Your Name : </label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                <label for="fname">Votre nom : </label>
+                <input type="text" id="fname" name="firstname" placeholder="Votre nom..">
 
-                <label for="lname">Your Email : </label>
-                <input type="text" id="lname" name="lastname" placeholder="Your email..">
-
-
-                <label for="lname">Subject : </label>
-                <input type="text" id="lname" name="lastname" placeholder="The subject of your message..">
+                <label for="lname">Votre email : </label>
+                <input type="text" id="lname" name="lastname" placeholder="Votre email..">
 
 
-                <label for="subject">Your Message : </label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                <label for="lname">Sujet : </label>
+                <input type="text" id="lname" name="lastname" placeholder="Le sujet de votre message..">
+
+
+                <label for="subject">Votre message : </label>
+                <textarea id="subject" name="subject" placeholder="Ecrivez ici.." style="height:200px"></textarea>
 
                 <input type="submit" class="okbtn" value="Submit">
             </form>
