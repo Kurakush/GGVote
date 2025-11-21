@@ -37,7 +37,7 @@ require('header.php');
             <h3>Valorant</h3>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/SwlBTktgMM4')">
             <img src="images/lol.png" alt="League of Legends">
             <h3>League of Legends</h3>
         </div>
@@ -57,7 +57,34 @@ require('header.php');
             <h3>Rocket League</h3>
         </div>
     </div>
-    
+
+    <div id="videoModal" class="modal-video">
+    <div class="modal-video-content">
+        <span class="video-close" onclick="closeVideo()">&times;</span>
+        <iframe id="gameVideo" width="560" height="315"
+            src=""
+            title="Gameplay"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+    </div>
+
+    <script>
+    function openVideo(url) {
+        const videoId = url.split("v=")[1]; // récupère l'ID après v=
+        const embedUrl = "https://www.youtube.com/embed/" + videoId;
+
+        document.getElementById("videoModal").style.display = "flex";
+        document.getElementById("gameVideo").src = url;
+    }
+
+    function closeVideo() {
+        document.getElementById("videoModal").style.display = "none";
+        document.getElementById("gameVideo").src = "";
+    }
+    </script>
 </div>
 
 
