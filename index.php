@@ -32,29 +32,34 @@ require('header.php');
 
     <h1>Jeux disponibles</h1>
     <div class="sections-jeux">
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/vlcIs06x7A8')">
             <img src="images/valorant.jpg" alt="Valorant">
             <h3>Valorant</h3>
+            <p>Cliquez ici</p>
         </div>
 
         <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/SwlBTktgMM4')">
             <img src="images/lol.png" alt="League of Legends">
             <h3>League of Legends</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/2S6vYJl6nkA')">
             <img src="images/csgo.jpg" alt="CSGO">
             <h3>CSGO:2</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/yaenw0_QBhQ')">
             <img src="images/fortnite1.png" alt="Fortnite">
             <h3>Fortnite</h3>
+            <p>Cliquez ici</p>
         </div>
 
-        <div class="tuiles">
+        <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/kctwBwN-ht0')">
             <img src="images/rocketleague.jpg" alt="Rocket League">
             <h3>Rocket League</h3>
+            <p>Cliquez ici</p>
         </div>
     </div>
 
