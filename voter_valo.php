@@ -52,6 +52,18 @@ require('header.php');
             <p> Joueur pro chez HERETICS </p>
         </div>
     </div>
+
+    <div class="tuiles">
+            <img src="images/hyunmin.jpg" alt="hyunmin">
+            <h3>HYUNMIN</h3>
+            <p> Joueur pro chez DRX </p>
+        </div>
+
+    <div class="tuiles">
+            <img src="images/jawgemo.jpeg" alt="jawgemo">
+            <h3>Jawgemo</h3>
+            <p> Joueur pro chez G2 </p>
+        </div>
     
 </div>
 
