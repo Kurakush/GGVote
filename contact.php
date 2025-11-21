@@ -22,7 +22,7 @@ else{
 
     <div class="main">
 
-    <h3>Contact Us</h3>
+    <h3>Nous contacter</h3>
     <p align="center">Do you have any questions? You need a quote ?</p>
 
         <div class="formcontact">
