@@ -88,16 +88,20 @@ if (isset($_SESSION["login"])){
             <?php
             if ($admin){
                 ?>
-                <li style="float:right"><a href="#" onclick="disconnect()">Déconnexion</a></li>
+                <li style="float:right"><a href="#" onclick="disconnect()">DECONNEXION</a></li>
                 <?php
             }
             else{
                 ?>
-                <li style="float:right"><a href="#" onclick="authenticate()">Connexion</a></li>
+                <li style="float:right"><a href="#" onclick="authenticate()">CONNEXION</a></li>
                 <?php
             }
             ?>
-        </ul>
+            <li style ="float:right"><a href="contact.php">CONTACT</a></li>
+            <li style="float:right"><a href="resultat.php">RÉSULTATS</a></li>
+            <li style="float:right"><a href="vote.php">VOTER</a></li>
+            <li style="float:right"><a href="index.php">ACCUEIL</a></li>
+            </ul>
     </div>
 
     <!-- Authentication pour les différents espaces -->
