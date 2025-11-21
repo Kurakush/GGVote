@@ -3,7 +3,7 @@ require('header.php');
 $connexion=dbconnect(); 
 
 
-$sql = "SELECT * FROM admins WHERE contact=1";
+$sql = "SELECT * FROM admin WHERE contact=1";
 $query = $connexion->prepare($sql);
 $query->execute();
 $row_count = $query->rowCount();
