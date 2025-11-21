@@ -8,4 +8,16 @@ require('header.php');
         <p>Voter pour élir le MVP de Valorant par compétitions !</p>
           <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
         </p>
-    </div>
+</div>
+
+<div class="compet">
+        <h2>Champions Valorant</h2>
+</div>
+
+<div class="compet">
+        <h2>VCT EMEA</h2>
+</div>
+
+<div class="compet">
+        <h2>VCT PACIFIC</h2>
+</div>
