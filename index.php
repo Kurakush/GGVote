@@ -88,7 +88,7 @@ require('header.php');
         <h2>Prêt à voter pour votre champion ?</h2>
         <p>
             Connectez-vous, choisissez votre jeu préféré et soutenez le joueur 
-            qui mérite le titre de meilleur compétiteur. Chaque vote compte&nbsp;!
+            qui mérite le titre de MVP. Chaque vote compte&nbsp;!
         </p>
     </div>
     <a href="voter.php" class="cta-vote-btn">Aller voter</a>
