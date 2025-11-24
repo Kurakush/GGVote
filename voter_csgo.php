@@ -126,32 +126,32 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>VCT PACIFIC</h2>
+        <h2>Perfect World Shanghai Major 2024</h2>
 </div>
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/aspas.webp" alt="aspas">
-            <h3>Aspas</h3>
-            <p> Joueur pro chez MIBR </p>
+            <img src="images/donk.jpg" alt="donk">
+            <h3>Donk</h3>
+            <p> Joueur pro chez Team Spirit </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/brawk.webp" alt="brawk">
-            <h3>Brawk</h3>
-            <p> Joueur pro chez NRG </p>
+            <img src="images/zywoo.jpg" alt="zywoo">
+            <h3>Zywoo</h3>
+            <p> Joueur pro chez Vitality </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur pro chez FNATIC </p>
+            <img src="images/niko.avif" alt="niko">
+            <h3>Niko</h3>
+            <p> Joueur pro chez G2 </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/cortezia.jpg" alt="cortezia">
-            <h3>Cortezia</h3>
-            <p> Joueur pro chez MIBR </p>
+            <img src="images/monesy.jpg" alt="monesy">
+            <h3>Monesy</h3>
+            <p> Joueur pro chez G2 </p>
         </div>
 </div>
 <div class="sections-jeux">
