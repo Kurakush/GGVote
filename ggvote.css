@@ -201,7 +201,7 @@
 }
 
 .okbtn:hover {
-    box-shadow: 0 0 15px rgba(227, 25, 25, 0,8);
+    box-shadow: 0 0 15px rgba(227, 25, 25, 0.8);
     transform: translateY(-1px);
     filter: brightness(1.05);
     background : #ff2222;

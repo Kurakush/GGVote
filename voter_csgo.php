@@ -74,54 +74,54 @@ require('header.php');
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/derke.jpg" alt="derke">
-            <h3>Derke</h3>
-            <p> Joueur pro chez Team Vitality </p>
+            <img src="images/zywoo.jpg" alt="zywoo">
+            <h3>Zywoo</h3>
+            <p> Joueur pro chez Vitality </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/miniboo.jpg" alt="miniboo">
-            <h3>Miniboo</h3>
-            <p> Joueur pro chez Team Heretics </p>
+            <img src="images/donk.jpg" alt="donk">
+            <h3>Donk</h3>
+            <p> Joueur pro chez Team Spirit </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/koalanoob.jpg" alt="koalanoob">
-            <h3>Koalanoob</h3>
-            <p> Joueur pro chez Natus Vincere </p>
+            <img src="images/senzu.avif" alt="senzu">
+            <h3>Senzu</h3>
+            <p> Joueur pro chez The MongolZ </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/xeus.jpg" alt="xeus">
-            <h3>Xeus</h3>
-            <p> Joueur pro chez FUT Esports </p>
+            <img src="images/ropz.jpg" alt="ropz">
+            <h3>Ropz</h3>
+            <p> Joueur pro chez Vitality </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur pro chez FNATIC </p>
+            <img src="images/mezi.jpg" alt="mezi">
+            <h3>Mezii</h3>
+            <p> Joueur pro chez Vitality </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur pro chez HERETICS </p>
+            <img src="images/910.jpg" alt="910">
+            <h3>910</h3>
+            <p> Joueur pro chez The MongolZ </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur pro chez DRX </p>
+            <img src="images/nqz.jpg" alt="nqz">
+            <h3>nqz</h3>
+            <p> Joueur pro chez paiN Gaming  </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/jawgemo.jpg" alt="jawgemo">
-            <h3>Jawgemo</h3>
-            <p> Joueur pro chez G2 </p>
+            <img src="images/simple.jpg" alt="simple">
+            <h3>s1mple</h3>
+            <p> Joueur pro chez FaZe Clan </p>
         </div>
 </div>
 
