@@ -11,13 +11,13 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>Champions Valorant</h2>
+        <h2> Worlds </h2>
 </div>
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/aspas.webp" alt="aspas">
-            <h3>Aspas</h3>
-            <p> Joueur pro chez MIBR </p>
+            <img src="images/chovy.webp" alt="chovy">
+            <h3>Chovy</h3>
+            <p> Joueur pro chez GEN.G </p>
         </div>
 
         <div class="tuiles">
@@ -69,7 +69,7 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>VCT EMEA</h2>
+        <h2>MSI</h2>
 </div>
 
 <div class="sections-jeux">
@@ -126,7 +126,7 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>VCT PACIFIC</h2>
+        <h2>First Stand </h2>
 </div>
 
 <div class="sections-jeux">
