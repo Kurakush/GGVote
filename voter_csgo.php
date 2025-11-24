@@ -11,7 +11,7 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>PGL Major Copenhagen</h2>
+        <h2>PGL Major Copenhagen 2024</h2>
 </div>
 <div class="sections-jeux">
         <div class="tuiles">
@@ -69,7 +69,7 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>VCT EMEA</h2>
+        <h2>BLAST.tv Austin Major 2025</h2>
 </div>
 
 <div class="sections-jeux">
