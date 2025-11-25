@@ -3,7 +3,7 @@ require('header.php');
 ?>
 
 <div class="about-us">
-        <img src="images/lol.png" alt="Valorant" width=200px height= 200px>
+        <img src="images/lol.png" alt="lol" width=384px height=216px >
         <h1>MVP League of Legends</h1>
         <p>Voter pour élir le MVP de League of Legends par compétitions !</p>
           <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
