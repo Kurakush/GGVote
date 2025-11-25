@@ -133,51 +133,51 @@ require('header.php');
         <div class="tuiles">
             <img src="images/donk.jpg" alt="donk">
             <h3>Donk</h3>
-            <p> Joueur pro chez Team Spirit </p>
+            <p> Joueur chez Team Spirit </p>
         </div>
 
         <div class="tuiles">
             <img src="images/zywoo.jpg" alt="zywoo">
             <h3>Zywoo</h3>
-            <p> Joueur pro chez Vitality </p>
+            <p> Joueur chez Vitality </p>
         </div>
 
         <div class="tuiles">
             <img src="images/niko.avif" alt="niko">
             <h3>Niko</h3>
-            <p> Joueur pro chez G2 </p>
+            <p> Joueur chez G2 </p>
         </div>
 
         <div class="tuiles">
             <img src="images/monesy.jpg" alt="monesy">
             <h3>Monesy</h3>
-            <p> Joueur pro chez G2 </p>
+            <p> Joueur chez G2 </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/noman.jpg" alt="noman">
-            <h3>NoMan</h3>
-            <p> Joueur pro chez XLG </p>
+            <img src="images/icy.jpg" alt="icy">
+            <h3>ICY</h3>
+            <p> Joueur chez Cloud9 </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur pro chez HERETICS </p>
+            <img src="images/fame.jpg" alt="fame">
+            <h3>fame</h3>
+            <p> Joueur chez Virtus.pro </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur pro chez DRX </p>
+            <img src="images/flamez.jpg" alt="flamez">
+            <h3>flameZ</h3>
+            <p> Joueur chez Vitality </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/jawgemo.jpg" alt="jawgemo">
-            <h3>Jawgemo</h3>
-            <p> Joueur pro chez G2 </p>
+            <img src="images/spinx.jpg" alt="spinx">
+            <h3>Spinx</h3>
+            <p> Joueur chez Vitality </p>
         </div>
 </div>
