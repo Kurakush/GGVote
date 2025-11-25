@@ -3,9 +3,9 @@ require('header.php');
 ?>
 
 <div class="about-us">
-        <img src="images/valorant.jpg" alt="Valorant" width=200px height= 200px>
-        <h1>MVP Valorant</h1>
-        <p>Voter pour élir le MVP de Valorant par compétitions !</p>
+        <img src="images/lol.png" alt="Valorant" width=200px height= 200px>
+        <h1>MVP League of Legends</h1>
+        <p>Voter pour élir le MVP de League of Legends par compétitions !</p>
           <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
         </p>
 </div>
@@ -18,51 +18,59 @@ require('header.php');
             <img src="images/chovy.webp" alt="chovy">
             <h3>Chovy</h3>
             <p> Joueur pro chez GEN.G </p>
+            <p> Mid-laner </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/brawk.webp" alt="brawk">
-            <h3>Brawk</h3>
-            <p> Joueur pro chez NRG </p>
+            <img src="images/ruler.png" alt="ruler">
+            <h3>Ruler</h3>
+            <p> Joueur chez GEN.G </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur pro chez FNATIC </p>
+            <img src="images/kiin.jpg" alt="kiin">
+            <h3>Kiin</h3>
+            <p> Joueur chez GEN.G </p>
+            <p> Top-laner </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/cortezia.jpg" alt="cortezia">
-            <h3>Cortezia</h3>
-            <p> Joueur pro chez MIBR </p>
+            <img src="images/faker.webp" alt="faker">
+            <h3>Faker</h3>
+            <p> Joueur chez T1 </p>
+            <p> Mid-laner </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/noman.jpg" alt="noman">
-            <h3>NoMan</h3>
-            <p> Joueur pro chez XLG </p>
+            <img src="images/gumayusi.webp" alt="gumayusi">
+            <h3>Gumayusi</h3>
+            <p> Joueur chez HLE </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur pro chez HERETICS </p>
+            <img src="images/knight.jpg" alt="knight">
+            <h3>Knight</h3>
+            <p> Joueur chez BLG </p>
+            <p> Mid-laner</p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur pro chez DRX </p>
+            <img src="images/bdd.jpg" alt="bdd">
+            <h3>BDD</h3>
+            <p> Joueur chez KT Rolster </p>
+            <p> Mid-laner </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/jawgemo.jpg" alt="jawgemo">
-            <h3>Jawgemo</h3>
-            <p> Joueur pro chez G2 </p>
+            <img src="images/cuzz.jpg" alt="cuzz">
+            <h3>Cuzz</h3>
+            <p> Joueur chez KT Rolster</p>
+            <p> Jungler </p>
         </div>
 </div>
     
