@@ -181,3 +181,7 @@ require('header.php');
             <p> Joueur chez VITALITY </p>
         </div>
 </div>
+
+<?php
+require('footer.php');
+?>
