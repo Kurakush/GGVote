@@ -17,25 +17,25 @@ require('header.php');
         <div class="tuiles">
             <img src="images/jL.jpg" alt="jL">
             <h3>jL</h3>
-            <p> Joueur pro chez NAVI </p>
+            <p> Joueur chez NAVI </p>
         </div>
 
         <div class="tuiles">
             <img src="images/monesy.jpg" alt="monesy">
             <h3>mONESY</h3>
-            <p> Joueur pro chez Falcons </p>
+            <p> Joueur chez FALCONS </p>
         </div>
 
         <div class="tuiles">
             <img src="images/donk.jpg" alt="donk">
             <h3>donk</h3>
-            <p> Joueur pro chez Team Spirit </p>
+            <p> Joueur chez TEAM SPIRIT </p>
         </div>
 
         <div class="tuiles">
             <img src="images/niko.avif" alt="niko">
             <h3>NiKo</h3>
-            <p> Joueur pro chez G2 </p>
+            <p> Joueur chez G2 </p>
         </div>
 </div>
 <div class="sections-jeux">
@@ -43,26 +43,26 @@ require('header.php');
         <div class="tuiles">
             <img src="images/zywoo.jpg" alt="zywoo">
             <h3>ZywOo</h3>
-            <p> Joueur pro chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
             <img src="images/broky.jpg" alt="broky">
             <h3>broky</h3>
-            <p> Joueur pro chez FaZe Clan </p>
+            <p> Joueur chez FAZE CLAN </p>
         </div>
     
 
     <div class="tuiles">
             <img src="images/bit.jpg" alt="bit">
             <h3>b1t</h3>
-            <p> Joueur pro chez NAVI </p>
+            <p> Joueur chez NAVI </p>
         </div>
 
     <div class="tuiles">
             <img src="images/frozen.jpg" alt="frozen">
             <h3>frozen</h3>
-            <p> Joueur pro chez FaZe Clan </p>
+            <p> Joueur chez FAZE CLAN </p>
         </div>
 </div>
     
@@ -76,25 +76,25 @@ require('header.php');
         <div class="tuiles">
             <img src="images/zywoo.jpg" alt="zywoo">
             <h3>Zywoo</h3>
-            <p> Joueur pro chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
             <img src="images/donk.jpg" alt="donk">
             <h3>Donk</h3>
-            <p> Joueur pro chez Team Spirit </p>
+            <p> Joueur chez TEAM SPIRIT </p>
         </div>
 
         <div class="tuiles">
             <img src="images/senzu.avif" alt="senzu">
             <h3>Senzu</h3>
-            <p> Joueur pro chez The MongolZ </p>
+            <p> Joueur chez THE MONGOLZ </p>
         </div>
 
         <div class="tuiles">
             <img src="images/ropz.jpg" alt="ropz">
             <h3>Ropz</h3>
-            <p> Joueur pro chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 </div>
 <div class="sections-jeux">
@@ -102,26 +102,26 @@ require('header.php');
         <div class="tuiles">
             <img src="images/mezi.jpg" alt="mezi">
             <h3>Mezii</h3>
-            <p> Joueur pro chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
             <img src="images/910.jpg" alt="910">
             <h3>910</h3>
-            <p> Joueur pro chez The MongolZ </p>
+            <p> Joueur chez THE MONGOLZ </p>
         </div>
     
 
     <div class="tuiles">
             <img src="images/nqz.jpg" alt="nqz">
             <h3>nqz</h3>
-            <p> Joueur pro chez paiN Gaming  </p>
+            <p> Joueur chez PAIN GAMING </p>
         </div>
 
     <div class="tuiles">
             <img src="images/simple.jpg" alt="simple">
             <h3>s1mple</h3>
-            <p> Joueur pro chez FaZe Clan </p>
+            <p> Joueur chez FAZE CLAN </p>
         </div>
 </div>
 
@@ -133,13 +133,13 @@ require('header.php');
         <div class="tuiles">
             <img src="images/donk.jpg" alt="donk">
             <h3>Donk</h3>
-            <p> Joueur chez Team Spirit </p>
+            <p> Joueur chez TEAM SPIRIT </p>
         </div>
 
         <div class="tuiles">
             <img src="images/zywoo.jpg" alt="zywoo">
             <h3>Zywoo</h3>
-            <p> Joueur chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
@@ -159,25 +159,25 @@ require('header.php');
         <div class="tuiles">
             <img src="images/icy.jpg" alt="icy">
             <h3>ICY</h3>
-            <p> Joueur chez Cloud9 </p>
+            <p> Joueur chez CLOUD9 </p>
         </div>
 
         <div class="tuiles">
             <img src="images/fame.jpg" alt="fame">
             <h3>fame</h3>
-            <p> Joueur chez Virtus.pro </p>
+            <p> Joueur chez VIRTUS.PRO </p>
         </div>
     
 
     <div class="tuiles">
             <img src="images/flamez.jpg" alt="flamez">
             <h3>flameZ</h3>
-            <p> Joueur chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 
     <div class="tuiles">
             <img src="images/spinx.jpg" alt="spinx">
             <h3>Spinx</h3>
-            <p> Joueur chez Vitality </p>
+            <p> Joueur chez VITALITY </p>
         </div>
 </div>
