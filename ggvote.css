@@ -307,23 +307,68 @@ body{
 }
 
 /* footer */
-
-footer {
-    text-align: center;
-    background-color: #303030;
-    color: #f5f5f5;
-    padding: 32px;
+.gg-footer {
+    background: #303030;
+    padding: 40px 25px;
+    color: #D9D9D9;
     font-family: 'Exo 2', sans-serif;
+    margin-top: 60px;
+    box-shadow: 0 -4px 25px rgba(0,0,0,0.4);
+    border-top: 2px solid #e31919;
 }
 
-footer a {
-    color: #f5f5f5;
+.footer-content {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
 }
 
-footer a:hover {
-    color: #777;
+/* Titre du footer */
+.footer-title {
+    font-size: 2rem;
+    margin: 0 0 12px;
+    color: #e31919;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-shadow: 0 0 12px rgba(227,25,25,0.7);
+}
+
+/* Petit texte d'intro */
+.footer-desc {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    opacity: 0.9;
+}
+
+/* Droits d’auteur */
+.footer-authors p {
+    margin: 6px 0;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* Liens */
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    color: #D9D9D9;
     text-decoration: none;
+    margin: 0 12px;
+    font-weight: 600;
+    transition: 0.2s;
+    padding: 6px 10px;
+    border-radius: 5px;
 }
+
+.footer-links a:hover {
+    color: #fff;
+    background: #e31919;
+    box-shadow: 0 0 10px rgba(227,25,25,0.7);
+}
+
 
 h1{
     color: white;
