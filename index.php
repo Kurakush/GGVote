@@ -83,7 +83,10 @@ require('header.php');
     
     <div class="modeVote">
         <h1>Comment est élu le meilleur joueur ?</h1>
-        <p>Dans GGVote, nous avons retenu un <strong>scrutin uninominal majoritaire à un tour</strong>, un mode de vote simple, transparent et parfaitement adapté aux compétitions e-sport. Chaque électeur dispose d’un unique vote, qu’il attribue au joueur qu’il considère comme le meilleur. À la fin de la période de vote, le candidat ayant obtenu le plus grand nombre de voix est déclaré vainqueur. Ce système garantit une compréhension immédiate des résultats, une participation intuitive pour les utilisateurs, et respecte les principes fondamentaux d’un vote sécurisé : unicité, anonymat, et intégrité du dépouillement.
+        <p>Dans GGVote, nous avons retenu un <strong>scrutin uninominal majoritaire à un tour</strong>, un mode de vote simple, transparent et parfaitement adapté aux compétitions e-sport. </p>
+        <p>Chaque électeur dispose d’un unique vote, qu’il attribue au joueur qu’il considère comme le meilleur.</p>
+        <p>À la fin de la période de vote, le candidat ayant obtenu le plus grand nombre de voix est déclaré vainqueur.</p>
+        <p>Ce système garantit une compréhension immédiate des résultats, une participation intuitive pour les utilisateurs, et respecte les principes fondamentaux d’un vote sécurisé : unicité, anonymat, et intégrité du dépouillement. </p>
     </div>
 
     <div class="cta-vote">
