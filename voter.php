@@ -43,3 +43,7 @@ require('header.php');
     </a>
 
 </div>
+
+<?php 
+require('footer.php');
+?>

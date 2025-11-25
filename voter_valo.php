@@ -181,3 +181,7 @@ require('header.php');
             <p> Joueur chez DRX </p>
         </div>
 </div>
+
+<?php
+require('footer.php');
+?>

@@ -13,6 +13,7 @@
     z-index: 100;
     padding: 0px;
     align-items: center;
+    position: relative;
 }
 
 .navbar ul {
@@ -55,6 +56,16 @@
     color: #1e1e2f;
 }
 
+.navbar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #e31919;
+    box-shadow: 0 0 12px rgba(227, 25, 25, 0.8);
+}
 
 .logoGG{
     border-radius: 15px;   /* arrondit les coins */
@@ -422,22 +433,43 @@ p{
 }
 
 /* mode vote section */
-.modeVote{
-    max-width: 800px;
+
+.modeVote {
+    max-width: 900px;
     margin: 60px auto;
-    padding: 30px;
-    background: #121212;
-    color: #fff;
+    padding: 40px;
+    background: #1a1a1a;
     text-align: center;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border-radius: 18px;
+    color: #D9D9D9;
+    box-shadow: 0 0 18px rgba(227, 25, 25, 0.4);
+    border: 2px solid #e31919;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Effet néon subtil autour */
+.modeVote::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(227,25,25,0.5), transparent 60%);
+    opacity: 0.25;
+    z-index: -1;
+}
+
+/* Titre néon */
+.modeVote h1 {
+    color: #e31919;
+    text-shadow: 0 0 8px rgba(227,25,25,0.8);
+    margin: 20px 0;
+}
+
+/* Texte */
 .modeVote p {
-    font-size: 1.1em;
-    line-height: 1.7;
+    font-size: 1.2em;
     opacity: 0.9;
-    margin-bottom: 15px;
 }
 
 /* compet section*/
