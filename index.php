@@ -2,6 +2,9 @@
 require('header.php');
 ?>
 
+<br>
+<br>
+
 <div class="main">
     <div class="slider-container">
         <div class="carousel">
