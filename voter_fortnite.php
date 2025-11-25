@@ -3,7 +3,7 @@ require('header.php');
 ?>
 
 <div class="about-us">
-        <img src="images/fortnite1.png" alt="fortnite" width=300px height= 200px>
+        <img src="images/fortniteVoter.png" alt="fortnite" width=368px height= 260px>
         <h1>MVP CSGO:2</h1>
         <p>Voter pour élir le MVP de CSGO:2 par compétitions !</p>
           <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
