@@ -147,53 +147,61 @@ require('header.php');
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/meiy.jpg" alt="meiy">
-            <h3>Meiy</h3>
-            <p> Joueur pro chez DFM </p>
+            <img src="images/zeka.jpg" alt="zeka">
+            <h3>Zeka</h3>
+            <p> Joueur chez HLE </p>
+            <p> Mid-laner </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur pro chez DRX </p>
+            <img src="images/zeus.jpg" alt="zeus">
+            <h3>Zeus</h3>
+            <p> Joueur chez HLE </p>
+            <p> Top-laner </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/jemkin.jpg" alt="jemkin">
-            <h3>Jemkin</h3>
-            <p> Joueur pro chez RRQ </p>
+            <img src="images/viper.jpg" alt="viper">
+            <h3>Viper</h3>
+            <p> Joueur chez HLE </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/karon.jpg" alt="karon">
-            <h3>Karon</h3>
-            <p> Joueur pro chez GEN.G </p>
+            <img src="images/delight.jpg" alt="delight">
+            <h3>Delight</h3>
+            <p> Joueur chez HLE </p>
+            <p> Support </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/something.jpg" alt="something">
-            <h3>Something</h3>
-            <p> Joueur pro chez Paper Rex </p>
+            <img src="images/peanut.jpg" alt="peanut">
+            <h3>Peanut</h3>
+            <p> Joueur chez HLE </p>
+            <p> Jungler </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/d4v41.jpg" alt="d4v41">
-            <h3>D4v41</h3>
-            <p> Joueur pro chez Paper Rex </p>
+            <img src="images/kanavi.jpg" alt="kanavi">
+            <h3>Kanavi</h3>
+            <p> Joueur chez TES </p>
+            <p> Jungler </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/meteor.jpg" alt="meteor">
-            <h3>Meteor</h3>
-            <p> Joueur pro chez T1 </p>
+            <img src="images/canna.jpg" alt="canna">
+            <h3>Canna</h3>
+            <p> Joueur chez TES </p>
+            <p> Top-laner </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/maKo.jpg" alt="mako">
-            <h3>MaKo</h3>
-            <p> Joueur pro chez DRX </p>
+            <img src="images/jackeylove.jpg" alt="jackeylove">
+            <h3>JackeyLove</h3>
+            <p> Joueur chez TES </p>
+            <p> ADC </p>
         </div>
 </div>
