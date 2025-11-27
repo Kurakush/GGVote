@@ -512,6 +512,8 @@ p{
     cursor: pointer;
     border: 2px solid transparent;
     position: relative;
+    text-decoration: none;       /* enlève le soulignement sur toute la tuile */
+    color: inherit;              /* garde la bonne couleur du texte */
 }
 
 /* Effet hover gaming : glow rouge */
@@ -537,6 +539,7 @@ p{
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
+    text-decoration: none;
 }
 
 /* Sous-texte / indication (ex : Cliquez ici) */
