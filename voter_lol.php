@@ -82,54 +82,62 @@ require('header.php');
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/derke.jpg" alt="derke">
-            <h3>Derke</h3>
-            <p> Joueur pro chez Team Vitality </p>
+            <img src="images/gumayusi.webp" alt="gumayusi">
+            <h3>Gumayusi</h3>
+            <p> Joueur chez HLE </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/miniboo.jpg" alt="miniboo">
-            <h3>Miniboo</h3>
-            <p> Joueur pro chez Team Heretics </p>
+            <img src="images/doggo.jpg" alt="doggo">
+            <h3>Doggo</h3>
+            <p> Joueur chez CFO </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/koalanoob.jpg" alt="koalanoob">
-            <h3>Koalanoob</h3>
-            <p> Joueur pro chez Natus Vincere </p>
+            <img src="images/ruler.png" alt="ruler">
+            <h3>Ruler</h3>
+            <p> Joueur chez GEN.G </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/xeus.jpg" alt="xeus">
-            <h3>Xeus</h3>
-            <p> Joueur pro chez FUT Esports </p>
+            <img src="images/knight.jpg" alt="knight">
+            <h3>Knight</h3>
+            <p> Joueur chez BLG </p>
+            <p> Mid-laner </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur pro chez FNATIC </p>
+            <img src="images/supa.jpg" alt="supa">
+            <h3>Supa</h3>
+            <p> Joueur chez KOI </p>
+            <p> ADC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur pro chez HERETICS </p>
+            <img src="images/keria.jpg" alt="keria">
+            <h3>Keria</h3>
+            <p> Joueur chez T1 </p>
+            <p> Support </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/alfajer.jpg" alt="alfajer">
-            <h3>Alfajer</h3>
-            <p> Joueur pro chez FNATIC </p>
+            <img src="images/elk.jpg" alt="elk">
+            <h3>Elk</h3>
+            <p> Joueur chez BLG </p>
+            <p> ADC </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/boo.jpg" alt="boo">
-            <h3>Boo</h3>
-            <p> Joueur pro chez Heretics </p>
+            <img src="images/hope.jpg" alt="hope">
+            <h3>Hope</h3>
+            <p> Joueur chez AL </p>
+            <p> ADC </p>
         </div>
 </div>
 
