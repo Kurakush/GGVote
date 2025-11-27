@@ -6,7 +6,6 @@ require('header.php');
         <img src="images/fortniteVoter.png" alt="fortnite" width=368px height= 260px>
         <h1>MVP Fortnite</h1>
         <p>Voter pour élir les MVP de Fortnite par compétitions !</p>
-        <p>Pour ce jeu, nous donnerons les <strong>4 meilleurs duos.</strong></p>
           <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
         </p>
 </div>
@@ -18,19 +17,16 @@ require('header.php');
         <div class="tuiles">
             <img src="images/pink.jpg" alt="pinq">
             <h3>Pinq</h3>
-            <p> Joueur chez Onyx Ravens </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/monesy.jpg" alt="monesy">
-            <h3>mONESY</h3>
-            <p> Joueur chez FALCONS </p>
+            <img src="images/setty.jpg" alt="setty">
+            <h3>Setty</h3>
         </div>
 
         <div class="tuiles">
-            <img src="images/donk.jpg" alt="donk">
-            <h3>donk</h3>
-            <p> Joueur chez TEAM SPIRIT </p>
+            <img src="images/malibuca.jpg" alt="malibuca">
+            <h3>Malibuca</h3>
         </div>
 
         <div class="tuiles">
