@@ -205,3 +205,7 @@ require('header.php');
             <p> ADC </p>
         </div>
 </div>
+
+<?php
+require('footer.php');
+?>
