@@ -12,13 +12,13 @@ require('header.php');
 </div>
 
 <div class="compet">
-        <h2>PGL Major Copenhagen 2024</h2>
+        <h2>FNCS Major – Solo Victory Cup</h2>
 </div>
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/jL.jpg" alt="jL">
-            <h3>jL</h3>
-            <p> Joueur chez NAVI </p>
+            <img src="images/pink.jpg" alt="pinq">
+            <h3>Pinq</h3>
+            <p> Joueur chez Onyx Ravens </p>
         </div>
 
         <div class="tuiles">
@@ -131,11 +131,9 @@ require('header.php');
 </div>
 
 <div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/donk.jpg" alt="donk">
-            <h3>Donk</h3>
-            <p> Joueur chez TEAM SPIRIT </p>
-        </div>
+       
+</div>
+
 
         <div class="tuiles">
             <img src="images/zywoo.jpg" alt="zywoo">
