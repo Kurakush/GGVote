@@ -128,57 +128,59 @@ require('header.php');
 
 <br><br>
 <div class="compet">
-        <h2>Perfect World Shanghai Major 2024</h2>
+        <h2>Cash Cups Solo - Majors Seasonnelles</h2>
 </div>
 
 <div class="sections-jeux">
-       
-</div>
-
-
         <div class="tuiles">
-            <img src="images/zywoo.jpg" alt="zywoo">
-            <h3>Zywoo</h3>
-            <p> Joueur chez VITALITY </p>
+            <img src="images/malibuca.jpg" alt="malibuca">
+            <h3>Malibuca</h3>
+            <p> Joueur chez FALCONS </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/niko.avif" alt="niko">
-            <h3>Niko</h3>
-            <p> Joueur chez G2 </p>
+            <img src="images/merstach.jpg" alt="merstach">
+            <h3>Merstach</h3>
+            <p> Joueur chez FALCONS </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/monesy.jpg" alt="monesy">
-            <h3>Monesy</h3>
-            <p> Joueur chez G2 </p>
+            <img src="images/setty.jpg" alt="setty">
+            <h3>Setty</h3>
+            <p> Joueur chez BL </p>
+        </div>
+
+        <div class="tuiles">
+            <img src="images/queasy.jpg" alt="queasy">
+            <h3>Queasy</h3>
+            <p> Joueur chez GENTLEMATES </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/icy.jpg" alt="icy">
-            <h3>ICY</h3>
-            <p> Joueur chez CLOUD9 </p>
+            <img src="images/kami.jpg" alt="kami">
+            <h3>Kami</h3>
+            <p> Joueur chez AIQ </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/fame.jpg" alt="fame">
-            <h3>fame</h3>
-            <p> Joueur chez VIRTUS.PRO </p>
+            <img src="images/pink.jpg" alt="pinq">
+            <h3>Pinq</h3>
+            <p> Joueur chez HERETICS </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/flamez.jpg" alt="flamez">
-            <h3>flameZ</h3>
-            <p> Joueur chez VITALITY </p>
+            <img src="images/thomas.jpg" alt="thomas">
+            <h3>ThOmasHD</h3>
+            <p> Joueur chez ASTRALIS </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/spinx.jpg" alt="spinx">
-            <h3>Spinx</h3>
-            <p> Joueur chez VITALITY </p>
+            <img src="images/veno.jpg" alt="veno">
+            <h3>Veno</h3>
+            <p> Joueur chez XSET </p>
         </div>
 </div>
 
