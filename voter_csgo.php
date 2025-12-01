@@ -68,6 +68,7 @@ require('header.php');
     
 </div>
 
+<br><br>
 <div class="compet">
         <h2>BLAST.tv Austin Major 2025</h2>
 </div>
@@ -125,6 +126,7 @@ require('header.php');
         </div>
 </div>
 
+<br><br>
 <div class="compet">
         <h2>Perfect World Shanghai Major 2024</h2>
 </div>

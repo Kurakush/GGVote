@@ -76,6 +76,7 @@ require('header.php');
     
 </div>
 
+<br><br>
 <div class="compet">
         <h2>MSI</h2>
 </div>
@@ -141,6 +142,7 @@ require('header.php');
         </div>
 </div>
 
+<br><br>
 <div class="compet">
         <h2>First Stand </h2>
 </div>

@@ -68,6 +68,7 @@ require('header.php');
     
 </div>
 
+<br><br>
 <div class="compet">
         <h2>VCT EMEA</h2>
 </div>
@@ -124,6 +125,8 @@ require('header.php');
             <p> Joueur chez HERETICS </p>
         </div>
 </div>
+
+<br><br>
 
 <div class="compet">
         <h2>VCT PACIFIC</h2>
