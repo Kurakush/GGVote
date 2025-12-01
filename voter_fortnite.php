@@ -17,54 +17,58 @@ require('header.php');
         <div class="tuiles">
             <img src="images/pink.jpg" alt="pinq">
             <h3>Pinq</h3>
+            <p> Joueur chez HERETICS </p>
         </div>
 
         <div class="tuiles">
             <img src="images/setty.jpg" alt="setty">
             <h3>Setty</h3>
+            <p> Joueur chez BL </p>
         </div>
 
         <div class="tuiles">
             <img src="images/malibuca.jpg" alt="malibuca">
             <h3>Malibuca</h3>
+            <p> Joueur chez FALCONS
         </div>
 
         <div class="tuiles">
-            <img src="images/niko.avif" alt="niko">
-            <h3>NiKo</h3>
-            <p> Joueur chez G2 </p>
+            <img src="images/thomas.jpg" alt="thomas">
+            <h3>ThOmasHD</h3>
+            <p> Joueur chez ASTRALIS </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/zywoo.jpg" alt="zywoo">
-            <h3>ZywOo</h3>
-            <p> Joueur chez VITALITY </p>
+            <img src="images/merstach.jpg" alt="merstach">
+            <h3>Merstach</h3>
+            <p> Joueur chez FALCONS </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/broky.jpg" alt="broky">
-            <h3>broky</h3>
-            <p> Joueur chez FAZE CLAN </p>
+            <img src="images/queasy.jpg" alt="queasy">
+            <h3>Queasy</h3>
+            <p> Joueur chez GENTLEMATES </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/bit.jpg" alt="bit">
-            <h3>b1t</h3>
-            <p> Joueur chez NAVI </p>
+            <img src="images/alex.jpg" alt="alex">
+            <h3>Alex</h3>
+            <p> Joueur chez HEROIC </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/frozen.jpg" alt="frozen">
-            <h3>frozen</h3>
-            <p> Joueur chez FAZE CLAN </p>
+            <img src="images/kami.jpg" alt="kami">
+            <h3>Kami</h3>
+            <p> Joueur chez AIQ </p>
         </div>
 </div>
     
 </div>
 
+<br><br>
 <div class="compet">
         <h2>BLAST.tv Austin Major 2025</h2>
 </div>
