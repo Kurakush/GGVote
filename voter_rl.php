@@ -70,7 +70,7 @@ require('header.php');
 
 <br><br>
 <div class="compet">
-        <h2>VCT EMEA</h2>
+        <h2>RLCS Majors</h2>
 </div>
 
 <div class="sections-jeux">
