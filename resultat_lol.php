@@ -8,6 +8,19 @@ require('header.php');
         <p>Découvrez les MVP élus pour chaque compétitions !</p>
 </div>
 
+<div class="compet">
+        <h2> Worlds </h2>
+</div>
+
+<div class="compet">
+        <h2>MSI</h2>
+</div>
+
+<div class="compet">
+        <h2>First Stand </h2>
+</div>
+
+
 <?php
 require('footer.php');
 ?>
