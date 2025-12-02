@@ -97,7 +97,7 @@ require('header.php');
             qui mérite le titre de MVP. Chaque vote compte&nbsp;!
         </p>
     </div>
-    <a href="voter.php" class="cta-vote-btn">Aller voter</a>
+    <a href="#" class="cta-vote-btn" onclick="authenticate()">Aller voter</a>
 </div>
 
 
