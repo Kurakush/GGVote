@@ -2,6 +2,17 @@
 require('header.php');
 ?>
 
+<?php
+session_start();
+if (
+    !isset($_SESSION["electeur_email"]) &&   // pas électeur
+    !isset($_SESSION["login"])               // pas admin
+) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <div class="about-us">
         <h1>Comment voter ?</h1>
         <p>En tant qu'électeur vous posséderez un jeton de vote par compétition. Pour voter choisissez simplement la compétition qui vous intérresse, puis voter pour votre joueur(euse) favoris.
