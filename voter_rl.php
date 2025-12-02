@@ -75,54 +75,54 @@ require('header.php');
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/derke.jpg" alt="derke">
-            <h3>Derke</h3>
+            <img src="images/zen.jpg" alt="zen">
+            <h3>Zen</h3>
             <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/miniboo.jpg" alt="miniboo">
-            <h3>Miniboo</h3>
-            <p> Joueur chez HERETICS </p>
+            <img src="images/vatira.jpg" alt="vatira">
+            <h3>Vatira</h3>
+            <p> Joueur chez KC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/koalanoob.jpg" alt="koalanoob">
-            <h3>Koalanoob</h3>
-            <p> Joueur chez NAVI </p>
+            <img src="images/rise.jpg" alt="rise">
+            <h3>Rise</h3>
+            <p> Joueur chez OXYGEN </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/xeus.jpg" alt="xeus">
-            <h3>Xeus</h3>
-            <p> Joueur chez FUT ESPORTS </p>
+            <img src="images/joyo.jpg" alt="joyo">
+            <h3>Joyo</h3>
+            <p> Joueur chez MOIST </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur chez FNATIC </p>
+            <img src="images/beastmode.jpg" alt="beastmode">
+            <h3>Beastmode</h3>
+            <p> Joueur chez COMPLEXITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur chez HERETICS </p>
+            <img src="images/evoh.jpg" alt="evoh">
+            <h3>Evoh</h3>
+            <p> Joueur chez FAZE </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/alfajer.jpg" alt="alfajer">
-            <h3>Alfajer</h3>
-            <p> Joueur chez FNATIC </p>
+            <img src="images/monkeymoon.jpg" alt="monkeymoon">
+            <h3>Monkeymoon</h3>
+            <p> Joueur chez BDS </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/boo.jpg" alt="boo">
-            <h3>Boo</h3>
-            <p> Joueur chez HERETICS </p>
+            <img src="images/kaydop.jpg" alt="kaydop">
+            <h3>Kaydop</h3>
+            <p> Joueur chez VITALITY </p>
         </div>
 </div>
 
