@@ -3,21 +3,21 @@ require('header.php');
 ?>
 
 <div class="about-us">
-        <img src="images/lol.png" alt="lol" width=384px height= 216px>
-        <h1>RÉSULTATS League of Legends</h1>
+        <img src="images/rocketleague.jpg" alt="rl" width=384px height= 216px>
+        <h1>RÉSULTATS Rocket League</h1>
         <p>Découvrez les MVP élus pour chaque compétitions !</p>
 </div>
 
 <div class="compet">
-        <h2> Worlds </h2>
+        <h2>Rocket League Championship Series</h2>
 </div>
 
 <div class="compet">
-        <h2>MSI</h2>
+        <h2>RLCS Majors</h2>
 </div>
 
 <div class="compet">
-        <h2>First Stand </h2>
+        <h2>Esports World Cup</h2>
 </div>
 
 
