@@ -75,112 +75,112 @@ require('header.php');
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/derke.jpg" alt="derke">
-            <h3>Derke</h3>
+            <img src="images/zen.jpg" alt="zen">
+            <h3>Zen</h3>
             <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/miniboo.jpg" alt="miniboo">
-            <h3>Miniboo</h3>
-            <p> Joueur chez HERETICS </p>
+            <img src="images/vatira.jpg" alt="vatira">
+            <h3>Vatira</h3>
+            <p> Joueur chez KC </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/koalanoob.jpg" alt="koalanoob">
-            <h3>Koalanoob</h3>
-            <p> Joueur chez NAVI </p>
+            <img src="images/rise.jpg" alt="rise">
+            <h3>Rise</h3>
+            <p> Joueur chez OXYGEN </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/xeus.jpg" alt="xeus">
-            <h3>Xeus</h3>
-            <p> Joueur chez FUT ESPORTS </p>
+            <img src="images/joyo.jpg" alt="joyo">
+            <h3>Joyo</h3>
+            <p> Joueur chez MOIST </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur chez FNATIC </p>
+            <img src="images/beastmode.jpg" alt="beastmode">
+            <h3>Beastmode</h3>
+            <p> Joueur chez COMPLEXITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur chez HERETICS </p>
+            <img src="images/evoh.jpg" alt="evoh">
+            <h3>Evoh</h3>
+            <p> Joueur chez FAZE </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/alfajer.jpg" alt="alfajer">
-            <h3>Alfajer</h3>
-            <p> Joueur chez FNATIC </p>
+            <img src="images/monkeymoon.jpg" alt="monkeymoon">
+            <h3>Monkeymoon</h3>
+            <p> Joueur chez BDS </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/boo.jpg" alt="boo">
-            <h3>Boo</h3>
-            <p> Joueur chez HERETICS </p>
+            <img src="images/kaydop.jpg" alt="kaydop">
+            <h3>Kaydop</h3>
+            <p> Joueur chez VITALITY </p>
         </div>
 </div>
 
 <br><br>
 <div class="compet">
-        <h2>VCT PACIFIC</h2>
+        <h2>Esports World Cup</h2>
 </div>
 
 <div class="sections-jeux">
         <div class="tuiles">
-            <img src="images/meiy.jpg" alt="meiy">
-            <h3>Meiy</h3>
-            <p> Joueur chez DFM </p>
+            <img src="images/zen.jpg" alt="zen">
+            <h3>Zen</h3>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur chez DRX </p>
+            <img src="images/alpha.jpg" alt="alpha">
+            <h3>Alpha54</h3>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/jemkin.jpg" alt="jemkin">
-            <h3>Jemkin</h3>
-            <p> Joueur chez RRQ </p>
+            <img src="images/radosin.jpg" alt="radosin">
+            <h3>Radosin</h3>
+            <p> Joueur chez VITALITY </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/karon.jpg" alt="karon">
-            <h3>Karon</h3>
-            <p> Joueur chez GEN.G </p>
+            <img src="images/ahmad.jpg" alt="ahmad">
+            <h3>Ahmad</h3>
+            <p> Joueur chez FALCONS </p>
         </div>
 </div>
 <div class="sections-jeux">
 
         <div class="tuiles">
-            <img src="images/something.jpg" alt="something">
-            <h3>Something</h3>
-            <p> Joueur chez PAPER REX </p>
+            <img src="images/trk.jpg" alt="trk">
+            <h3>Trk511</h3>
+            <p> Joueur chez FALCONS </p>
         </div>
 
         <div class="tuiles">
-            <img src="images/d4v41.jpg" alt="d4v41">
-            <h3>D4v41</h3>
-            <p> Joueur chez PAPER REX </p>
+            <img src="images/oski.jpg" alt="oski">
+            <h3>Oski</h3>
+            <p> Joueur chez OXYGEN </p>
         </div>
     
 
     <div class="tuiles">
-            <img src="images/meteor.jpg" alt="meteor">
-            <h3>Meteor</h3>
-            <p> Joueur chez T1 </p>
+            <img src="images/joyo.jpg" alt="joyo">
+            <h3>Joyo</h3>
+            <p> Joueur chez MOIST </p>
         </div>
 
     <div class="tuiles">
-            <img src="images/maKo.jpg" alt="mako">
-            <h3>MaKo</h3>
-            <p> Joueur chez DRX </p>
+            <img src="images/itachi.jpg" alt="itachi">
+            <h3>Itachi</h3>
+            <p> Joueur chez KC </p>
         </div>
 </div>
 

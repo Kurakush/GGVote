@@ -37,7 +37,7 @@ if (isset($_POST['login'])){
             if($row_count==1) 
             {
                 $member_row = $members_array[0];
-                $_SESSION['login'] = $member_row['login'];
+                $_SESSION['login'] = $member_row['login_admin'];
             }
         }
         $connexion=null;
