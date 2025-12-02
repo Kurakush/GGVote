@@ -223,6 +223,24 @@
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
+.flash-message {
+    background: #00bf63;
+    padding: 12px 18px;
+    color: white;
+    font-weight: bold;
+    width: fit-content;
+    margin: 15px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0,255,100,0.6);
+    animation: fadeOut 2s 2s forwards;
+    font-family: 'Exo 2', sans-serif;
+}
+
+/* Disparition douce */
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
 
 /* --- BOUTONS --- */
 .okbtn {

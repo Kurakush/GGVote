@@ -36,7 +36,8 @@ if (isset($_POST['role']) && $_POST['role'] === 'admin') {
 
             if($row_count == 1) {
                 $member_row = $members_array[0];
-                $_SESSION['login'] = $member_row['login_admin']; // <-- corrigé ici
+                $_SESSION['login'] = $member_row['login_admin'];
+                $_SESSION['flash_message'] = "Connexion réussie en tant qu'administrateur !";
             } else {
                 $error_admin = "Login ou mot de passe admin incorrect.";
             }
@@ -69,6 +70,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
                 $member_row = $members_array[0];
                 $_SESSION['electeur_email'] = $member_row['email'];
                 $_SESSION['idelecteur']     = $member_row['idelecteur'];
+                $_SESSION['flash_message'] = "Connexion réussie en tant qu'électeur !";
             } else {
                 $error_electeur = "Email ou mot de passe incorrect.";
             }
@@ -216,6 +218,13 @@ $electeur = isset($_SESSION["electeur_email"]);
 
         </div>
     </div>
+
+    <?php if (isset($_SESSION['flash_message'])): ?>
+    <div class="flash-message">
+        <?= $_SESSION['flash_message']; ?>
+    </div>
+    <?php unset($_SESSION['flash_message']); ?>
+    <?php endif; ?>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
