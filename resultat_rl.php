@@ -3,10 +3,11 @@ require('header.php');
 ?>
 
 <div class="about-us">
-        <img src="images/lol.png" alt="lol" width=384px height= 216px>
-        <h1>RÉSULTATS League of Legends</h1>
+        <img src="images/rl.jpg" alt="rl" width=300px height= 200px>
+        <h1>RÉSULTATS Rocket League</h1>
         <p>Découvrez les MVP élus pour chaque compétitions !</p>
 </div>
+
 
 <?php
 require('footer.php');
