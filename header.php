@@ -4,27 +4,28 @@ require('dbconnect.php');
 //Load Session Variables
 session_start();
 
-//check disconnect
-if (isset($_GET["disconnect"])){
-    if ($_GET["disconnect"]==1){
-        unset($_SESSION["login"]);
-    }
+// check disconnect
+if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
+    unset($_SESSION["login"]);            // admin
+    unset($_SESSION["electeur_email"]);   // électeur
+    unset($_SESSION["idelecteur"]);
 }
 
-//check credentiels
-if (isset($_POST['login'])){
-    if (isset($_POST["password"])){
-        
-        $sql="SELECT COUNT(*) FROM admin"; 
+// ==========================
+//  CONNEXION ADMIN
+// ==========================
+if (isset($_POST['role']) && $_POST['role'] === 'admin') {
 
-        $connexion=dbconnect(); 
-        if(!$connexion->query($sql)) {
+    if (isset($_POST['login']) && isset($_POST["password"])){
+
+        $connexion = dbconnect(); 
+        if(!$connexion) {
             echo "Pb d'accès à la bdd"; 
         }
         else{
-            
-            /* Query Prepare */
-            $sql = "SELECT * FROM admin WHERE login_admin = :login AND mot_de_passe =:password";
+
+            // Ton code de base, légèrement simplifié
+            $sql = "SELECT * FROM admin WHERE login_admin = :login AND mot_de_passe = :password";
             $query = $connexion->prepare($sql);
             $query->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
             $query->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
@@ -33,25 +34,52 @@ if (isset($_POST['login'])){
 
             $row_count = count($members_array);
 
-            // Check the number of rows that match the SELECT statement 
-            if($row_count==1) 
-            {
+            if($row_count == 1) {
                 $member_row = $members_array[0];
-                $_SESSION['login'] = $member_row['login_admin'];
+                $_SESSION['login'] = $member_row['login_admin']; // <-- corrigé ici
+            } else {
+                $error_admin = "Login ou mot de passe admin incorrect.";
             }
         }
-        $connexion=null;
+        $connexion = null;
     }
 }
 
-//set admin var = true if user is logged
-$admin = false;
-if (isset($_SESSION["login"])){
-    $admin = true;
+// ==========================
+//  CONNEXION ELECTEUR
+// ==========================
+if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
 
-    //coucou
+    if (isset($_POST['email']) && isset($_POST["password"])){
+
+        $connexion = dbconnect(); 
+        if(!$connexion) {
+            echo "Pb d'accès à la bdd"; 
+        }
+        else{
+
+            $sql = "SELECT * FROM electeur WHERE email = :email AND mot_de_passe = :password";
+            $query = $connexion->prepare($sql);
+            $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
+            $query->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
+            $query->execute();
+            $members_array = $query->fetchAll();
+
+            if(count($members_array) == 1) {
+                $member_row = $members_array[0];
+                $_SESSION['electeur_email'] = $member_row['email'];
+                $_SESSION['idelecteur']     = $member_row['idelecteur'];
+            } else {
+                $error_electeur = "Email ou mot de passe incorrect.";
+            }
+        }
+        $connexion = null;
+    }
 }
 
+// set admin / electeur vars
+$admin    = isset($_SESSION["login"]);
+$electeur = isset($_SESSION["electeur_email"]);
 ?>
 
 <html>
@@ -60,33 +88,61 @@ if (isset($_SESSION["login"])){
     <title>GGVote</title>
     <link rel="stylesheet" href="ggvote.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+
     <script>
-    /**
-     * Display authentication modal form : 
-     */
+    // Affiche le modal de connexion
     function authenticate() {
-        // Display loginModal div and display it
         let modal = document.getElementById('loginModal');
-        modal.style.display='block';
+        modal.style.display = 'block';
+
+        // Par défaut : onglet électeur
+        switchTab('electeur');
     }
 
-    /**
-     * Disconnection
-     */
+    // Déconnexion
     function disconnect() {
         window.location.href = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" + '?disconnect=1';
     }
-  </script>
+
+    // Gestion des onglets
+    function switchTab(role) {
+        const tabElecteurBtn = document.getElementById('tabElecteur');
+        const tabAdminBtn    = document.getElementById('tabAdmin');
+        const formElecteur   = document.getElementById('formElecteur');
+        const formAdmin      = document.getElementById('formAdmin');
+
+        tabElecteurBtn.classList.remove('active');
+        tabAdminBtn.classList.remove('active');
+        formElecteur.classList.remove('active');
+        formAdmin.classList.remove('active');
+
+        if (role === 'electeur') {
+            tabElecteurBtn.classList.add('active');
+            formElecteur.classList.add('active');
+        } else {
+            tabAdminBtn.classList.add('active');
+            formAdmin.classList.add('active');
+        }
+    }
+
+    // Fermer le modal si clic en dehors
+    window.onclick = function(event) {
+        const modal = document.getElementById('loginModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
 </head>
 
 <body>
     <!-- Barre d'header -->
     <div class="navbar">
         <ul>
-            <li class="logoGG"><img src="images/ggvoteSansFond.png" alt = "Logo GGVOTE" height="100px"></li>
+            <li class="logoGG"><img src="images/ggvoteSansFond.png" alt="Logo GGVOTE" height="100px"></li>
 
             <?php
-            if ($admin){
+            if ($admin || $electeur){
                 ?>
                 <li style="float:right"><a href="#" onclick="disconnect()">DECONNEXION</a></li>
                 <?php
@@ -104,28 +160,61 @@ if (isset($_SESSION["login"])){
         </ul>
     </div>
 
-    <!-- Authentication pour les différents espaces -->
+    <!-- Modal de connexion (admin + électeur) -->
     <div id="loginModal" class="modal">
-  
-        <form id="loginForm" class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <div class="modal-content animate">
             <div class="dlgheadcontainer">
                 <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    <h1>Connectez vous !</h1>
+                <h1>Connectez-vous !</h1>
             </div>
 
-            <div class="dlgcontainer">
-                <label for="uname"><b>Login</b></label>
-                <input type="text" placeholder="Entrez votre identifiant" name="login" id="login" required>
-
-                <label for="psw"><b>Mot de passe</b></label>
-                <input type="password" placeholder="Entrez votre mot de passe" name="password" id="password" required>
-                    
-                <button type="submit" class="okbtn">Connexion</button>
-                <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
-
+            <!-- Onglets -->
+            <div class="tab-menu">
+                <button type="button" id="tabElecteur" class="active" onclick="switchTab('electeur')">Électeur</button>
+                <button type="button" id="tabAdmin" onclick="switchTab('admin')">Admin</button>
             </div>
 
-        </form>
+            <!-- Contenu onglet ÉLECTEUR -->
+            <div id="formElecteur" class="tab-content active">
+                <form class="dlgcontainer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                    <input type="hidden" name="role" value="electeur">
+
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" placeholder="Entrez votre email" name="email" id="email" required>
+
+                    <label for="psw_e"><b>Mot de passe</b></label>
+                    <input type="password" placeholder="Entrez votre mot de passe" name="password" id="psw_e" required>
+                        
+                    <button type="submit" class="okbtn">Connexion</button>
+                    <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
+
+                    <?php if (!empty($error_electeur)) { ?>
+                        <p style="color:#e31919;"><?php echo $error_electeur; ?></p>
+                    <?php } ?>
+                </form>
+            </div>
+
+            <!-- Contenu onglet ADMIN -->
+            <div id="formAdmin" class="tab-content">
+                <form class="dlgcontainer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                    <input type="hidden" name="role" value="admin">
+
+                    <label for="login"><b>Login admin</b></label>
+                    <input type="text" placeholder="Entrez votre identifiant" name="login" id="login" required>
+
+                    <label for="psw_a"><b>Mot de passe</b></label>
+                    <input type="password" placeholder="Entrez votre mot de passe" name="password" id="psw_a" required>
+                        
+                    <button type="submit" class="okbtn">Connexion</button>
+                    <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
+
+                    <?php if (!empty($error_admin)) { ?>
+                        <p style="color:#e31919;"><?php echo $error_admin; ?></p>
+                    <?php } ?>
+                </form>
+            </div>
+
+        </div>
     </div>
 
     <script>

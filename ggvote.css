@@ -171,7 +171,8 @@
 
 /* Inputs */
 .dlgcontainer input[type=text],
-.dlgcontainer input[type=password] {
+.dlgcontainer input[type=password]
+.dlgcontainer input[type=email] {
     width: 100%;
     padding: 11px 12px;
     border-radius: 8px;
@@ -184,16 +185,44 @@
 }
 
 .dlgcontainer input[type=text]::placeholder,
-.dlgcontainer input[type=password]::placeholder {
+.dlgcontainer input[type=password]::placeholder
+.dlgcontainer input[type=email]::placeholder 
+{
     color: #D9D9D9aa;
 }
 
 .dlgcontainer input[type=text]:focus,
-.dlgcontainer input[type=password]:focus {
+.dlgcontainer input[type=password]:focus
+.dlgcontainer input[type=email]:focus{
     border-color: #e31919;
     box-shadow: 0 0 8px rgba(227, 25, 25, 0.7);
     background: #303030;
 }
+
+.tab-menu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.tab-menu button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #303030;
+    color: #D9D9D9;
+    border-radius: 6px;
+}
+
+.tab-menu button.active {
+        background-color: #e31919;
+        color: #D9D9D9;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
 
 /* --- BOUTONS --- */
 .okbtn {
