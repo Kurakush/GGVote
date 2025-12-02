@@ -171,7 +171,7 @@
 
 /* Inputs */
 .dlgcontainer input[type=text],
-.dlgcontainer input[type=password]
+.dlgcontainer input[type=password],
 .dlgcontainer input[type=email] {
     width: 100%;
     padding: 11px 12px;
@@ -185,14 +185,14 @@
 }
 
 .dlgcontainer input[type=text]::placeholder,
-.dlgcontainer input[type=password]::placeholder
+.dlgcontainer input[type=password]::placeholder,
 .dlgcontainer input[type=email]::placeholder 
 {
     color: #D9D9D9aa;
 }
 
 .dlgcontainer input[type=text]:focus,
-.dlgcontainer input[type=password]:focus
+.dlgcontainer input[type=password]:focus,
 .dlgcontainer input[type=email]:focus{
     border-color: #e31919;
     box-shadow: 0 0 8px rgba(227, 25, 25, 0.7);
@@ -224,23 +224,43 @@
 .tab-content.active { display: block; }
 
 .flash-message {
-    background: #00bf63;
-    padding: 12px 18px;
-    color: white;
-    font-weight: bold;
-    width: fit-content;
-    margin: 15px auto;
+    position: fixed;              
+    top: 80px;                    /* en haut de la fenêtre */
+    left: 50%;
+    transform: translateX(-50%);  /* centré horizontalement */
+    z-index: 10000;               /* au-dessus du carousel et du reste */
+    
+    padding: 12px 20px;
     border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0,255,100,0.6);
-    animation: fadeOut 2s 2s forwards;
+    font-weight: 700;
     font-family: 'Exo 2', sans-serif;
+    text-align: center;
+    color: #ffffff;
+
+    width: max-content;
+    max-width: 80%;
+
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    animation: fadeOut 2s 2.5s forwards;
 }
 
-/* Disparition douce */
+/* Succès (vert) */
+.flash-message.success {
+    background: #00bf63;
+}
+
+/* Erreur (rouge) */
+.flash-message.error {
+    background: #e31919;
+}
+
+/* Animation de disparition */
 @keyframes fadeOut {
-    to { opacity: 0; transform: translateY(-10px); }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
 }
-
 
 /* --- BOUTONS --- */
 .okbtn {

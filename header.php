@@ -39,8 +39,9 @@ if (isset($_POST['role']) && $_POST['role'] === 'admin') {
                 $_SESSION['login'] = $member_row['login_admin'];
                 $_SESSION['flash_message'] = "Connexion réussie en tant qu'administrateur !";
             } else {
-                $error_admin = "Login ou mot de passe admin incorrect.";
+                $_SESSION['flash_error'] = "Identifiants incorrects (Admin)";
             }
+            
         }
         $connexion = null;
     }
@@ -72,7 +73,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
                 $_SESSION['idelecteur']     = $member_row['idelecteur'];
                 $_SESSION['flash_message'] = "Connexion réussie en tant qu'électeur !";
             } else {
-                $error_electeur = "Email ou mot de passe incorrect.";
+                $_SESSION['flash_error'] = "Identifiants incorrects (Électeur)";
             }
         }
         $connexion = null;
@@ -95,7 +96,7 @@ $electeur = isset($_SESSION["electeur_email"]);
     // Affiche le modal de connexion
     function authenticate() {
         let modal = document.getElementById('loginModal');
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
 
         // Par défaut : onglet électeur
         switchTab('electeur');
@@ -220,10 +221,17 @@ $electeur = isset($_SESSION["electeur_email"]);
     </div>
 
     <?php if (isset($_SESSION['flash_message'])): ?>
-    <div class="flash-message">
+    <div class="flash-message success">
         <?= $_SESSION['flash_message']; ?>
     </div>
     <?php unset($_SESSION['flash_message']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['flash_error'])): ?>
+    <div class="flash-message error">
+        <?= $_SESSION['flash_error']; ?>
+    </div>
+    <?php unset($_SESSION['flash_error']); ?>
     <?php endif; ?>
 
     <script>
