@@ -1,6 +1,7 @@
 <?php
-require('dbconnect.php');
-session_start();
+require("header.php");
+$connexion = dbconnect();
+
 
 // Accès réservé : électeur OU admin
 if (
@@ -9,11 +10,6 @@ if (
 ) {
     header("Location: index.php");
     exit;
-}
-
-$connexion = dbconnect();
-if (!$connexion) {
-    die("Pb d'accès à la bdd");
 }
 
 // ========================
@@ -43,8 +39,7 @@ $openCSGO     = hasOpenScrutin($connexion, 5);
 $openFortnite = hasOpenScrutin($connexion, 4);
 $openRL       = hasOpenScrutin($connexion, 3);
 
-// À partir d'ici on peut envoyer du HTML
-require('header.php');
+
 ?>
 
 <div class="about-us">

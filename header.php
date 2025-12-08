@@ -1,8 +1,8 @@
-<?php 
-require('dbconnect.php');
-
-//Load Session Variables
-session_start();
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once('dbconnect.php');
 
 // check disconnect
 if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
