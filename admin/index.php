@@ -29,7 +29,7 @@ $scrutinsClotures = (int) $stmt->fetchColumn();
 // Nombre de candidats (si la table existe)
 $totalCandidats = 0;
 try {
-    $stmt = $connexion->query("SELECT COUNT(*) FROM candidat");
+    $stmt = $connexion->query("SELECT COUNT(*) FROM joueur");
     $totalCandidats = (int) $stmt->fetchColumn();
 } catch (PDOException $e) {
     // on laisse 0 si la table n'existe pas encore

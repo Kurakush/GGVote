@@ -1,188 +1,66 @@
 <?php 
 require('header.php');
+
+$connexion = dbconnect();
+if (!$connexion) {
+    die("Pb d'accès à la bdd");
+}
+
+// 1) Récupérer les compétitions Fortnite
+$sql = "SELECT idcompetition, nom_compet
+        FROM competition
+        WHERE idjeu = 4"; 
+$stmt = $connexion->query($sql);
+$competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="about-us">
-        <img src="images/fortniteVoter.png" alt="fortnite" width=368px height= 260px>
-        <h1>MVP Fortnite</h1>
-        <p>Voter pour élir les MVP de Fortnite par compétitions !</p>
-          <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
+    <img src="images/fortniteVoter.png" alt="fortnite" width="368" height="260">
+    <h1>MVP Fortnite</h1>
+    <p>Voter pour élir les MVP de Fortnite par compétitions !</p>
+    <p><strong>Attention votre vote ne sera plus modifiable après la validation</strong></p>
+</div>
+
+<?php
+// 2) Pour chaque compétition Fortnite, on affiche les joueurs associés
+foreach ($competitions as $comp) {
+
+    // Récupérer les joueurs associés à cette compétition
+    $sqlJ = "SELECT *
+             FROM joueur
+             WHERE idcompetition = :idcomp
+             ORDER BY pseudo";
+    $stmtJ = $connexion->prepare($sqlJ);
+    $stmtJ->execute([':idcomp' => $comp['idcompetition']]);
+    $joueurs = $stmtJ->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
+    <div class="compet">
+        <h2><?= htmlspecialchars($comp['nom_compet']) ?></h2>
+    </div>
+
+    <?php if (count($joueurs) === 0): ?>
+        <p style="text-align:center;margin-bottom:40px;">
+            Aucun joueur enregistré pour cette compétition.
         </p>
-</div>
+    <?php else: ?>
+        <div class="sections-jeux">
+            <?php foreach ($joueurs as $j): ?>
+                <div class="tuiles">
+                    <?php if (!empty($j['photo'])): ?>
+                        <img src="images/<?= htmlspecialchars($j['photo']) ?>"
+                             alt="<?= htmlspecialchars($j['pseudo']) ?>">
+                    <?php endif; ?>
 
-<div class="compet">
-        <h2>FNCS Major – Solo Victory Cup</h2>
-</div>
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/pink.jpg" alt="pinq">
-            <h3>Pinq</h3>
-            <p> Joueur chez HERETICS </p>
+                    <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
+                    <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
+
+                </div>
+            <?php endforeach; ?>
         </div>
+    <?php endif; ?>
 
-        <div class="tuiles">
-            <img src="images/setty.jpg" alt="setty">
-            <h3>Setty</h3>
-            <p> Joueur chez BL </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/malibuca.jpg" alt="malibuca">
-            <h3>Malibuca</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/thomas.jpg" alt="thomas">
-            <h3>ThOmasHD</h3>
-            <p> Joueur chez ASTRALIS </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/merstach.jpg" alt="merstach">
-            <h3>Merstach</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/queasy.jpg" alt="queasy">
-            <h3>Queasy</h3>
-            <p> Joueur chez GENTLEMATES </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/alex.jpg" alt="alex">
-            <h3>Alex</h3>
-            <p> Joueur chez HEROIC </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/kami.jpg" alt="kami">
-            <h3>Kami</h3>
-            <p> Joueur chez AIQ </p>
-        </div>
-</div>
-    
-</div>
-
-<br><br>
-<div class="compet">
-        <h2>Elite Cup Solo (Epic - Série Elite)</h2>
-</div>
-
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/malibuca.jpg" alt="malibuca">
-            <h3>Malibuca</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/merstach.jpg" alt="merstach">
-            <h3>Merstach</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/setty.jpg" alt="setty">
-            <h3>Setty</h3>
-            <p> Joueur chez BL </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/queasy.jpg" alt="queasy">
-            <h3>Queasy</h3>
-            <p> Joueur chez GENTLEMATES </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/kami.jpg" alt="kami">
-            <h3>Kami</h3>
-            <p> Joueur chez AIQ </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/pink.jpg" alt="pinq">
-            <h3>Pinq</h3>
-            <p> Joueur chez HERETICS </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/thomas.jpg" alt="thomas">
-            <h3>ThOmasHD</h3>
-            <p> Joueur chez ASTRALIS </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/veno.jpg" alt="veno">
-            <h3>Veno</h3>
-            <p> Joueur chez XSET </p>
-        </div>
-</div>
-
-<br><br>
-<div class="compet">
-        <h2>Cash Cups Solo - Majors Seasonnelles</h2>
-</div>
-
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/malibuca.jpg" alt="malibuca">
-            <h3>Malibuca</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/merstach.jpg" alt="merstach">
-            <h3>Merstach</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/setty.jpg" alt="setty">
-            <h3>Setty</h3>
-            <p> Joueur chez BL </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/queasy.jpg" alt="queasy">
-            <h3>Queasy</h3>
-            <p> Joueur chez GENTLEMATES </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/kami.jpg" alt="kami">
-            <h3>Kami</h3>
-            <p> Joueur chez AIQ </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/pink.jpg" alt="pinq">
-            <h3>Pinq</h3>
-            <p> Joueur chez HERETICS </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/thomas.jpg" alt="thomas">
-            <h3>ThOmasHD</h3>
-            <p> Joueur chez ASTRALIS </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/veno.jpg" alt="veno">
-            <h3>Veno</h3>
-            <p> Joueur chez XSET </p>
-        </div>
-</div>
+<?php } ?>
 
 <?php
 require('footer.php');
