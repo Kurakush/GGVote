@@ -175,6 +175,13 @@ $electeur = isset($_SESSION["electeur_email"]);
             <li style="float:right"><a href="voter.php">VOTER</a></li>
             <?php } ?>
 
+            <?php if ($electeur) { 
+                ?>
+                <li style="float:right"><a href="profil_electeur.php">MON PROFIL</a></li>
+                <?php 
+            }
+            ?>
+
             
             <li style="float:right"><a href="index.php">ACCUEIL</a></li>
         </ul>
