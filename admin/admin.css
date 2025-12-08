@@ -123,3 +123,118 @@ a:hover {
     font-weight: 600;
     background-color: #252525;
 }
+
+
+/* Corps de page admin (si pas déjà fait) */
+body {
+    margin: 0;
+    font-family: 'Exo 2', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #181818;
+    color: #D9D9D9;
+}
+
+/* Mise en page spéciale pour les pages formulaire */
+.admin-main.form-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px 60px;
+}
+
+/* Panel du formulaire */
+.panel.panel-form {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Formulaire */
+.form-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-admin label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Deux colonnes pour les dates sur grand écran */
+.form-row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* Inputs & selects */
+.form-admin input[type="text"],
+.form-admin input[type="datetime-local"],
+.form-admin select {
+    padding: 12px 14px;
+    background-color: #1c1c1c;
+    border: 1px solid #545454;
+    border-radius: 10px;
+    color: #D9D9D9;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-admin input:focus,
+.form-admin select:focus {
+    border-color: #e31919;
+    box-shadow: 0 0 6px #e3191944;
+}
+
+/* Boutons */
+.btn-primary {
+    padding: 12px 18px;
+    background-color: #e31919;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #b81313;
+}
+
+.btn-secondary {
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid #545454;
+    background: transparent;
+    color: #D9D9D9;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.btn-secondary:hover {
+    border-color: #e31919;
+    color: #e31919;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .form-row-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

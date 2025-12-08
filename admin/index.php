@@ -119,7 +119,7 @@ $derniersScrutins = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($derniersScrutins as $s): ?>
                     <tr>
                         <td><?= htmlspecialchars($s['nom_scrutin']) ?></td>
-                        <td><?= htmlspecialchars($s['nom_competition']) ?></td>
+                        <td><?= htmlspecialchars($s['nom_compet']) ?></td>
                         <td><?= htmlspecialchars($s['date_ouverture']) ?></td>
                         <td><?= htmlspecialchars($s['date_cloture']) ?></td>
                         <td><?= htmlspecialchars($s['etat_scrutin']) ?></td>
