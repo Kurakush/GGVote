@@ -68,7 +68,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <div class="tuiles tuiles-disabled">
             <img src="images/valorant.jpg" alt="Valorant">
             <h3>Valorant</h3>
-            <p class="tuiles-status">Aucun vote ouvert</p>
+            <p class="tuiles-status">Aucun scrutin ouvert</p>
         </div>
     <?php endif; ?>
 
@@ -82,7 +82,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <div class="tuiles tuiles-disabled">
             <img src="images/lol.png" alt="League of Legends">
             <h3>League of Legends</h3>
-            <p class="tuiles-status">Aucun vote ouvert</p>
+            <p class="tuiles-status">Aucun scrutin ouvert</p>
         </div>
     <?php endif; ?>
 
@@ -96,7 +96,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <div class="tuiles tuiles-disabled">
             <img src="images/csgo.jpg" alt="CSGO">
             <h3>CSGO:2</h3>
-            <p class="tuiles-status">Aucun vote ouvert</p>
+            <p class="tuiles-status">Aucun scrutin ouvert</p>
         </div>
     <?php endif; ?>
 
@@ -110,7 +110,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <div class="tuiles tuiles-disabled">
             <img src="images/fortnite1.png" alt="Fortnite">
             <h3>Fortnite</h3>
-            <p class="tuiles-status">Aucun vote ouvert</p>
+            <p class="tuiles-status">Aucun scrutin ouvert</p>
         </div>
     <?php endif; ?>
 
@@ -124,7 +124,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <div class="tuiles tuiles-disabled">
             <img src="images/rocketleague.jpg" alt="Rocket League">
             <h3>Rocket League</h3>
-            <p class="tuiles-status">Aucun vote ouvert</p>
+            <p class="tuiles-status">Aucun scrutin ouvert</p>
         </div>
     <?php endif; ?>
 
