@@ -11,7 +11,7 @@ if (!$connexion) {
 // Adapte la condition à ta table : soit par nom, soit par idjeu, etc.
 $sql = "SELECT idcompetition, nom_compet
         FROM competition
-        WHERE nom_jeu = 'Valorant'"; // ou WHERE idjeu = 2; selon ta structure
+        WHERE idjeu = 1"; // supposons que 1 = Valorant
 $stmt = $connexion->query($sql);
 $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
