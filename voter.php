@@ -1,6 +1,8 @@
-<?php 
-require('header.php');
+<?php
+require('dbconnect.php');
+session_start();
 
+// Accès réservé : électeur OU admin
 if (
     !isset($_SESSION["electeur_email"]) &&   // pas électeur
     !isset($_SESSION["login"])               // pas admin
@@ -14,7 +16,9 @@ if (!$connexion) {
     die("Pb d'accès à la bdd");
 }
 
+// ========================
 // fonction utilitaire : y a-t-il un scrutin OUVERT pour ce jeu ?
+// ========================
 function hasOpenScrutin(PDO $connexion, int $idjeu): bool {
     $now = date('Y-m-d H:i:s');
 
@@ -33,11 +37,14 @@ function hasOpenScrutin(PDO $connexion, int $idjeu): bool {
 }
 
 // adapte les idjeu à ta BDD
-$openValo    = hasOpenScrutin($connexion, 1);
-$openLoL     = hasOpenScrutin($connexion, 2);
-$openCSGO    = hasOpenScrutin($connexion, 5);
-$openFortnite= hasOpenScrutin($connexion, 4);
-$openRL      = hasOpenScrutin($connexion, 3);
+$openValo     = hasOpenScrutin($connexion, 1);
+$openLoL      = hasOpenScrutin($connexion, 2);
+$openCSGO     = hasOpenScrutin($connexion, 5);
+$openFortnite = hasOpenScrutin($connexion, 4);
+$openRL       = hasOpenScrutin($connexion, 3);
+
+// À partir d'ici on peut envoyer du HTML
+require('header.php');
 ?>
 
 <div class="about-us">
