@@ -642,6 +642,20 @@ p{
     width: 80%;
 }
 
+.tuiles-disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;   /* pas cliquable */
+    position: relative;
+}
+
+.tuiles-status {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #e31919;
+}
+
+
 /* call to action section */
 .cta-vote {
     margin: 40px auto;
