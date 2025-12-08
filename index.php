@@ -33,7 +33,9 @@ require('header.php');
         </p>
     </div>
 
+    <div class="titre-section">
     <h1>Jeux disponibles</h1>
+    </div>
     <div class="sections-jeux">
         <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/vlcIs06x7A8')">
             <img src="images/valorant.jpg" alt="Valorant">

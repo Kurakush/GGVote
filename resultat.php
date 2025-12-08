@@ -2,7 +2,15 @@
 require('header.php');
 ?>
 
+<div class="about-us">
+        <h1>Résultats des votes</h1>
+        <p>Découvrez les résultats des votes pour les différentes compétitions e-sport disponibles sur GGVote. Cliquez sur un jeu pour voir le classement des joueurs votés par la communauté.
+        </p>
+    </div>
+
+    <div class="titre-section">
 <h1>Jeux disponibles</h1>
+    </div>
     <div class="sections-jeux">
         <a href="resultat_valo.php" class="tuiles">
         <img src="images/valorant.jpg" alt="Valorant">
@@ -31,3 +39,7 @@ require('header.php');
 
     
 </div>
+
+<?php 
+require('footer.php');
+?>
