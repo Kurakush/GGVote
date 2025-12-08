@@ -15,6 +15,7 @@ $age           = "";
 $nationalite   = "";
 $poste         = "";
 $idcompetition = "";
+$photo = "";
 
 // Si modification
 if (isset($_GET['id'])) {
@@ -32,6 +33,7 @@ if (isset($_GET['id'])) {
         $nationalite   = $joueur['nationalite'];
         $poste         = $joueur['poste'];
         $idcompetition = $joueur['idcompetition'];
+        $photo         = $candidat['photo'];
     }
 }
 
@@ -59,7 +61,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <main class="admin-main form-page">
     <section class="panel panel-form">
-        <form method="post" action="candidat_save.php" class="form-admin">
+        <form method="post" action="candidat_save.php" class="form-admin" enctype="multipart/form-data">
             <input type="hidden" name="mode" value="<?= $mode ?>">
             <?php if ($mode === "edition"): ?>
                 <input type="hidden" name="idjoueur" value="<?= (int)$idjoueur ?>">
@@ -96,6 +98,18 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </option>
                 <?php endforeach; ?>
             </select>
+            
+            <label>Photo du joueur</label>
+            <input type="file" name="photo" accept="image/*">
+
+            <?php if ($mode === "edition" && !empty($photo)): ?>
+                <p>Photo actuelle :</p>
+                <img src="../images/<?= htmlspecialchars($photo) ?>" alt="Photo actuelle"
+                     style="max-width: 200px; border-radius: 12px; display:block; margin-bottom:10px;">
+            <?php endif; ?>
+
+            <!-- pour garder l'ancienne photo si on n'en choisit pas une nouvelle -->
+            <input type="hidden" name="old_photo" value="<?= htmlspecialchars($photo) ?>">
 
             <div class="form-actions">
                 <button type="submit" class="btn-primary">Enregistrer</button>
