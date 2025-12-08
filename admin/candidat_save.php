@@ -22,15 +22,26 @@ $photo = $old_photo; // par défaut, on garde l'ancienne
 
 if (!empty($_FILES['photo']['name'])) {
 
-    $uploadDir = "../images/"; // dossier où tu ranges les images
+    $uploadDir = "../images/";
     $fileName  = $_FILES['photo']['name'];
     $fileTmp   = $_FILES['photo']['tmp_name'];
 
-    // Sécuriser un peu le nom
-    $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    // On récupère juste le nom + extension, on enlève le chemin éventuel
+    $baseName = basename($fileName);
+
+    // Petit nettoyage : espaces → tirets, tout en minuscules
+    $baseName = str_replace(' ', '-', $baseName);
+    $baseName = strtolower($baseName);
+
+    $extension = strtolower(pathinfo($baseName, PATHINFO_EXTENSION));
     $allowed   = ['jpg', 'jpeg', 'png', 'webp'];
 
-    
+    if (in_array($extension, $allowed)) {
+        // Pas de uniqid ici : on garde le nom choisi (nettoyé)
+        if (move_uploaded_file($fileTmp, $uploadDir . $baseName)) {
+            $photo = $baseName;
+        }
+    }
 }
 
 if ($mode === "ajout") {
