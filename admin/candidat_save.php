@@ -48,7 +48,7 @@ if (!empty($_FILES['photo']['name'])) {
 
 if ($mode === "ajout") {
 
-    $sql = "INSERT INTO candidat (pseudo, equipe, age, nationalite, poste, idadmin, idcompetition, photo)
+    $sql = "INSERT INTO joueur (pseudo, equipe, age, nationalite, poste, idadmin, idcompetition, photo)
             VALUES (:pseudo, :equipe, :age, :nationalite, :poste, :idadmin, :idcomp, :photo)";
     $stmt = $connexion->prepare($sql);
     $stmt->execute([
@@ -66,7 +66,7 @@ if ($mode === "ajout") {
 
     $idcandidat = (int) ($_POST['idcandidat'] ?? 0);
 
-    $sql = "UPDATE candidat
+    $sql = "UPDATE joueur
             SET pseudo = :pseudo,
                 equipe = :equipe,
                 age = :age,

@@ -65,7 +65,7 @@ $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($j['poste']) ?></td>
                         <td><?= (int)$j['age'] ?></td>
                         <td><?= htmlspecialchars($j['nationalite']) ?></td>
-                        <td><?= htmlspecialchars($j['nom_competition']) ?></td>
+                        <td><?= htmlspecialchars($j['nom_compet']) ?></td>
                         <td>
                             <a href="candidat_form.php?id=<?= $j['idjoueur'] ?>">Éditer</a> ·
                             <a href="candidat_action.php?id=<?= $j['idjoueur'] ?>&action=supprimer"
