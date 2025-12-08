@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
         $nationalite   = $joueur['nationalite'];
         $poste         = $joueur['poste'];
         $idcompetition = $joueur['idcompetition'];
-        $photo         = $candidat['photo'];
+        $photo         = $joueur['photo'];
     }
 }
 

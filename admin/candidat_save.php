@@ -30,20 +30,7 @@ if (!empty($_FILES['photo']['name'])) {
     $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     $allowed   = ['jpg', 'jpeg', 'png', 'webp'];
 
-    if (in_array($extension, $allowed)) {
-
-        // nom unique
-        $newName = uniqid("cand_") . "." . $extension;
-
-        if (move_uploaded_file($fileTmp, $uploadDir . $newName)) {
-            $photo = $newName;
-
-            // si tu veux, tu peux supprimer l'ancienne image :
-            // if ($old_photo && file_exists($uploadDir . $old_photo)) {
-            //     unlink($uploadDir . $old_photo);
-            // }
-        }
-    }
+    
 }
 
 if ($mode === "ajout") {
@@ -74,7 +61,7 @@ if ($mode === "ajout") {
                 poste = :poste,
                 idcompetition = :idcomp,
                 photo = :photo
-            WHERE idcandidat = :id";
+            WHERE idjoueur = :id";
     $stmt = $connexion->prepare($sql);
     $stmt->execute([
         ':pseudo'      => $pseudo,
