@@ -1,9 +1,10 @@
 <?php
-require("header.php");
-$connexion = dbconnect();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 
-// Accès réservé : électeur OU admin
 if (
     !isset($_SESSION["electeur_email"]) &&   // pas électeur
     !isset($_SESSION["login"])               // pas admin
@@ -11,6 +12,11 @@ if (
     header("Location: index.php");
     exit;
 }
+
+
+require('header.php');
+
+$connexion = dbconnect();
 
 // ========================
 // fonction utilitaire : y a-t-il un scrutin OUVERT pour ce jeu ?
@@ -22,6 +28,7 @@ function hasOpenScrutin(PDO $connexion, int $idjeu): bool {
             FROM scrutin s
             JOIN competition c ON c.idcompetition = s.idcompetition
             WHERE c.idjeu = :idjeu
+              AND s.etat_scrutin = 'ouvert'
               AND s.date_ouverture <= :now
               AND s.date_cloture   >= :now";
     $stmt = $connexion->prepare($sql);
@@ -32,7 +39,7 @@ function hasOpenScrutin(PDO $connexion, int $idjeu): bool {
     return (int)$stmt->fetchColumn() > 0;
 }
 
-// adapte les idjeu à ta BDD
+
 $openValo     = hasOpenScrutin($connexion, 1);
 $openLoL      = hasOpenScrutin($connexion, 2);
 $openCSGO     = hasOpenScrutin($connexion, 5);
@@ -63,6 +70,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <a href="voter_valo.php" class="tuiles">
             <img src="images/valorant.jpg" alt="Valorant">
             <h3>Valorant</h3>
+            <p class="tuiles-status">Au moins 1 scrutin est ouvert</p>
         </a>
     <?php else: ?>
         <div class="tuiles tuiles-disabled">
@@ -77,6 +85,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <a href="voter_lol.php" class="tuiles">
             <img src="images/lol.png" alt="League of Legends">
             <h3>League of Legends</h3>
+            <p class="tuiles-status">Au moins 1 scrutin est ouvert</p>
         </a>
     <?php else: ?>
         <div class="tuiles tuiles-disabled">
@@ -91,6 +100,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <a href="voter_csgo.php" class="tuiles">
             <img src="images/csgo.jpg" alt="CSGO">
             <h3>CSGO:2</h3>
+            <p class="tuiles-status">Au moins 1 scrutin est ouvert</p>
         </a>
     <?php else: ?>
         <div class="tuiles tuiles-disabled">
@@ -105,6 +115,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <a href="voter_fortnite.php" class="tuiles">
             <img src="images/fortnite1.png" alt="Fortnite">
             <h3>Fortnite</h3>
+            <p class="tuiles-status">Au moins 1 scrutin est ouvert</p>
         </a>
     <?php else: ?>
         <div class="tuiles tuiles-disabled">
@@ -119,6 +130,7 @@ $openRL       = hasOpenScrutin($connexion, 3);
         <a href="voter_rl.php" class="tuiles">
             <img src="images/rocketleague.jpg" alt="Rocket League">
             <h3>Rocket League</h3>
+            <p class="tuiles-status">Au moins 1 scrutin est ouvert</p>
         </a>
     <?php else: ?>
         <div class="tuiles tuiles-disabled">

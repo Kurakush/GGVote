@@ -14,6 +14,7 @@ $sqlCheck = "SELECT COUNT(*)
              FROM scrutin s
              JOIN competition c ON c.idcompetition = s.idcompetition
              WHERE c.idjeu = :idjeu
+               AND s.etat_scrutin = 'ouvert'
                AND s.date_ouverture <= :now
                AND s.date_cloture   >= :now";
 $stmtCheck = $connexion->prepare($sqlCheck);
@@ -36,11 +37,19 @@ if ($nbScrutinsOuverts === 0) {
     exit;
 }
 
-// 1) Récupérer les compétitions CS2
-$sql = "SELECT idcompetition, nom_compet
-        FROM competition
-        WHERE idjeu = 5";
-$stmt = $connexion->query($sql);
+// Récupérer les compétitions CS2 d'un scrutin ouvert
+$sql = "SELECT DISTINCT c.idcompetition, c.nom_compet, s.idscrutin
+        FROM competition c
+        JOIN scrutin s ON s.idcompetition = c.idcompetition
+        WHERE c.idjeu = :idjeu
+          AND s.etat_scrutin = 'ouvert'
+          AND s.date_ouverture <= :now
+          AND s.date_cloture   >= :now";
+$stmt = $connexion->prepare($sql);
+$stmt->execute([
+    ':idjeu' => 5,     // idjeu CSGO2
+    ':now'   => $now
+]);
 $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

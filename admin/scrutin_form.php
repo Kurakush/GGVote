@@ -68,7 +68,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($competitions as $c): ?>
                     <option value="<?= $c['idcompetition'] ?>"
                         <?= ($c['idcompetition'] == $idcompetition) ? "selected" : "" ?>>
-                        <?= htmlspecialchars($c['nom_competition']) ?>
+                        <?= htmlspecialchars($c['nom_compet']) ?>
                     </option>
                 <?php endforeach; ?>
             </select>

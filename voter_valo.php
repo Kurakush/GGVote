@@ -8,7 +8,7 @@ if (!$connexion) {
 }
 
 
-/* --------- Vérifier si au moins un scrutin Valorant est OUVERT --------- */
+/* --------- Vérifier si au moins un scrutin  est OUVERT --------- */
 $idjeu = 1;
 $now   = date('Y-m-d H:i:s');
 
@@ -38,12 +38,22 @@ if ($nbScrutinsOuverts === 0) {
     exit;
 }
 
-// 1) Récupérer les compétitions Valorant
-// Adapte la condition à ta table : soit par nom, soit par idjeu, etc.
-$sql = "SELECT idcompetition, nom_compet
-        FROM competition
-        WHERE idjeu = 1"; 
-$stmt = $connexion->query($sql);
+
+$now = date('Y-m-d H:i:s');
+
+// Compétitions Valorant qui ont un scrutin OUVERT
+$sql = "SELECT DISTINCT c.idcompetition, c.nom_compet, s.idscrutin
+        FROM competition c
+        JOIN scrutin s ON s.idcompetition = c.idcompetition
+        WHERE c.idjeu = :idjeu
+          AND s.etat_scrutin = 'ouvert'
+          AND s.date_ouverture <= :now
+          AND s.date_cloture   >= :now";
+$stmt = $connexion->prepare($sql);
+$stmt->execute([
+    ':idjeu' => 1,   // idjeu Valorant
+    ':now'   => $now
+]);
 $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
