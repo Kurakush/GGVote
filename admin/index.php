@@ -57,6 +57,7 @@ $derniersScrutins = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <header class="admin-header">
     <h1>Dashboard GGVote</h1>
     <nav>
+        <a href="../index.php">Accueil site</a>
         <a href="scrutins.php">Scrutins</a>
         <a href="electeurs.php">Électeurs</a>
         <a href="candidats.php">Candidats</a>
