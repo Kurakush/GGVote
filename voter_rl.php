@@ -1,188 +1,66 @@
 <?php 
 require('header.php');
+
+$connexion = dbconnect();
+if (!$connexion) {
+    die("Pb d'accès à la bdd");
+}
+
+// 1) Récupérer les compétitions Rocket League
+$sql = "SELECT idcompetition, nom_compet
+        FROM competition
+        WHERE idjeu = 3 ";
+$stmt = $connexion->query($sql);
+$competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="about-us">
-        <img src="images/rocketleague.jpg" alt="RL" width=384px height= 216px>
-        <h1>MVP Rocket League</h1>
-        <p>Voter pour élir le MVP de Rocket League par compétitions !</p>
-          <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
-        </p>
+    <img src="images/rocketleague.jpg" alt="RL" width="384" height="216">
+    <h1>MVP Rocket League</h1>
+    <p>Voter pour élire le MVP de Rocket League par compétitions !</p>
+    <p><strong>Attention votre vote ne sera plus modifiable après la validation</strong></p>
+</div>
+
+<?php
+// 2) Pour chaque compétition RL, on affiche les joueurs associés
+foreach ($competitions as $comp) {
+
+    // Joueurs de cette compétition
+    $sqlJ = "SELECT *
+             FROM joueur
+             WHERE idcompetition = :idcomp
+             ORDER BY pseudo";
+    $stmtJ = $connexion->prepare($sqlJ);
+    $stmtJ->execute([':idcomp' => $comp['idcompetition']]);
+    $joueurs = $stmtJ->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
+    <div class="compet">
+        <h2><?= htmlspecialchars($comp['nom_compet']) ?></h2>
     </div>
 
-<div class="compet">
-        <h2>Rocket League Championship Series</h2>
-</div>
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/zen.jpg" alt="zen">
-            <h3>zen</h3>
-            <p> Joueur chez team VITALITY </p>
+    <?php if (count($joueurs) === 0): ?>
+        <p style="text-align:center;margin-bottom:40px;">
+            Aucun joueur enregistré pour cette compétition.
+        </p>
+    <?php else: ?>
+        <div class="sections-jeux">
+            <?php foreach ($joueurs as $j): ?>
+                <div class="tuiles">
+                    <?php if (!empty($j['photo'])): ?>
+                        <img src="images/<?= htmlspecialchars($j['photo']) ?>"
+                             alt="<?= htmlspecialchars($j['pseudo']) ?>">
+                    <?php endif; ?>
+
+                    <h3><?= strtolower(htmlspecialchars($j['pseudo'])) ?></h3>
+                    <p> Joueur chez <?= htmlspecialchars($j['equipe']) ?> </p>
+
+                </div>
+            <?php endforeach; ?>
         </div>
+    <?php endif; ?>
 
-        <div class="tuiles">
-            <img src="images/firstkiller.jpg" alt="firstkiller">
-            <h3>firstkiller</h3>
-            <p> Joueur chez COMPLEXITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/jknaps.jpg" alt="jknaps">
-            <h3>jknaps</h3>
-            <p> Joueur chez G2 </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/monkeymoon.jpg" alt="monkeymoon">
-            <h3>monkeymoon</h3>
-            <p> Joueur chez BDS </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/rise.jpg" alt="rise">
-            <h3>rise</h3>
-            <p> Joueur chez BDS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/vatira.jpg" alt="vatira">
-            <h3>vatira</h3>
-            <p> Joueur chez KC </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/atomic.jpg" alt="atomic">
-            <h3>atomic</h3>
-            <p> Joueur chez G2 </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/seikoo.jpg" alt="seikoo">
-            <h3>seikoo</h3>
-            <p> Joueur chez BDS </p>
-        </div>
-</div>
-    
-</div>
-
-<br><br>
-<div class="compet">
-        <h2>RLCS Majors</h2>
-</div>
-
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/zen.jpg" alt="zen">
-            <h3>Zen</h3>
-            <p> Joueur chez VITALITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/vatira.jpg" alt="vatira">
-            <h3>Vatira</h3>
-            <p> Joueur chez KC </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/rise.jpg" alt="rise">
-            <h3>Rise</h3>
-            <p> Joueur chez OXYGEN </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/joyo.jpg" alt="joyo">
-            <h3>Joyo</h3>
-            <p> Joueur chez MOIST </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/beastmode.jpg" alt="beastmode">
-            <h3>Beastmode</h3>
-            <p> Joueur chez COMPLEXITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/evoh.jpg" alt="evoh">
-            <h3>Evoh</h3>
-            <p> Joueur chez FAZE </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/monkeymoon.jpg" alt="monkeymoon">
-            <h3>Monkeymoon</h3>
-            <p> Joueur chez BDS </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/kaydop.jpg" alt="kaydop">
-            <h3>Kaydop</h3>
-            <p> Joueur chez VITALITY </p>
-        </div>
-</div>
-
-<br><br>
-<div class="compet">
-        <h2>Esports World Cup</h2>
-</div>
-
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/zen.jpg" alt="zen">
-            <h3>Zen</h3>
-            <p> Joueur chez VITALITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/alpha.jpg" alt="alpha">
-            <h3>Alpha54</h3>
-            <p> Joueur chez VITALITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/radosin.jpg" alt="radosin">
-            <h3>Radosin</h3>
-            <p> Joueur chez VITALITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/ahmad.jpg" alt="ahmad">
-            <h3>Ahmad</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/trk.jpg" alt="trk">
-            <h3>Trk511</h3>
-            <p> Joueur chez FALCONS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/oski.jpg" alt="oski">
-            <h3>Oski</h3>
-            <p> Joueur chez OXYGEN </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/joyo.jpg" alt="joyo">
-            <h3>Joyo</h3>
-            <p> Joueur chez MOIST </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/itachi.jpg" alt="itachi">
-            <h3>Itachi</h3>
-            <p> Joueur chez KC </p>
-        </div>
-</div>
+<?php } ?>
 
 <?php
 require('footer.php');
