@@ -7,6 +7,35 @@ if (!$connexion) {
     die("Pb d'accès à la bdd");
 }
 
+/* --------- Vérifier si au moins un scrutin LoL est OUVERT --------- */
+$idjeu = 2;
+$now   = date('Y-m-d H:i:s');
+
+$sqlCheck = "SELECT COUNT(*)
+             FROM scrutin s
+             JOIN competition c ON c.idcompetition = s.idcompetition
+             WHERE c.idjeu = :idjeu
+               AND s.date_ouverture <= :now
+               AND s.date_cloture   >= :now";
+$stmtCheck = $connexion->prepare($sqlCheck);
+$stmtCheck->execute([
+    ':idjeu' => $idjeu,
+    ':now'   => $now
+]);
+$nbScrutinsOuverts = (int)$stmtCheck->fetchColumn();
+
+if ($nbScrutinsOuverts === 0) {
+    // aucun scrutin LoL ouvert → on affiche un message et on arrête
+    ?>
+    <div class="scrutin-info">
+        <h2>Scrutin fermé</h2>
+        <p>Aucun vote n'est actuellement ouvert pour League of Legends.</p>
+        <p>Revenez plus tard ou choisissez un autre jeu.</p>
+    </div>
+    <?php
+    require('footer.php');
+    exit;
+}
 
 // 1) Récupérer les compétitions LoL
 $sql = "SELECT idcompetition, nom_compet
