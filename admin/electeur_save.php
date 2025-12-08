@@ -2,6 +2,8 @@
 require "check_admin.php";
 require "../dbconnect.php";
 
+$idadmin = $_SESSION['admin_id'] ?? null;
+
 $connexion = dbconnect();
 if (!$connexion) {
     die("Pb d'accès à la bdd");
@@ -14,13 +16,14 @@ $type       = $_POST['type'] ?? 'ELECTEUR';
 
 if ($mode === "ajout") {
 
-    $sql = "INSERT INTO electeur (email, mot_de_passe, type, actif)
-            VALUES (:email, :mdp, :type, 1)";
+    $sql = "INSERT INTO electeur (email, mot_de_passe, type, actif, idadmin)
+            VALUES (:email, :mdp, :type, 1, :idadmin)";
     $stmt = $connexion->prepare($sql);
     $stmt->execute([
-        ':email' => $email,
-        ':mdp'   => $password,   // compat avec ton login actuel
-        ':type'  => $type
+        ':email'   => $email,
+        ':mdp'     => $password,
+        ':type'    => $type,
+        ':idadmin' => $idadmin
     ]);
 
 } else { // edition
