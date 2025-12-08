@@ -11,7 +11,7 @@ if (!$connexion) {
 // Adapte la condition à ta table : soit par nom, soit par idjeu, etc.
 $sql = "SELECT idcompetition, nom_compet
         FROM competition
-        WHERE idjeu = 1"; // supposons que 1 = Valorant
+        WHERE idjeu = 1"; 
 $stmt = $connexion->query($sql);
 $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -37,7 +37,7 @@ foreach ($competitions as $comp) {
     ?>
 
     <div class="compet">
-        <h2><?= htmlspecialchars($comp['nom_competition']) ?></h2>
+        <h2><?= htmlspecialchars($comp['nom_compet']) ?></h2>
     </div>
 
     <?php if (count($joueurs) === 0): ?>
