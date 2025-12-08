@@ -1,189 +1,65 @@
 <?php 
 require('header.php');
+
+
+$connexion = dbconnect();
+if (!$connexion) {
+    die("Pb d'accès à la bdd");
+}
+
+// 1) Récupérer les compétitions Valorant
+// Adapte la condition à ta table : soit par nom, soit par idjeu, etc.
+$sql = "SELECT idcompetition, nom_compet
+        FROM competition
+        WHERE nom_jeu = 'Valorant'"; // ou WHERE idjeu = 2; selon ta structure
+$stmt = $connexion->query($sql);
+$competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="about-us">
-        <img src="images/valorant.jpg" alt="Valorant" width=200px height= 200px>
-        <h1>MVP Valorant</h1>
-        <p>Voter pour élir le MVP de Valorant par compétitions !</p>
-          <p> <strong> Attention votre vote ne sera plus modifiable après la validation</strong>
+    <img src="images/valorant.jpg" alt="Valorant" width="200" height="200">
+    <h1>MVP Valorant</h1>
+    <p>Voter pour élir le MVP de Valorant par compétitions !</p>
+    <p><strong>Attention votre vote ne sera plus modifiable après la validation</strong></p>
+</div>
+
+<?php
+// Pour chaque compétition Valorant, on affiche les joueurs
+foreach ($competitions as $comp) {
+
+    // Récupérer les joueurs de cette compétition
+    $sqlJ = "SELECT * FROM joueur
+             WHERE idcompetition = :idcomp
+             ORDER BY pseudo";
+    $stmtJ = $connexion->prepare($sqlJ);
+    $stmtJ->execute([':idcomp' => $comp['idcompetition']]);
+    $joueurs = $stmtJ->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
+    <div class="compet">
+        <h2><?= htmlspecialchars($comp['nom_competition']) ?></h2>
+    </div>
+
+    <?php if (count($joueurs) === 0): ?>
+        <p style="text-align:center;margin-bottom:40px;">
+            Aucun joueur enregistré pour cette compétition.
         </p>
-</div>
-
-<div class="compet">
-        <h2>Champions Valorant</h2>
-</div>
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/aspas.webp" alt="aspas">
-            <h3>Aspas</h3>
-            <p> Joueur chez MIBR </p>
+    <?php else: ?>
+        <div class="sections-jeux">
+            <?php foreach ($joueurs as $j): ?>
+                <div class="tuiles">
+                    <?php if (!empty($j['photo'])): ?>
+                        <img src="images/<?= htmlspecialchars($j['photo']) ?>" 
+                             alt="<?= htmlspecialchars($j['pseudo']) ?>">
+                    <?php endif; ?>
+                    <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
+                    <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
+                </div>
+            <?php endforeach; ?>
         </div>
+    <?php endif; ?>
 
-        <div class="tuiles">
-            <img src="images/brawk.webp" alt="brawk">
-            <h3>Brawk</h3>
-            <p> Joueur chez NRG </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur chez FNATIC </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/cortezia.jpg" alt="cortezia">
-            <h3>Cortezia</h3>
-            <p> Joueur chez MIBR </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/noman.jpg" alt="noman">
-            <h3>NoMan</h3>
-            <p> Joueur chez XLG </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur chez HERETICS </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur chez DRX </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/jawgemo.jpg" alt="jawgemo">
-            <h3>Jawgemo</h3>
-            <p> Joueur chez G2 </p>
-        </div>
-</div>
-    
-</div>
-
-<br><br>
-<div class="compet">
-        <h2>VCT EMEA</h2>
-</div>
-
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/derke.jpg" alt="derke">
-            <h3>Derke</h3>
-            <p> Joueur chez VITALITY </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/miniboo.jpg" alt="miniboo">
-            <h3>Miniboo</h3>
-            <p> Joueur chez HERETICS </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/koalanoob.jpg" alt="koalanoob">
-            <h3>Koalanoob</h3>
-            <p> Joueur chez NAVI </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/xeus.jpg" alt="xeus">
-            <h3>Xeus</h3>
-            <p> Joueur chez FUT ESPORTS </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/kaajak.jpg" alt="kaajak">
-            <h3>Kaajak</h3>
-            <p> Joueur chez FNATIC </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/riens.jpg" alt="riens">
-            <h3>RieNs</h3>
-            <p> Joueur chez HERETICS </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/alfajer.jpg" alt="alfajer">
-            <h3>Alfajer</h3>
-            <p> Joueur chez FNATIC </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/boo.jpg" alt="boo">
-            <h3>Boo</h3>
-            <p> Joueur chez HERETICS </p>
-        </div>
-</div>
-
-<br><br>
-
-<div class="compet">
-        <h2>VCT PACIFIC</h2>
-</div>
-
-<div class="sections-jeux">
-        <div class="tuiles">
-            <img src="images/meiy.jpg" alt="meiy">
-            <h3>Meiy</h3>
-            <p> Joueur chez DFM </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/hyunmin.jpg" alt="hyunmin">
-            <h3>HYUNMIN</h3>
-            <p> Joueur chez DRX </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/jemkin.jpg" alt="jemkin">
-            <h3>Jemkin</h3>
-            <p> Joueur chez RRQ </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/karon.jpg" alt="karon">
-            <h3>Karon</h3>
-            <p> Joueur chez GEN.G </p>
-        </div>
-</div>
-<div class="sections-jeux">
-
-        <div class="tuiles">
-            <img src="images/something.jpg" alt="something">
-            <h3>Something</h3>
-            <p> Joueur chez PAPER REX </p>
-        </div>
-
-        <div class="tuiles">
-            <img src="images/d4v41.jpg" alt="d4v41">
-            <h3>D4v41</h3>
-            <p> Joueur chez PAPER REX </p>
-        </div>
-    
-
-    <div class="tuiles">
-            <img src="images/meteor.jpg" alt="meteor">
-            <h3>Meteor</h3>
-            <p> Joueur chez T1 </p>
-        </div>
-
-    <div class="tuiles">
-            <img src="images/maKo.jpg" alt="mako">
-            <h3>MaKo</h3>
-            <p> Joueur chez DRX </p>
-        </div>
-</div>
+<?php } // fin foreach compétitions ?>
 
 <?php
 require('footer.php');

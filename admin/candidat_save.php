@@ -62,7 +62,7 @@ if ($mode === "ajout") {
 
 } else { // edition
 
-    $idcandidat = (int) ($_POST['idcandidat'] ?? 0);
+    $idcandidat = (int) ($_POST['idjoueur'] ?? 0);
 
     $sql = "UPDATE joueur
             SET pseudo = :pseudo,
