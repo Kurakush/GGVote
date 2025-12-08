@@ -5,38 +5,43 @@ require "../dbconnect.php";
 
 // --- Récupération des statistiques principales ---
 
+$connexion = dbconnect();
+if (!$connexion) {
+    die("Pb d'accès à la bdd");
+}
+
 // Nombre total d'électeurs
-$stmt = $pdo->query("SELECT COUNT(*) FROM electeur");
+$stmt = $connexion->query("SELECT COUNT(*) FROM electeur");
 $totalElecteurs = (int) $stmt->fetchColumn();
 
 // Nombre total de scrutins
-$stmt = $pdo->query("SELECT COUNT(*) FROM scrutin");
+$stmt = $connexion->query("SELECT COUNT(*) FROM scrutin");
 $totalScrutins = (int) $stmt->fetchColumn();
 
 // Nombre de scrutins ouverts
-$stmt = $pdo->query("SELECT COUNT(*) FROM scrutin WHERE etat_scrutin = 'ouvert'");
+$stmt = $connexion->query("SELECT COUNT(*) FROM scrutin WHERE etat_scrutin = 'ouvert'");
 $scrutinsOuverts = (int) $stmt->fetchColumn();
 
 // Nombre de scrutins clôturés
-$stmt = $pdo->query("SELECT COUNT(*) FROM scrutin WHERE etat_scrutin = 'cloture'");
+$stmt = $connexion->query("SELECT COUNT(*) FROM scrutin WHERE etat_scrutin = 'cloture'");
 $scrutinsClotures = (int) $stmt->fetchColumn();
 
-// Nombre de candidats (si ta table s'appelle autrement, adapte ici)
+// Nombre de candidats (si la table existe)
 $totalCandidats = 0;
 try {
-    $stmt = $pdo->query("SELECT COUNT(*) FROM candidat");
+    $stmt = $connexion->query("SELECT COUNT(*) FROM candidat");
     $totalCandidats = (int) $stmt->fetchColumn();
 } catch (PDOException $e) {
-    // Si la table n'existe pas encore, on laisse 0 et on n'affiche pas d'erreur
+    // on laisse 0 si la table n'existe pas encore
 }
 
 // Derniers scrutins créés
-$sql = "SELECT s.*, c.nom_competition
+$sql = "SELECT s.*, c.nom_compet
         FROM scrutin s
         JOIN competition c ON c.idcompetition = s.idcompetition
         ORDER BY s.date_ouverture DESC
         LIMIT 5";
-$stmt = $pdo->query($sql);
+$stmt = $connexion->query($sql);
 $derniersScrutins = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
