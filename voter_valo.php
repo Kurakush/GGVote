@@ -1,47 +1,36 @@
 <?php 
 require('header.php');
 
-
 $connexion = dbconnect();
 if (!$connexion) {
     die("Pb d'accès à la bdd");
 }
 
-
-/* --------- Vérifier si au moins un scrutin  est OUVERT --------- */
-$idjeu = 1;
+$idjeu = 1; // Valorant
 $now   = date('Y-m-d H:i:s');
 
+/* --- Vérifier qu'il existe AU MOINS un scrutin Valorant OUVERT --- */
 $sqlCheck = "SELECT COUNT(*)
              FROM scrutin s
              JOIN competition c ON c.idcompetition = s.idcompetition
              WHERE c.idjeu = :idjeu
+               AND s.etat_scrutin = 'ouvert'
                AND s.date_ouverture <= :now
                AND s.date_cloture   >= :now";
 $stmtCheck = $connexion->prepare($sqlCheck);
-$stmtCheck->execute([
-    ':idjeu' => $idjeu,
-    ':now'   => $now
-]);
-$nbScrutinsOuverts = (int)$stmtCheck->fetchColumn();
-
-if ($nbScrutinsOuverts === 0) {
-    // aucun scrutin LoL ouvert → on affiche un message et on arrête
+$stmtCheck->execute([':idjeu' => $idjeu, ':now' => $now]);
+if ((int)$stmtCheck->fetchColumn() === 0) {
     ?>
     <div class="scrutin-info">
         <h2>Scrutin fermé</h2>
         <p>Aucun vote n'est actuellement ouvert pour Valorant.</p>
-        <p>Revenez plus tard ou choisissez un autre jeu.</p>
     </div>
     <?php
     require('footer.php');
     exit;
 }
 
-
-$now = date('Y-m-d H:i:s');
-
-// Compétitions Valorant qui ont un scrutin OUVERT
+/* --- Compétitions Valorant qui ont un scrutin OUVERT --- */
 $sql = "SELECT DISTINCT c.idcompetition, c.nom_compet, s.idscrutin
         FROM competition c
         JOIN scrutin s ON s.idcompetition = c.idcompetition
@@ -50,25 +39,27 @@ $sql = "SELECT DISTINCT c.idcompetition, c.nom_compet, s.idscrutin
           AND s.date_ouverture <= :now
           AND s.date_cloture   >= :now";
 $stmt = $connexion->prepare($sql);
-$stmt->execute([
-    ':idjeu' => 1,   // idjeu Valorant
-    ':now'   => $now
-]);
+$stmt->execute([':idjeu' => $idjeu, ':now' => $now]);
 $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="about-us">
     <img src="images/valorant.jpg" alt="Valorant" width="200" height="200">
     <h1>MVP Valorant</h1>
-    <p>Voter pour élir le MVP de Valorant par compétitions !</p>
-    <p><strong>Attention votre vote ne sera plus modifiable après la validation</strong></p>
+    <p>Voter pour élire le MVP de Valorant par compétitions !</p>
+    <p><strong>Attention : votre vote ne sera plus modifiable après la validation.</strong></p>
 </div>
 
-<?php
-// Pour chaque compétition Valorant, on affiche les joueurs
-foreach ($competitions as $comp) {
+<?php if (empty($competitions)): ?>
+    <div class="scrutin-info">
+        <p>Aucune compétition Valorant ouverte au vote pour le moment.</p>
+    </div>
+<?php endif; ?>
 
-    // Récupérer les joueurs de cette compétition
+<?php foreach ($competitions as $comp): ?>
+
+    <?php
+    // Joueurs de cette compétition
     $sqlJ = "SELECT * FROM joueur
              WHERE idcompetition = :idcomp
              ORDER BY pseudo";
@@ -86,22 +77,51 @@ foreach ($competitions as $comp) {
             Aucun joueur enregistré pour cette compétition.
         </p>
     <?php else: ?>
-        <div class="sections-jeux">
-            <?php foreach ($joueurs as $j): ?>
-                <div class="tuiles">
-                    <?php if (!empty($j['photo'])): ?>
-                        <img src="images/<?= htmlspecialchars($j['photo']) ?>" 
-                             alt="<?= htmlspecialchars($j['pseudo']) ?>">
-                    <?php endif; ?>
-                    <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
-                    <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
+
+        <!-- FORMULAIRE DE VOTE POUR CETTE COMPÉTITION -->
+        <form class="vote-form" action="vote_save.php" method="post">
+            <input type="hidden" name="idscrutin" value="<?= (int)$comp['idscrutin'] ?>">
+
+            <div class="sections-jeux">
+                <?php foreach ($joueurs as $j): ?>
+                    <label class="tuiles tuiles-selectable">
+                        <!-- Radio caché qui représente le choix -->
+                        <input type="radio"
+                               name="idjoueur"
+                               value="<?= (int)$j['idjoueur'] ?>"
+                               required>
+
+                        <div class="tuiles-content">
+                            <?php if (!empty($j['photo'])): ?>
+                                <img src="images/<?= htmlspecialchars($j['photo']) ?>"
+                                     alt="<?= htmlspecialchars($j['pseudo']) ?>">
+                            <?php endif; ?>
+
+                            <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
+                            <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
+
+                            <?php if (!empty($j['poste'])): ?>
+                                <p><?= htmlspecialchars($j['poste']) ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="vote-token-field">
+                <label for="token_<?= (int)$comp['idscrutin'] ?>">Votre jeton de vote</label>
+                <input type="text"
+                       id="token_<?= (int)$comp['idscrutin'] ?>"
+                       name="token_code"
+                       placeholder="Entrez votre jeton"
+                       required>
+            </div>
+
+            <button type="submit" class="vote-btn">Valider mon vote</button>
+        </form>
+
     <?php endif; ?>
 
-<?php } // fin foreach compétitions ?>
+<?php endforeach; ?>
 
-<?php
-require('footer.php');
-?>
+<?php require('footer.php'); ?>

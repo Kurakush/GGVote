@@ -655,6 +655,66 @@ p{
     color: #e31919;
 }
 
+/* On cache le radio dans la tuile */
+.tuiles-selectable input[type="radio"] {
+    display: none;
+}
+
+.tuiles-selectable {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border 0.15s ease;
+}
+
+/* contenu visuel de la tuile */
+.tuiles-content {
+    height: 100%;
+}
+
+/* Effet quand la tuile est sélectionnée */
+.tuiles-selectable input[type="radio"]:checked + .tuiles-content {
+    border: 2px solid #e31919;
+    box-shadow: 0 0 18px rgba(227,25,25,0.6);
+    transform: translateY(-4px);
+}
+
+/* Champ jeton + bouton */
+.vote-form {
+    margin-bottom: 40px;
+}
+
+.vote-token-field {
+    margin: 18px 0 10px;
+}
+
+.vote-token-field label {
+    display: block;
+    margin-bottom: 6px;
+    color: #D9D9D9;
+}
+
+.vote-token-field input[type="text"] {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #545454;
+    background-color: #202020;
+    color: #D9D9D9;
+}
+
+.vote-btn {
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: none;
+    background-color: #e31919;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.vote-btn:hover {
+    filter: brightness(1.1);
+}
 
 /* call to action section */
 .cta-vote {
