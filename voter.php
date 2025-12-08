@@ -3,7 +3,6 @@ require('header.php');
 ?>
 
 <?php
-session_start();
 if (
     !isset($_SESSION["electeur_email"]) &&   // pas électeur
     !isset($_SESSION["login"])               // pas admin
@@ -24,7 +23,9 @@ if (
         </p>
     </div>
 
-<h1>Jeux disponibles</h1>
+    <div class="titre-section">
+        <h1>Jeux disponibles</h1>
+    </div>
 
 <div class="sections-jeux">
 
