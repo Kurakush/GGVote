@@ -7,6 +7,7 @@ session_start();
 // check disconnect
 if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
     unset($_SESSION["login"]);            // admin
+    unset($_SESSION["admin_id"]);
     unset($_SESSION["electeur_email"]);   // électeur
     unset($_SESSION["idelecteur"]);
 }
@@ -37,6 +38,8 @@ if (isset($_POST['role']) && $_POST['role'] === 'admin') {
             if($row_count == 1) {
                 $member_row = $members_array[0];
                 $_SESSION['login'] = $member_row['login_admin'];
+                $_SESSION['admin_id'] = $member_row['idadmin']; // colonne de ta table admin
+
                 $_SESSION['flash_message'] = "Connexion réussie en tant qu'administrateur !";
             } else {
                 $_SESSION['flash_error'] = "Identifiants incorrects (Admin)";
@@ -156,6 +159,15 @@ $electeur = isset($_SESSION["electeur_email"]);
                 <?php
             }
             ?>
+
+            <?php
+            if ($admin) { 
+                ?>
+                <li style="float:right"><a href="admin/index.php">CONSOLE ADMIN</a></li>
+                <?php 
+            } 
+            ?>
+
             <li style ="float:right"><a href="contact.php">CONTACT</a></li>
             <li style="float:right"><a href="resultat.php">RÉSULTATS</a></li>
 

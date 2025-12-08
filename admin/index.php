@@ -1,7 +1,7 @@
 <?php
 // admin/index.php
 require "check_admin.php";
-require_once __DIR__ . '/../dbconnect.php';
+require "../dbconnect.php";
 
 // --- Récupération des statistiques principales ---
 
