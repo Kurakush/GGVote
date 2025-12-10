@@ -1,5 +1,4 @@
 <?php
-require('header.php');
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -10,6 +9,8 @@ if (!isset($_SESSION['idjoueur_candidat'])) {
     header("Location: index.php");
     exit;
 }
+
+require('header.php');
 
 $idjoueur = (int)$_SESSION['idjoueur_candidat'];
 

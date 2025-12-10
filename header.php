@@ -241,9 +241,9 @@ $candidat = isset($_SESSION["idjoueur_candidat"]);
         switchTab('electeur');
     }
 
-    // Déconnexion
+    // Déconnexion toujours sur index.php
     function disconnect() {
-        window.location.href = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" + '?disconnect=1';
+        window.location.href = "index.php?disconnect=1";
     }
 
     // Gestion des onglets
