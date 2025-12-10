@@ -222,6 +222,30 @@ if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
 $admin    = isset($_SESSION["login"]);
 $electeur = isset($_SESSION["electeur_email"]);
 $candidat = isset($_SESSION["idjoueur_candidat"]);
+
+// ------------------------------------------------------
+//  RESTRICTION D'ACCES A CERTAINES PAGES (VOTE)
+// ------------------------------------------------------
+$current_page = basename($_SERVER['PHP_SELF']);
+
+// Pages de vote à protéger
+$pages_vote = [
+    'voter_valo.php',
+    'voter_lol.php',
+    'voter_cs.php',
+    'voter_fortnite.php',
+    'voter.php'        // si tu as une page hub des votes
+];
+
+// Si on est sur une page de vote
+if (in_array($current_page, $pages_vote, true)) {
+
+    // Accès autorisé : électeur OU admin
+    if (!isset($_SESSION['idelecteur']) && !isset($_SESSION['admin_id'])) {
+        header('Location: index.php');
+        exit;
+    }
+}
 ?>
 
 <html>
