@@ -76,13 +76,8 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
                 $hash_en_bdd = $member_row['mot_de_passe'];
                 $mdp_saisi   = $_POST['password'];
 
-                // 1) Cas normal : mot de passe hashé
+                // Vérification du mot de passe hashé
                 if (password_verify($mdp_saisi, $hash_en_bdd)) {
-                    $password_ok = true;
-                }
-                // 2) Optionnel : compat pour anciens comptes en clair
-                // (à supprimer quand tous les comptes seront hashés)
-                elseif ($mdp_saisi === $hash_en_bdd) {
                     $password_ok = true;
                 }
             }
