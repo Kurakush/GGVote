@@ -15,7 +15,6 @@ if (!isset($_SESSION['idelecteur']) && !isset($_SESSION['admin_id'])) {
     header('Location: index.php');
     exit;
 }
-
 // A partir d'ici, on peut envoyer du HTML
 require('header.php');
 
