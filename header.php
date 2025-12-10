@@ -6,10 +6,18 @@ require_once('dbconnect.php');
 
 // check disconnect
 if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
-    unset($_SESSION["login"]);            // admin
+   // admin
+    unset($_SESSION["login"]);
     unset($_SESSION["admin_id"]);
-    unset($_SESSION["electeur_email"]);   // électeur
+
+    // électeur
+    unset($_SESSION["electeur_email"]);
     unset($_SESSION["idelecteur"]);
+
+    // candidat
+    unset($_SESSION["idcandidat"]);
+    unset($_SESSION["candidat_email"]);
+    unset($_SESSION["candidat_pseudo"]);
 }
 
 // ==========================
@@ -153,10 +161,69 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
     }
 }
 
+/* ==========================================================
+ *  CONNEXION CANDIDAT
+ *  (via le formulaire / modal avec role="candidat")
+ * ========================================================== */
+if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
+
+    // On vérifie que les champs sont remplis
+    $email    = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if ($email === '' || $password === '') {
+        $_SESSION['flash_error'] = "Veuillez saisir un email et un mot de passe (Candidat).";
+    } else {
+
+        $connexion = dbconnect();
+        if (!$connexion) {
+            $_SESSION['flash_error'] = "Problème d'accès à la base de données (Candidat).";
+        } else {
+
+            // On cherche le candidat dans la table candidat_user
+            $sql = "SELECT idcandidat, email, mdp_hash, pseudo, candidature_complete, candidature_validee
+                    FROM candidat_user
+                    WHERE email = :email
+                    LIMIT 1";
+            $stmt = $connexion->prepare($sql);
+            $stmt->execute([':email' => $email]);
+            $candidat = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $password_ok = false;
+
+            if ($candidat && !empty($candidat['mdp_hash'])) {
+                if (password_verify($password, $candidat['mdp_hash'])) {
+                    $password_ok = true;
+                }
+            }
+
+            if ($password_ok) {
+
+                // Variables de session pour l'espace candidat
+                $_SESSION['idcandidat']        = (int)$candidat['idcandidat'];
+                $_SESSION['candidat_email']    = $candidat['email'];
+                $_SESSION['candidat_pseudo']   = $candidat['pseudo'];
+                $_SESSION['flash_message']     = "Connexion réussie en tant que candidat.";
+
+                // Redirection vers l'espace candidat
+                header("Location: espace_candidat.php");
+                exit;
+
+            } else {
+                $_SESSION['flash_error'] = "Identifiants incorrects (Candidat).";
+            }
+
+            $connexion = null;
+        }
+    }
+}
+
+
 
 // set admin / electeur vars
 $admin    = isset($_SESSION["login"]);
 $electeur = isset($_SESSION["electeur_email"]);
+$candidat = isset($_SESSION["idcandidat"]);
 ?>
 
 <html>
@@ -263,6 +330,13 @@ $electeur = isset($_SESSION["electeur_email"]);
             }
             ?>
 
+            <?php if ($candidat) { 
+                ?>
+                <li style="float:right"><a href="espace_candidat.php">ESPACE CANDIDAT</a></li>
+                <?php 
+            }
+            ?>
+
             
             <li style="float:right"><a href="index.php">ACCUEIL</a></li>
         </ul>
@@ -335,7 +409,6 @@ $electeur = isset($_SESSION["electeur_email"]);
                     <button type="submit" class="okbtn">Connexion</button>
                     <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
             </div>
-
         </div>
     </div>
 
