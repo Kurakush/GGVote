@@ -1,6 +1,5 @@
 <?php
 // Script de migration des mots de passe des électeurs
-// À lancer UNE FOIS, en étant connecté en admin.
 
 require "check_admin.php";    // sécurise l'accès
 require "../dbconnect.php";
