@@ -6,6 +6,12 @@ if (!$connexion) {
     die("Pb d'accès à la bdd");
 }
 
+/* --- Accès réservé aux électeurs connectés --- */
+if (!isset($_SESSION['idelecteur'])) {
+    header("Location: index.php");
+    exit;
+}
+
 $idjeu = 1; // Valorant
 $now   = date('Y-m-d H:i:s');
 
@@ -100,9 +106,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
                             <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
 
-                            <?php if (!empty($j['poste'])): ?>
-                                <p><?= htmlspecialchars($j['poste']) ?></p>
-                            <?php endif; ?>
+                            
                         </div>
                     </label>
                 <?php endforeach; ?>
