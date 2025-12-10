@@ -112,6 +112,9 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </div>
 
+            <br>
+            <br>
+
             <div class="vote-token-field">
                 <label for="token_<?= (int)$comp['idscrutin'] ?>">Votre jeton de vote</label>
                 <input type="text"
