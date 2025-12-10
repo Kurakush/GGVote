@@ -62,7 +62,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="about-us">
-    <img src="images/valorant.jpg" alt="LoL" width="200" height="200">
+    <img src="images/valorant.jpg" alt="Valorant" width="200" height="200">
     <h1>MVP Valorant</h1>
     <p>Voter pour élire le MVP de Valorant par compétitions !</p>
     <p><strong>Attention : votre vote ne sera plus modifiable après la validation.</strong></p>
@@ -122,9 +122,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
                                 <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
 
-                                <?php if (!empty($j['poste'])): ?>
-                                    <p><?= htmlspecialchars($j['poste']) ?></p>
-                                <?php endif; ?>
+                                
                             </div>
                         </label>
                     <?php endforeach; ?>
@@ -163,9 +161,6 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
                             <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
 
-                            <?php if (!empty($j['poste'])): ?>
-                                <p><?= htmlspecialchars($j['poste']) ?></p>
-                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

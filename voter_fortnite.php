@@ -1,4 +1,4 @@
-<?php 
+<?php
 // -------------------------------
 //  CONTROLE D'ACCES AVANT HTML
 // -------------------------------
@@ -15,7 +15,6 @@ if (!isset($_SESSION['idelecteur']) && !isset($_SESSION['admin_id'])) {
     header('Location: index.php');
     exit;
 }
-
 // A partir d'ici, on peut envoyer du HTML
 require('header.php');
 
@@ -27,7 +26,7 @@ if (!$connexion) {
 $idjeu = 4; // Fortnite
 $now   = date('Y-m-d H:i:s');
 
-/* --- Vérifier qu'il existe AU MOINS un scrutin Fortnite OUVERT --- */
+/* --- Vérifier qu'il existe AU MOINS un scrutin ouvert pour Fortnite --- */
 $sqlCheck = "SELECT COUNT(*)
              FROM scrutin s
              JOIN competition c ON c.idcompetition = s.idcompetition
@@ -37,11 +36,12 @@ $sqlCheck = "SELECT COUNT(*)
                AND s.date_cloture   >= :now";
 $stmtCheck = $connexion->prepare($sqlCheck);
 $stmtCheck->execute([':idjeu' => $idjeu, ':now' => $now]);
+
 if ((int)$stmtCheck->fetchColumn() === 0) {
     ?>
     <div class="scrutin-info">
         <h2>Scrutin fermé</h2>
-        <p>Aucun vote n'est actuellement ouvert pour Fornite.</p>
+        <p>Aucun vote n'est actuellement ouvert pour Fortnite.</p>
     </div>
     <?php
     require('footer.php');
@@ -70,7 +70,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php if (empty($competitions)): ?>
     <div class="scrutin-info">
-        <p>Aucune compétition Fortnite ouverte au vote pour le moment.</p>
+        <p>Aucune compétition ouverte au vote pour le moment.</p>
     </div>
 <?php endif; ?>
 
@@ -91,24 +91,67 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <?php if (count($joueurs) === 0): ?>
+
         <p style="text-align:center;margin-bottom:40px;">
             Aucun joueur enregistré pour cette compétition.
         </p>
+
     <?php else: ?>
 
-        <!-- FORMULAIRE DE VOTE POUR CETTE COMPÉTITION -->
-        <form class="vote-form" action="vote_save.php" method="post">
-            <input type="hidden" name="idscrutin" value="<?= (int)$comp['idscrutin'] ?>">
+        <?php if (isset($_SESSION['idelecteur'])): ?>
+
+            <!-- FORMULAIRE DE VOTE POUR CETTE COMPÉTITION (ÉLECTEUR SEULEMENT) -->
+            <form class="vote-form" action="vote_save.php" method="post">
+                <input type="hidden" name="idscrutin" value="<?= (int)$comp['idscrutin'] ?>">
+
+                <div class="sections-jeux">
+                    <?php foreach ($joueurs as $j): ?>
+                        <label class="tuiles tuiles-selectable">
+                            <!-- Radio caché qui représente le choix -->
+                            <input type="radio"
+                                   name="idjoueur"
+                                   value="<?= (int)$j['idjoueur'] ?>"
+                                   required>
+
+                            <div class="tuiles-content">
+                                <?php if (!empty($j['photo'])): ?>
+                                    <img src="images/<?= htmlspecialchars($j['photo']) ?>"
+                                         alt="<?= htmlspecialchars($j['pseudo']) ?>">
+                                <?php endif; ?>
+
+                                <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
+                                <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
+
+                                
+                            </div>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+
+                <br><br>
+
+                <div class="vote-token-field">
+                    <label for="token_<?= (int)$comp['idscrutin'] ?>">Votre jeton de vote</label>
+                    <input type="text"
+                           id="token_<?= (int)$comp['idscrutin'] ?>"
+                           name="token_code"
+                           placeholder="Entrez votre jeton"
+                           required>
+                </div>
+
+                <button type="submit" class="vote-btn">Valider mon vote</button>
+            </form>
+
+        <?php else: ?>
+
+            <!-- ADMIN : CONSULTATION UNIQUEMENT -->
+            <p style="text-align:center;margin-bottom:40px;color:#e31919;">
+                Vous êtes connecté en tant qu'administrateur : consultation autorisée, vote désactivé.
+            </p>
 
             <div class="sections-jeux">
                 <?php foreach ($joueurs as $j): ?>
-                    <label class="tuiles tuiles-selectable">
-                        <!-- Radio caché qui représente le choix -->
-                        <input type="radio"
-                               name="idjoueur"
-                               value="<?= (int)$j['idjoueur'] ?>"
-                               required>
-
+                    <div class="tuiles">
                         <div class="tuiles-content">
                             <?php if (!empty($j['photo'])): ?>
                                 <img src="images/<?= htmlspecialchars($j['photo']) ?>"
@@ -118,25 +161,12 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
                             <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
 
-                            
                         </div>
-                    </label>
+                    </div>
                 <?php endforeach; ?>
             </div>
-            <br>
-            <br>
 
-            <div class="vote-token-field">
-                <label for="token_<?= (int)$comp['idscrutin'] ?>">Votre jeton de vote</label>
-                <input type="text"
-                       id="token_<?= (int)$comp['idscrutin'] ?>"
-                       name="token_code"
-                       placeholder="Entrez votre jeton"
-                       required>
-            </div>
-
-            <button type="submit" class="vote-btn">Valider mon vote</button>
-        </form>
+        <?php endif; ?>
 
     <?php endif; ?>
 
