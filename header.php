@@ -4,6 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once('dbconnect.php');
 
+// erreurs pour les 3 logins
+$error_admin    = $error_admin    ?? '';
+$error_electeur = $error_electeur ?? '';
+$error_candidat = $error_candidat ?? '';
+
 // check disconnect
 if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
    // admin
@@ -15,9 +20,11 @@ if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
     unset($_SESSION["idelecteur"]);
 
     // candidat
-    unset($_SESSION["idcandidat"]);
+    unset($_SESSION["idjoueur_candidat"]);
     unset($_SESSION["candidat_email"]);
     unset($_SESSION["candidat_pseudo"]);
+    unset($_SESSION["candidature_complete"]);
+    unset($_SESSION["candidature_validee"]);
 }
 
 // ==========================
@@ -167,53 +174,44 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
  * ========================================================== */
 if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
 
-    // On vérifie que les champs sont remplis
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
     if ($email === '' || $password === '') {
-        $_SESSION['flash_error'] = "Veuillez saisir un email et un mot de passe (Candidat).";
+        $error_candidat = "Veuillez saisir un email et un mot de passe.";
     } else {
 
         $connexion = dbconnect();
         if (!$connexion) {
-            $_SESSION['flash_error'] = "Problème d'accès à la base de données (Candidat).";
+            $error_candidat = "Problème d'accès à la base de données.";
         } else {
 
-            // On cherche le candidat dans la table candidat_user
-            $sql = "SELECT idcandidat, email, mdp_hash, pseudo, candidature_complete, candidature_validee
-                    FROM candidat_user
-                    WHERE email = :email
+            $sql = "SELECT idjoueur, email_candidat, mdp_candidat, pseudo,
+                           candidature_complete, candidature_validee
+                    FROM joueur
+                    WHERE email_candidat = :email
                     LIMIT 1";
             $stmt = $connexion->prepare($sql);
             $stmt->execute([':email' => $email]);
-            $candidat = $stmt->fetch(PDO::FETCH_ASSOC);
+            $cand = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $password_ok = false;
+            if (
+                $cand &&
+                !empty($cand['mdp_candidat']) &&
+                password_verify($password, $cand['mdp_candidat'])
+            ) {
+                // connexion OK
+                $_SESSION['idjoueur_candidat']   = (int)$cand['idjoueur'];
+                $_SESSION['candidat_email']      = $cand['email_candidat'];
+                $_SESSION['candidat_pseudo']     = $cand['pseudo'];
+                $_SESSION['candidature_complete'] = (int)$cand['candidature_complete'];
+                $_SESSION['candidature_validee']  = (int)$cand['candidature_validee'];
 
-            if ($candidat && !empty($candidat['mdp_hash'])) {
-                if (password_verify($password, $candidat['mdp_hash'])) {
-                    $password_ok = true;
-                }
-            }
-
-            if ($password_ok) {
-
-                // Variables de session pour l'espace candidat
-                $_SESSION['idcandidat']        = (int)$candidat['idcandidat'];
-                $_SESSION['candidat_email']    = $candidat['email'];
-                $_SESSION['candidat_pseudo']   = $candidat['pseudo'];
-                $_SESSION['flash_message']     = "Connexion réussie en tant que candidat.";
-
-                // Redirection vers l'espace candidat
                 header("Location: espace_candidat.php");
                 exit;
-
             } else {
-                $_SESSION['flash_error'] = "Identifiants incorrects (Candidat).";
+                $error_candidat = "Identifiants incorrects (candidat).";
             }
-
-            $connexion = null;
         }
     }
 }
@@ -223,7 +221,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
 // set admin / electeur vars
 $admin    = isset($_SESSION["login"]);
 $electeur = isset($_SESSION["electeur_email"]);
-$candidat = isset($_SESSION["idcandidat"]);
+$candidat = isset($_SESSION["idjoueur_candidat"]);
 ?>
 
 <html>
@@ -296,7 +294,7 @@ $candidat = isset($_SESSION["idcandidat"]);
             <li class="logoGG"><img src="images/ggvoteSansFond.png" alt="Logo GGVOTE" height="100px"></li>
 
             <?php
-            if ($admin || $electeur){
+            if ($admin || $electeur || $candidat){
                 ?>
                 <li style="float:right"><a href="#" onclick="disconnect()">DECONNEXION</a></li>
                 <?php
@@ -399,16 +397,28 @@ $candidat = isset($_SESSION["idcandidat"]);
 
             <!-- Contenu onglet CANDIDAT -->
             <div id="formCandidat" class="tab-content">
-                <form class="dlgcontainer" action="login_candidat.php" method="post">
+                <form class="dlgcontainer" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                    <!-- Très important : indiquer qu’on est sur le rôle candidat -->
+                    <input type="hidden" name="role" value="candidat">
+
                     <label for="email_c"><b>Email</b></label>
-                    <input type="email" placeholder="Entrez votre email" name="email_c" id="email_c" required>
+                    <!-- Le name doit être "email" pour correspondre au PHP -->
+                    <input type="email" placeholder="Entrez votre email" name="email" id="email_c" required>
 
                     <label for="psw_c"><b>Mot de passe</b></label>
-                    <input type="password" placeholder="Entrez votre mot de passe" name="password_c" id="psw_c" required>
-                        
+                    <!-- Le name doit être "password" pour correspondre au PHP -->
+                    <input type="password" placeholder="Entrez votre mot de passe" name="password" id="psw_c" required>
+            
                     <button type="submit" class="okbtn">Connexion</button>
                     <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
+
+                    <?php if (!empty($error_candidat)) { ?>
+                        <p style="color:#e31919;"><?php echo $error_candidat; ?></p>
+                    <?php } ?>
+                </form>
             </div>
+    </form>
+</div>
         </div>
     </div>
 

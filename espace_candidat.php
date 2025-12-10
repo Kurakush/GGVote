@@ -6,41 +6,37 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Vérifier la connexion candidat
-if (!isset($_SESSION['idcandidat'])) {
+if (!isset($_SESSION['idjoueur_candidat'])) {
     header("Location: index.php");
     exit;
 }
 
-$idcandidat = (int)$_SESSION['idcandidat'];
+$idjoueur = (int)$_SESSION['idjoueur_candidat'];
 
 $connexion = dbconnect();
 if (!$connexion) {
     die("Erreur d'accès à la base de données.");
 }
 
-/* ==================================================
-   RÉCUPÉRATION DES INFORMATIONS DU CANDIDAT
-   ================================================== */
+/* ========= RÉCUP INFOS JOUEUR ========= */
 $sql = "SELECT *
-        FROM candidat_user
-        WHERE idcandidat = :id";
+        FROM joueur
+        WHERE idjoueur = :id";
 $stmt = $connexion->prepare($sql);
-$stmt->execute([':id' => $idcandidat]);
-$candidat = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt->execute([':id' => $idjoueur]);
+$cand = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$candidat) {
+if (!$cand) {
     die("Candidat introuvable.");
 }
 
-$complete = (int)$candidat['candidature_complete'];
-$validee  = (int)$candidat['candidature_validee'];
+$complete = (int)$cand['candidature_complete'];
+$validee  = (int)$cand['candidature_validee'];
 
 $message_success = "";
 $message_error   = "";
 
-/* ==================================================
-   TRAITEMENT DU FORMULAIRE DE MISE À JOUR
-   ================================================== */
+/* ========= MISE À JOUR PROFIL ========= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
 
     $pseudo     = trim($_POST['pseudo'] ?? '');
@@ -51,12 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     if ($pseudo === '') {
         $message_error = "Le pseudo ne peut pas être vide.";
     } else {
-        $sqlUpdate = "UPDATE candidat_user
+        $sqlUpdate = "UPDATE joueur
                       SET pseudo = :pseudo,
                           equipe = :equipe,
-                          bio = :bio,
+                          bio_candidat = :bio,
                           lien_media = :lien
-                      WHERE idcandidat = :id";
+                      WHERE idjoueur = :id";
 
         $stmtUp = $connexion->prepare($sqlUpdate);
         $stmtUp->execute([
@@ -64,36 +60,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
             ':equipe' => $equipe ?: null,
             ':bio'    => $bio ?: null,
             ':lien'   => $lien_media ?: null,
-            ':id'     => $idcandidat
+            ':id'     => $idjoueur
         ]);
 
         $message_success = "Votre profil a été mis à jour.";
+        // mettre à jour les données locales
+        $cand['pseudo']       = $pseudo;
+        $cand['equipe']       = $equipe;
+        $cand['bio_candidat'] = $bio;
+        $cand['lien_media']   = $lien_media;
     }
 }
 
-/* ==================================================
-   SOUMISSION DE LA CANDIDATURE
-   ================================================== */
+/* ========= SOUMISSION CANDIDATURE ========= */
 if (isset($_POST['submit_candidature'])) {
 
-    // Vérifier que le profil est complet :
-    if (empty($candidat['pseudo']) || empty($candidat['bio'])) {
-        $message_error = "Votre profil doit contenir au minimum un pseudo et une bio.";
+    if (empty($cand['pseudo']) || empty($cand['bio_candidat'])) {
+        $message_error = "Votre profil doit au minimum contenir un pseudo et une bio.";
     } else {
-        $sqlSubmit = "UPDATE candidat_user
+        $sqlSubmit = "UPDATE joueur
                       SET candidature_complete = 1
-                      WHERE idcandidat = :id";
+                      WHERE idjoueur = :id";
         $stmtSubmit = $connexion->prepare($sqlSubmit);
-        $stmtSubmit->execute([':id' => $idcandidat]);
+        $stmtSubmit->execute([':id' => $idjoueur]);
 
         $complete = 1;
-        $message_success = "Votre candidature est maintenant envoyée. Elle est en attente de validation.";
+        $message_success = "Votre candidature est envoyée. Elle est en attente de validation.";
     }
 }
 
 ?>
-
-<!-- HTML -->
 
 <div class="profil-container">
 
@@ -107,65 +103,61 @@ if (isset($_POST['submit_candidature'])) {
         <div class="success-box"><?= htmlspecialchars($message_success) ?></div>
     <?php endif; ?>
 
-    <!-- Informations compte -->
     <section class="profil-card">
-        <h2 class="profil-card-title">Mes informations</h2>
-        <p><strong>Email :</strong> <?= htmlspecialchars($candidat['email']) ?></p>
-        <p><strong>Jeu :</strong> <?= htmlspecialchars($candidat['idjeu']) ?></p>
-        <p><strong>Compétition :</strong> <?= htmlspecialchars($candidat['idcompetition']) ?></p>
-    </section>
-
-    <!-- Formulaire modification profil -->
-    <section class="profil-card">
-        <h2 class="profil-card-title">Mon profil candidat</h2>
+        <h2 class="profil-card-title">Mon profil</h2>
 
         <form method="post">
 
             <div class="vote-token-field">
                 <label>Pseudo</label>
                 <input type="text" name="pseudo"
-                       value="<?= htmlspecialchars($candidat['pseudo']) ?>" required>
+                       value="<?= htmlspecialchars($cand['pseudo']) ?>" required>
             </div>
 
             <div class="vote-token-field">
                 <label>Équipe</label>
                 <input type="text" name="equipe"
-                       value="<?= htmlspecialchars($candidat['equipe']) ?>">
+                       value="<?= htmlspecialchars($cand['equipe']) ?>">
             </div>
 
             <div class="vote-token-field">
                 <label>Bio / présentation</label>
-                <textarea name="bio" rows="4"><?= htmlspecialchars($candidat['bio']) ?></textarea>
+                <textarea name="bio" rows="4"><?= htmlspecialchars($cand['bio_candidat'] ?? '') ?></textarea>
             </div>
 
             <div class="vote-token-field">
                 <label>Lien média / highlight</label>
                 <input type="text" name="lien_media"
-                       value="<?= htmlspecialchars($candidat['lien_media']) ?>">
+                       value="<?= htmlspecialchars($cand['lien_media'] ?? '') ?>">
             </div>
 
-            <button type="submit" name="update_profile" class="vote-btn">Mettre à jour</button>
+            <button type="submit" name="update_profile" class="vote-btn">
+                Mettre à jour
+            </button>
         </form>
     </section>
 
-    <!-- État de la candidature -->
     <section class="profil-card">
         <h2 class="profil-card-title">État de ma candidature</h2>
 
         <?php if ($validee == 1): ?>
-            <p class="success-box">Votre candidature a été validée ✔  
-            Vous apparaissez maintenant dans les scrutins.</p>
+            <p class="success-box">
+                Votre candidature a été validée ✔<br>
+                Vous participez officiellement aux scrutins.
+            </p>
 
         <?php elseif ($complete == 1): ?>
-            <p class="profil-vote-summary">
-                Votre candidature est <strong>complète</strong> et <strong>en attente de validation</strong> par un administrateur.
+            <p>
+                Votre candidature est <strong>complète</strong> et
+                <strong>en attente de validation</strong> par un administrateur.
             </p>
 
         <?php else: ?>
             <p>Votre candidature n’a pas encore été envoyée.</p>
             <form method="post">
-                <button type="submit" name="submit_candidature"
-                        class="vote-btn">Soumettre ma candidature</button>
+                <button type="submit" name="submit_candidature" class="vote-btn">
+                    Soumettre ma candidature
+                </button>
             </form>
         <?php endif; ?>
     </section>
