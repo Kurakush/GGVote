@@ -25,7 +25,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'admin') {
         }
         else{
 
-            // Ton code de base, légèrement simplifié
+            
             $sql = "SELECT * FROM admin WHERE login_admin = :login AND mot_de_passe = :password";
             $query = $connexion->prepare($sql);
             $query->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
