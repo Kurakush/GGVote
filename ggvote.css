@@ -684,33 +684,12 @@ p{
     justify-content: center;
 }
 
-/* 4 par ligne sur grand écran */
+/* 4 par ligne */
 .vote-form .sections-jeux .tuiles {
     width: calc(25% - 24px);   /* 4 colonnes */
     max-width: 260px;          /* évite des tuiles trop larges */
 }
 
-/* 3 par ligne si l'écran est un peu plus petit */
-@media (max-width: 1200px) {
-    .vote-form .sections-jeux .tuiles {
-        width: calc(33.333% - 24px);
-    }
-}
-
-/* 2 par ligne en tablette */
-@media (max-width: 900px) {
-    .vote-form .sections-jeux .tuiles {
-        width: calc(50% - 24px);
-    }
-}
-
-/* 1 par ligne en mobile */
-@media (max-width: 600px) {
-    .vote-form .sections-jeux .tuiles {
-        width: 100%;
-        max-width: 100%;
-    }
-}
 
 /* Champ jeton + bouton */
 .vote-form {
