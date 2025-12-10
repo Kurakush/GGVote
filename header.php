@@ -93,9 +93,61 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
                 $_SESSION['electeur_email'] = $member_row['email'];
                 $_SESSION['idelecteur']     = $member_row['idelecteur'];
                 $_SESSION['flash_message']  = "Connexion réussie en tant qu'électeur !";
-            } else {
-                $_SESSION['flash_error'] = "Identifiants incorrects (Électeur)";
-            }
+
+                $idelecteur = (int)$member_row['idelecteur'];
+
+                // =======================================
+                // GENERATION DES TOKENS PAR COMPETITION
+                // =======================================
+
+                // On récupère les compétitions qui ont AU MOINS un scrutin ouvert
+                $sqlC = "SELECT DISTINCT c.idcompetition
+                    FROM scrutin s
+                    JOIN competition c ON c.idcompetition = s.idcompetition
+                    WHERE s.etat_scrutin = 'ouvert'
+                        AND s.date_ouverture <= NOW()
+                        AND s.date_cloture   >= NOW()";
+                $stmtC = $connexion->query($sqlC);
+                $competitions = $stmtC->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($competitions as $comp) {
+                $idcompetition = (int)$comp['idcompetition'];
+
+                // Vérifier si un token existe déjà pour cet électeur et cette compétition
+                $sqlCheck = "SELECT idtoken
+                    FROM token
+                    WHERE idelecteur = :idelecteur
+                       AND idcompetition = :idcompetition";
+                $stmtCheck = $connexion->prepare($sqlCheck);
+                $stmtCheck->execute([
+                    ':idelecteur'   => $idelecteur,
+                    ':idcompetition'=> $idcompetition
+            ]);
+
+            if ($stmtCheck->rowCount() == 0) {
+
+            // Génération du jeton
+            $token_code = bin2hex(random_bytes(16));
+            $token_hash = password_hash($token_code, PASSWORD_DEFAULT);
+
+            $sqlInsert = "INSERT INTO token (code_token, token_hash, idelecteur, idcompetition, etat)
+                          VALUES (:code, :hash, :idelecteur, :idcompetition, 0)";
+            $stmtI = $connexion->prepare($sqlInsert);
+            $stmtI->execute([
+                ':code'         => $token_code,
+                ':hash'         => $token_hash,
+                ':idelecteur'   => $idelecteur,
+                ':idcompetition'=> $idcompetition
+            ]);
+
+            // Optionnel : affichage dans la session
+            $_SESSION['token_comp_'.$idcompetition] = $token_code;
+        }
+    }
+
+    } else {
+        $_SESSION['flash_error'] = "Identifiants incorrects (Électeur)";
+    }
         }
         $connexion = null;
     }

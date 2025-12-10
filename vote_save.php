@@ -40,7 +40,8 @@ if (!$connexion) {
 try {
     $now = date('Y-m-d H:i:s');
 
-    // 1) Vérifier que le scrutin est ouvert (dates + etat_scrutin = 1)
+    // 1) Vérifier que le scrutin est ouvert (dates + etat_scrutin = 'ouvert')
+    //    et récupérer la compétition associée
     $sqlScrutin = "SELECT s.*, c.idcompetition
                    FROM scrutin s
                    JOIN competition c ON c.idcompetition = s.idcompetition
@@ -63,50 +64,57 @@ try {
 
     $idcompetition = (int)$scrutin['idcompetition'];
 
-    // 2) Vérifier que le joueur appartient bien à la compétition du scrutin
+    // 2) Vérifier que le joueur appartient bien à la COMPÉTITION du scrutin
     $sqlJoueur = "SELECT idjoueur
                   FROM joueur
                   WHERE idjoueur = :idjoueur
                     AND idcompetition = :idcompetition";
     $stmtJ = $connexion->prepare($sqlJoueur);
     $stmtJ->execute([
-        ':idjoueur'     => $idjoueur,
-        ':idcompetition'=> $idcompetition
+        ':idjoueur'      => $idjoueur,
+        ':idcompetition' => $idcompetition
     ]);
     $joueurOk = $stmtJ->fetch(PDO::FETCH_ASSOC);
 
     if (!$joueurOk) {
-        $_SESSION['flash_error'] = "Le joueur choisi n'appartient pas à ce scrutin.";
+        $_SESSION['flash_error'] = "Le joueur choisi n'appartient pas à cette compétition.";
         header("Location: voter.php");
         exit;
     }
 
-    // 3) Vérifier le token : appartient à l'électeur, bon scrutin, pas utilisé
+    // 3) Récupérer le token pour (électeur, compétition) non utilisé
+    //    On n'utilise plus code_token en clair, on vérifie via token_hash
     $sqlToken = "SELECT *
                  FROM token
-                 WHERE code_token = :code
-                   AND idelecteur = :idelecteur
-                   AND idscrutin  = :idscrutin
-                   AND utilise    = 0";
+                 WHERE idelecteur   = :idelecteur
+                   AND idcompetition = :idcompetition
+                   AND etat         = 0";
     $stmtT = $connexion->prepare($sqlToken);
     $stmtT->execute([
-        ':code'       => $token_code,
-        ':idelecteur' => $idelecteur,
-        ':idscrutin'  => $idscrutin
+        ':idelecteur'   => $idelecteur,
+        ':idcompetition'=> $idcompetition
     ]);
     $token = $stmtT->fetch(PDO::FETCH_ASSOC);
 
     if (!$token) {
-        $_SESSION['flash_error'] = "Jeton invalide, déjà utilisé ou ne correspondant pas à ce scrutin.";
+        $_SESSION['flash_error'] = "Aucun jeton valide trouvé pour cette compétition.";
+        header("Location: voter.php");
+        exit;
+    }
+
+    // 4) Vérifier que le jeton saisi correspond bien au hash stocké
+    if (empty($token['token_hash']) || !password_verify($token_code, $token['token_hash'])) {
+        $_SESSION['flash_error'] = "Jeton invalide.";
         header("Location: voter.php");
         exit;
     }
 
     $idtoken = (int)$token['idtoken'];
 
-    // 4) Enregistrer le vote + marquer le token utilisé dans une transaction
+    // 5) Enregistrer le vote + marquer le token utilisé dans une transaction
     $connexion->beginTransaction();
 
+    // Insertion du vote : on garde idscrutin pour savoir sur quel scrutin portait le vote
     $sqlInsert = "INSERT INTO vote (date_vote, heure_vote, idscrutin, idjoueur, idtoken)
                   VALUES (CURRENT_DATE, CURRENT_TIME, :idscrutin, :idjoueur, :idtoken)";
     $stmtV = $connexion->prepare($sqlInsert);
@@ -116,8 +124,9 @@ try {
         ':idtoken'   => $idtoken
     ]);
 
+    // Marquer le token comme utilisé (etat = 1)
     $sqlUpd = "UPDATE token
-               SET utilise = 1
+               SET etat = 1
                WHERE idtoken = :idtoken";
     $stmtU = $connexion->prepare($sqlUpd);
     $stmtU->execute([':idtoken' => $idtoken]);
@@ -135,7 +144,9 @@ try {
         $connexion->rollBack();
     }
 
-    // En debug tu peux var_dump($e->getMessage());
+    // En debug :
+    // error_log($e->getMessage());
+
     $_SESSION['flash_error'] = "Une erreur est survenue lors de l'enregistrement du vote.";
     header("Location: voter.php");
     exit;
