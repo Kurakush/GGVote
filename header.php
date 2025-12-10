@@ -185,20 +185,30 @@ $electeur = isset($_SESSION["electeur_email"]);
     function switchTab(role) {
         const tabElecteurBtn = document.getElementById('tabElecteur');
         const tabAdminBtn    = document.getElementById('tabAdmin');
+        const tabCandidatBtn = document.getElementById('tabCandidat');
+
         const formElecteur   = document.getElementById('formElecteur');
         const formAdmin      = document.getElementById('formAdmin');
+        const formCandidat   = document.getElementById('formCandidat');
 
+        // Réinitialisation des onglets et contenus
         tabElecteurBtn.classList.remove('active');
         tabAdminBtn.classList.remove('active');
+        tabCandidatBtn.classList.remove('active');
+
         formElecteur.classList.remove('active');
         formAdmin.classList.remove('active');
+        formCandidat.classList.remove('active');
 
         if (role === 'electeur') {
             tabElecteurBtn.classList.add('active');
             formElecteur.classList.add('active');
-        } else {
+        } else if (role === 'admin') {
             tabAdminBtn.classList.add('active');
             formAdmin.classList.add('active');
+        } else if (role === 'candidat') {
+            tabCandidatBtn.classList.add('active');
+            formCandidat.classList.add('active');
         }
     }
 
@@ -270,6 +280,7 @@ $electeur = isset($_SESSION["electeur_email"]);
             <div class="tab-menu">
                 <button type="button" id="tabElecteur" class="active" onclick="switchTab('electeur')">Électeur</button>
                 <button type="button" id="tabAdmin" onclick="switchTab('admin')">Admin</button>
+                <button type="button" id="tabCandidat" onclick="switchTab('candidat')">Candidat</button>
             </div>
 
             <!-- Contenu onglet ÉLECTEUR -->
@@ -298,7 +309,7 @@ $electeur = isset($_SESSION["electeur_email"]);
                     <input type="hidden" name="role" value="admin">
 
                     <label for="login"><b>Login admin</b></label>
-                    <input type="text" placeholder="Entrez votre identifiant" name="login" id="login" required>
+                    <input type="text" placeholder="Entrez votre login admin" name="login" id="login" required>
 
                     <label for="psw_a"><b>Mot de passe</b></label>
                     <input type="password" placeholder="Entrez votre mot de passe" name="password" id="psw_a" required>
@@ -310,6 +321,19 @@ $electeur = isset($_SESSION["electeur_email"]);
                         <p style="color:#e31919;"><?php echo $error_admin; ?></p>
                     <?php } ?>
                 </form>
+            </div>
+
+            <!-- Contenu onglet CANDIDAT -->
+            <div id="formCandidat" class="tab-content">
+                <form class="dlgcontainer" action="login_candidat.php" method="post">
+                    <label for="email_c"><b>Email</b></label>
+                    <input type="email" placeholder="Entrez votre email" name="email_c" id="email_c" required>
+
+                    <label for="psw_c"><b>Mot de passe</b></label>
+                    <input type="password" placeholder="Entrez votre mot de passe" name="password_c" id="psw_c" required>
+                        
+                    <button type="submit" class="okbtn">Connexion</button>
+                    <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Annuler</button>
             </div>
 
         </div>
