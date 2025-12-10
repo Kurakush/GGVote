@@ -670,11 +670,10 @@ p{
     height: 100%;
 }
 
-/* Effet quand la tuile est sélectionnée */
-.tuiles-selectable input[type="radio"]:checked + .tuiles-content {
-    border: 2px solid #e31919;
-    box-shadow: 0 0 18px rgba(227,25,25,0.6);
-    transform: translateY(-4px);
+/* TOUTE LA TUILE quand sélectionnée */
+.tuiles-selectable:has(input[type="radio"]:checked) {
+    border: 5px solid #e31919;
+    box-shadow: 0 0 18px rgba(227, 25, 25, 0.4);
 }
 
 /* === Mise en grille des tuiles dans les pages de vote === */
