@@ -206,9 +206,8 @@ if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
                 $_SESSION['candidat_pseudo']     = $cand['pseudo'];
                 $_SESSION['candidature_complete'] = (int)$cand['candidature_complete'];
                 $_SESSION['candidature_validee']  = (int)$cand['candidature_validee'];
+                $_SESSION['flash_message']  = "Connexion réussie en tant que candidat !";
 
-                header("Location: espace_candidat.php");
-                exit;
             } else {
                 $error_candidat = "Identifiants incorrects (candidat).";
             }
