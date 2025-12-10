@@ -61,6 +61,7 @@ $derniersScrutins = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <a href="scrutins.php">Scrutins</a>
         <a href="electeurs.php">Électeurs</a>
         <a href="candidats.php">Candidats</a>
+        <a href="candidatures_admin.php">Candidatures</a>
         <a href="../index.php?disconnect=1" class="btn-logout">Déconnexion</a>
     </nav>
 </header>
