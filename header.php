@@ -130,15 +130,15 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
             $token_code = bin2hex(random_bytes(16));
             $token_hash = password_hash($token_code, PASSWORD_DEFAULT);
 
-            $sqlInsert = "INSERT INTO token (code_token, token_hash, idelecteur, idcompetition, etat)
-                          VALUES (:code, :hash, :idelecteur, :idcompetition, 0)";
+            $sqlInsert = "INSERT INTO token (code_token, token_hash, idelecteur, idcompetition, etat, date_generation)
+                          VALUES (:code, :hash, :idelecteur, :idcompetition, 0, NOW())";
             $stmtI = $connexion->prepare($sqlInsert);
             $stmtI->execute([
                 ':code'         => $token_code,
                 ':hash'         => $token_hash,
                 ':idelecteur'   => $idelecteur,
                 ':idcompetition'=> $idcompetition
-            ]);
+]);
 
             // Optionnel : affichage dans la session
             $_SESSION['token_comp_'.$idcompetition] = $token_code;
