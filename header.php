@@ -325,7 +325,7 @@ $candidat = isset($_SESSION["idcandidat"]);
 
             <?php if ($electeur) { 
                 ?>
-                <li style="float:right"><a href="profil_electeur.php">MON PROFIL</a></li>
+                <li style="float:right"><a href="profil_electeur.php">ESPACE ELECTEUR</a></li>
                 <?php 
             }
             ?>
