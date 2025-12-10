@@ -55,7 +55,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'admin') {
 // ==========================
 if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
 
-    if (isset($_POST['email']) && isset($_POST["password"])){
+    if (!empty($_POST['email']) && !empty($_POST["password"])){
 
         $connexion = dbconnect(); 
         if(!$connexion) {
@@ -63,18 +63,34 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
         }
         else{
 
-            $sql = "SELECT * FROM electeur WHERE email = :email AND mot_de_passe = :password";
+            // On récupère l'électeur par son email
+            $sql = "SELECT * FROM electeur WHERE email = :email LIMIT 1";
             $query = $connexion->prepare($sql);
             $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
-            $query->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
             $query->execute();
-            $members_array = $query->fetchAll();
+            $member_row = $query->fetch(PDO::FETCH_ASSOC);
 
-            if(count($members_array) == 1) {
-                $member_row = $members_array[0];
+            $password_ok = false;
+
+            if ($member_row) {
+                $hash_en_bdd = $member_row['mot_de_passe'];
+                $mdp_saisi   = $_POST['password'];
+
+                // 1) Cas normal : mot de passe hashé
+                if (password_verify($mdp_saisi, $hash_en_bdd)) {
+                    $password_ok = true;
+                }
+                // 2) Optionnel : compat pour anciens comptes en clair
+                // (à supprimer quand tous les comptes seront hashés)
+                elseif ($mdp_saisi === $hash_en_bdd) {
+                    $password_ok = true;
+                }
+            }
+
+            if ($password_ok) {
                 $_SESSION['electeur_email'] = $member_row['email'];
                 $_SESSION['idelecteur']     = $member_row['idelecteur'];
-                $_SESSION['flash_message'] = "Connexion réussie en tant qu'électeur !";
+                $_SESSION['flash_message']  = "Connexion réussie en tant qu'électeur !";
             } else {
                 $_SESSION['flash_error'] = "Identifiants incorrects (Électeur)";
             }
@@ -82,6 +98,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
         $connexion = null;
     }
 }
+
 
 // set admin / electeur vars
 $admin    = isset($_SESSION["login"]);

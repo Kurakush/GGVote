@@ -14,14 +14,22 @@ $email      = $_POST['email'] ?? '';
 $password   = $_POST['password'] ?? '';
 $type       = $_POST['type'] ?? 'ELECTEUR';
 
+// on peut nettoyer un peu
+$email    = trim($email);
+$type     = trim($type);
+$password = trim($password);
+
 if ($mode === "ajout") {
+
+    // 🔐 hachage du mot de passe s'il est fourni
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO electeur (email, mot_de_passe, type, actif, idadmin)
             VALUES (:email, :mdp, :type, 1, :idadmin)";
     $stmt = $connexion->prepare($sql);
     $stmt->execute([
         ':email'   => $email,
-        ':mdp'     => $password,
+        ':mdp'     => $hash,
         ':type'    => $type,
         ':idadmin' => $idadmin
     ]);
@@ -30,7 +38,10 @@ if ($mode === "ajout") {
     $idelecteur = (int) ($_POST['idelecteur'] ?? 0);
 
     if ($password !== "") {
-        // on met à jour email + mdp
+        // un nouveau mot de passe a été saisi → on le hash
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        // on met à jour email + mdp + type
         $sql = "UPDATE electeur
                 SET email = :email,
                     mot_de_passe = :mdp,
@@ -39,12 +50,12 @@ if ($mode === "ajout") {
         $stmt = $connexion->prepare($sql);
         $stmt->execute([
             ':email' => $email,
-            ':mdp'   => $password,
+            ':mdp'   => $hash,
             ':type'  => $type,
             ':id'    => $idelecteur
         ]);
     } else {
-        // on laisse le mot de passe inchangé
+        // champ mdp vide → on laisse le mot de passe inchangé
         $sql = "UPDATE electeur
                 SET email = :email,
                     type = :type
