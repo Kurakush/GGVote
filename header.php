@@ -17,29 +17,36 @@ if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
 // ==========================
 if (isset($_POST['role']) && $_POST['role'] === 'admin') {
 
-    if (isset($_POST['login']) && isset($_POST["password"])){
+    if (!empty($_POST['login']) && !empty($_POST["password"])) {
 
         $connexion = dbconnect(); 
         if(!$connexion) {
             echo "Pb d'accès à la bdd"; 
         }
-        else{
+        else {
 
-            
-            $sql = "SELECT * FROM admin WHERE login_admin = :login AND mot_de_passe = :password";
+            // On récupère l’admin par son login
+            $sql = "SELECT * FROM admin WHERE login_admin = :login LIMIT 1";
             $query = $connexion->prepare($sql);
             $query->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
-            $query->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
             $query->execute();
-            $members_array = $query->fetchAll();
+            $member_row = $query->fetch(PDO::FETCH_ASSOC);
 
-            $row_count = count($members_array);
+            $password_ok = false;
 
-            if($row_count == 1) {
-                $member_row = $members_array[0];
-                $_SESSION['login'] = $member_row['login_admin'];
-                $_SESSION['admin_id'] = $member_row['idadmin']; // colonne de ta table admin
+            if ($member_row) {
+                $hash_en_bdd = $member_row['mot_de_passe'];
+                $mdp_saisi   = $_POST['password'];
 
+                // Vérification du mot de passe hashé
+                if (password_verify($mdp_saisi, $hash_en_bdd)) {
+                    $password_ok = true;
+                }
+            }
+
+            if ($password_ok) {
+                $_SESSION['login']    = $member_row['login_admin'];
+                $_SESSION['admin_id'] = $member_row['idadmin'];
                 $_SESSION['flash_message'] = "Connexion réussie en tant qu'administrateur !";
             } else {
                 $_SESSION['flash_error'] = "Identifiants incorrects (Admin)";
