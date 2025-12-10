@@ -1,15 +1,27 @@
 <?php 
+// -------------------------------
+//  CONTROLE D'ACCES AVANT HTML
+// -------------------------------
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/*
+ * Accès autorisé :
+ *  - électeur connecté (idelecteur)
+ *  - OU admin connecté (admin_id)
+ */
+if (!isset($_SESSION['idelecteur']) && !isset($_SESSION['admin_id'])) {
+    header('Location: index.php');
+    exit;
+}
+
+// A partir d'ici, on peut envoyer du HTML
 require('header.php');
 
 $connexion = dbconnect();
 if (!$connexion) {
     die("Pb d'accès à la bdd");
-}
-
-/* --- Accès réservé aux électeurs connectés --- */
-if (!isset($_SESSION['idelecteur'])) {
-    header("Location: index.php");
-    exit;
 }
 
 $idjeu = 4; // Fortnite
