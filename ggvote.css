@@ -1004,3 +1004,129 @@ h3 {
     color: #e31919;
     margin-bottom: 10px;
 }
+
+.profil-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 15px;
+    background-color: #404040;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.profil-table th {
+    background-color: #545454;
+    color: #ffffff;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #e31919;
+}
+
+.profil-table td {
+    padding: 12px;
+    border-bottom: 1px solid #545454;
+    color: #e0e0e0;
+}
+
+.profil-table tr:hover {
+    background-color: #505050;
+}
+
+/* Style du code du jeton */
+.profil-table code {
+    background: #1c1c1c;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #e31919;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* -------- BADGES ETAT DU TOKEN -------- */
+
+.token-status {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.token-status-ok {
+    background-color: #1b7f1b;
+    color: #ffffff;
+}
+
+.token-status-used {
+    background-color: #7f1b1b;
+    color: #ffffff;
+}
+
+
+/* -------- RESUME DU VOTE -------- */
+
+.profil-vote-summary {
+    background-color: #212121;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    line-height: 1.7;
+}
+
+.profil-vote-summary strong {
+    color: #e31919;
+}
+
+.profil-vote-note {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+
+/* -------- REGLES -------- */
+
+.profil-rules-list {
+    list-style: square;
+    margin-left: 20px;
+    line-height: 1.6;
+    color: #d0d0d0;
+}
+
+/* -------- PROFIL ELECTEUR  -------- */
+
+.profil-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 10px;
+    font-family: 'Exo 2', sans-serif;
+    color: #f5f5f5;
+}
+
+.profil-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #e31919;
+}
+
+/* -------- CARTES -------- */
+
+.profil-card {
+    background-color: #303030;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    border: 1px solid #545454;
+}
+
+.profil-card-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #e31919;
+}
