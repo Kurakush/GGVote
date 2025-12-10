@@ -4,11 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once('dbconnect.php');
 
-// erreurs pour les 3 logins
-$error_admin    = $error_admin    ?? '';
-$error_electeur = $error_electeur ?? '';
-$error_candidat = $error_candidat ?? '';
-
 // check disconnect
 if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
    // admin
@@ -209,7 +204,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
                 $_SESSION['flash_message']  = "Connexion réussie en tant que candidat !";
 
             } else {
-                $error_candidat = "Identifiants incorrects (candidat).";
+                $_SESSION['flash_error'] = "Identifiants incorrects (Candidat)";
             }
         }
     }
