@@ -62,7 +62,7 @@ $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td><?= htmlspecialchars($j['pseudo']) ?></td>
                         <td><?= htmlspecialchars($j['equipe']) ?></td>
-                        <td><?= htmlspecialchars($j['poste']) ?></td>
+                        <td><?= htmlspecialchars($j['poste'] ?? '') ?></td>
                         <td><?= (int)$j['age'] ?></td>
                         <td><?= htmlspecialchars($j['nationalite']) ?></td>
                         <td><?= htmlspecialchars($j['nom_compet']) ?></td>

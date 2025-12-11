@@ -122,6 +122,10 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <h3><?= strtoupper(htmlspecialchars($j['pseudo'])) ?></h3>
                                 <p>Joueur chez <?= htmlspecialchars($j['equipe']) ?></p>
 
+                                <a href="candidat_fiche.php?id=<?= (int)$j['idjoueur'] ?>" class="btn-fiche">
+                                Voir la fiche
+                                </a>
+
                             </div>
                         </label>
                     <?php endforeach; ?>

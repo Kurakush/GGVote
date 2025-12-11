@@ -138,30 +138,47 @@ if (isset($_POST['submit_candidature'])) {
         </form>
     </section>
 
-    <section class="profil-card">
-        <h2 class="profil-card-title">État de ma candidature</h2>
+   <section class="profil-card">
+    <h2 class="profil-card-title">État de ma candidature</h2>
 
-        <?php if ($validee == 1): ?>
-            <p class="success-box">
-                Votre candidature a été validée ✔<br>
-                Vous participez officiellement aux scrutins.
-            </p>
+    <?php if ($validee == 1): ?>
 
-        <?php elseif ($complete == 1): ?>
-            <p>
-                Votre candidature est <strong>complète</strong> et
-                <strong>en attente de validation</strong> par un administrateur.
-            </p>
+        <p class="success-box">
+            Votre candidature a été validée ✔<br>
+            Vous participez officiellement aux scrutins.
+        </p>
 
-        <?php else: ?>
-            <p>Votre candidature n’a pas encore été envoyée.</p>
-            <form method="post">
-                <button type="submit" name="submit_candidature" class="vote-btn">
-                    Soumettre ma candidature
-                </button>
-            </form>
-        <?php endif; ?>
-    </section>
+    <?php elseif ($cand['candidature_refusee'] == 1): ?>
+
+        <p class="error-box">
+            Votre candidature a été refusée par un administrateur.<br>
+            Vous pouvez la modifier puis la soumettre à nouveau.
+        </p>
+
+        <form method="post">
+            <button type="submit" name="submit_candidature" class="vote-btn">
+                Renvoyer la candidature
+            </button>
+        </form>
+
+    <?php elseif ($complete == 1): ?>
+
+        <p>
+            Votre candidature est <strong>complète</strong> et
+            <strong>en attente de validation</strong> par un administrateur.
+        </p>
+
+    <?php else: ?>
+
+        <p>Votre candidature n’a pas encore été envoyée.</p>
+        <form method="post">
+            <button type="submit" name="submit_candidature" class="vote-btn">
+                Soumettre ma candidature
+            </button>
+        </form>
+
+    <?php endif; ?>
+</section>
 
 </div>
 
