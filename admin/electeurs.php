@@ -32,6 +32,13 @@ $electeurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 
 <main class="admin-main">
+    <?php if (isset($_SESSION['flash_message_admin'])): ?>
+        <p class="flash-success">
+            <?= htmlspecialchars($_SESSION['flash_message_admin']); ?>
+        </p>
+        <?php unset($_SESSION['flash_message_admin']); ?>
+    <?php endif; ?>
+    
     <section class="panel">
         <div class="panel-header">
             <h2>Liste des électeurs</h2>

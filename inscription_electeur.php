@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require 'header.php';
 
-
 $connexion = dbconnect();
 if (!$connexion) {
     die("Pb d'accès à la base de données.");
@@ -19,88 +18,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm  = $_POST['confirm'] ?? '';
+    $role     = trim($_POST['role'] ?? '');
 
-    // 1) Vérifs de base
-    if ($email === '' || $password === '' || $confirm === '') {
-        $message_error = "Tous les champs sont obligatoires.";
+    $roles_valides = ['Public', 'Staff', 'Joueur'];
+
+    // 1) Vérifications
+    if ($email === '' || $password === '' || $confirm === '' || $role === '') {
+        $message_error = "Tous les champs doivent être remplis.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message_error = "L'email n'est pas valide.";
     } elseif ($password !== $confirm) {
         $message_error = "Les mots de passe ne correspondent pas.";
     } elseif (strlen($password) < 8) {
         $message_error = "Le mot de passe doit contenir au moins 8 caractères.";
+    } elseif (!in_array($role, $roles_valides)) {
+        $message_error = "Veuillez sélectionner un rôle valide.";
     } else {
 
-        // 2) Vérifier si l'email existe déjà
+        // Vérifier si l'email existe déjà
         $sqlCheck = "SELECT idelecteur FROM electeur WHERE email = :email LIMIT 1";
         $stmtCheck = $connexion->prepare($sqlCheck);
         $stmtCheck->execute([':email' => $email]);
 
         if ($stmtCheck->fetch()) {
-            $message_error = "Un compte avec cet email existe déjà.";
+            $message_error = "Un compte existe déjà avec cet email.";
         } else {
-            // 3) Insertion
+
+            // Insertion
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             $sqlInsert = "INSERT INTO electeur (email, mot_de_passe, type, actif, idadmin)
-                          VALUES (:email, :mdp, 'Public', 0, NULL)";
+                          VALUES (:email, :mdp, :type, 0, NULL)";
             $stmtInsert = $connexion->prepare($sqlInsert);
             $stmtInsert->execute([
                 ':email' => $email,
-                ':mdp'   => $hash
+                ':mdp'   => $hash,
+                ':type'  => $role
             ]);
 
-            $message_success = "Votre compte a été créé. 
-            Il sera activé par un administrateur avant que vous puissiez voter.";
+            $message_success = "Votre compte a été créé ! Il doit être validé par un administrateur.";
         }
     }
 }
 ?>
 
-<div class="profil-container">
-    <h1 class="profil-title">Inscription électeur</h1>
+<!-- PAGE INSCRIPTION -->
+<div class="auth-page">
+    <div class="auth-card">
 
-    <?php if ($message_error): ?>
-        <div class="error-box"><?= htmlspecialchars($message_error) ?></div>
-    <?php endif; ?>
+        <h1 class="auth-title">Créer un compte électeur</h1>
 
-    <?php if ($message_success): ?>
-        <div class="success-box"><?= htmlspecialchars($message_success) ?></div>
-    <?php endif; ?>
+        <?php if ($message_error): ?>
+            <div class="auth-alert auth-alert-error"><?= htmlspecialchars($message_error) ?></div>
+        <?php endif; ?>
 
-    <section class="profil-card">
-        <h2 class="profil-card-title">Créer un compte électeur</h2>
+        <?php if ($message_success): ?>
+            <div class="auth-alert auth-alert-success"><?= htmlspecialchars($message_success) ?></div>
+        <?php endif; ?>
 
-        <form method="post" class="vote-form">
+        <form method="post" class="auth-form">
 
-            <div class="vote-token-field">
-                <label for="email">Email</label>
-                <input type="email"
-                       id="email"
-                       name="email"
-                       required
-                       value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+            <div class="auth-field">
+                <label class="auth-label">Email</label>
+                <input type="email" name="email" class="auth-input"
+                       required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             </div>
 
-            <div class="vote-token-field">
-                <label for="password">Mot de passe</label>
-                <input type="password"
-                       id="password"
-                       name="password"
-                       required>
+            <div class="auth-field">
+                <label class="auth-label">Mot de passe</label>
+                <input type="password" name="password" class="auth-input" required>
             </div>
 
-            <div class="vote-token-field">
-                <label for="confirm">Confirmation du mot de passe</label>
-                <input type="password"
-                       id="confirm"
-                       name="confirm"
-                       required>
+            <div class="auth-field">
+                <label class="auth-label">Confirmation du mot de passe</label>
+                <input type="password" name="confirm" class="auth-input" required>
             </div>
 
-            <button type="submit" class="vote-btn">Créer mon compte</button>
+            <div class="auth-field">
+                <label class="auth-label">Rôle</label>
+                <select name="role" class="auth-input" required>
+                    <option value="">-- Choisissez un rôle --</option>
+                    <option value="Public" <?= (($_POST['role'] ?? '') === 'Public') ? 'selected' : '' ?>>Public</option>
+                    <option value="Staff"  <?= (($_POST['role'] ?? '') === 'Staff') ? 'selected' : '' ?>>Staff</option>
+                    <option value="Joueur" <?= (($_POST['role'] ?? '') === 'Joueur') ? 'selected' : '' ?>>Joueur</option>
+                </select>
+            </div>
+
+            <button type="submit" class="auth-submit">Créer mon compte</button>
+
         </form>
-    </section>
+    </div>
 </div>
 
 <?php require 'footer.php'; ?>

@@ -39,7 +39,7 @@ if ($action === 'activer') {
 $stmt = $connexion->prepare($sql);
 $stmt->execute([':id' => $idelecteur]);
 
-$_SESSION['flash_message'] = $msg;
+$_SESSION['flash_message_admin'] = $msg;
 
 header("Location: electeurs.php");
 exit;
