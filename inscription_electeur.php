@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             $sqlInsert = "INSERT INTO electeur (email, mot_de_passe, type, actif, idadmin)
-                          VALUES (:email, :mdp, 'ELECTEUR', 0, NULL)";
+                          VALUES (:email, :mdp, 'Public', 0, NULL)";
             $stmtInsert = $connexion->prepare($sqlInsert);
             $stmtInsert->execute([
                 ':email' => $email,
