@@ -1229,6 +1229,24 @@ h3 {
     color: #e31919;
 }
 
+.result-total-badge {
+    float: right;
+    background-color: #303030;
+    border: 1px solid #e31919;
+    color: #f5f5f5;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-family: 'Exo 2', sans-serif;
+    margin: 20px 30px 40px 0;
+    box-shadow: 0 0 10px rgba(227,25,25,0.4);
+}
+
+.result-total-badge strong {
+    color: #e31919;
+    font-size: 20px;
+}
+
 /* -------- PAGE INSCRIPTION -------- */
 .auth-page {
     min-height: calc(100vh - 120px); /* hauteur plus juste */
