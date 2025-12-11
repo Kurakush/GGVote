@@ -98,9 +98,10 @@ $scrutins = $stmtScrutins->fetchAll(PDO::FETCH_ASSOC);
                 </tbody>
             </table>
 
-            <p style="text-align:right;margin-bottom:40px;">
-                Total des votes : <strong><?= $totalVotes ?></strong>
-            </p>
+            <div class="result-total-badge">
+                <span>Total des votes : </span>
+            <strong><?= $totalVotes ?></strong>
+            </div>
 
         <?php endif; ?>
 
