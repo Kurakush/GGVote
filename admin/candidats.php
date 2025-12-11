@@ -7,12 +7,27 @@ if (!$connexion) {
     die("Pb d'accès à la bdd");
 }
 
-// Joueurs + nom de la compétition
+$search = trim($_GET['q'] ?? '');
+
 $sql = "SELECT j.*, c.nom_compet
         FROM joueur j
-        JOIN competition c ON c.idcompetition = j.idcompetition
-        ORDER BY c.nom_compet, j.pseudo";
-$stmt = $connexion->query($sql);
+        LEFT JOIN competition c ON c.idcompetition = j.idcompetition";
+
+$params = [];
+
+if ($search !== '') {
+    $sql .= " WHERE j.pseudo      LIKE :q
+              OR j.equipe        LIKE :q
+              OR j.poste         LIKE :q
+              OR j.nationalite   LIKE :q
+              OR c.nom_compet    LIKE :q";
+    $params[':q'] = '%'.$search.'%';
+}
+
+$sql .= " ORDER BY c.nom_compet IS NULL, c.nom_compet, j.pseudo";
+
+$stmt = $connexion->prepare($sql);
+$stmt->execute($params);
 $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -39,7 +54,15 @@ $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section class="panel">
         <div class="panel-header">
             <h2>Liste des candidats</h2>
-            <a href="candidat_form.php" class="btn-small">+ Nouveau candidat</a>
+            <form method="get" class="search-form">
+            <input type="text"
+                   name="q"
+                   placeholder="Rechercher..."
+                   value="<?= htmlspecialchars($search ?? '') ?>">
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <a href="candidats.php" class="btn-small">+ Nouveau candidat</a>
         </div>
 
         <?php if (count($joueurs) === 0): ?>

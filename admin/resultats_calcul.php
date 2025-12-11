@@ -15,7 +15,7 @@ if (!$connexion) {
  */
 $sqlScrutins = "SELECT idscrutin, nom_scrutin
                 FROM scrutin
-                WHERE etat_scrutin = 'cloturer'";
+                WHERE etat_scrutin = 'cloture'";
 $stmtScrutins = $connexion->query($sqlScrutins);
 $scrutins = $stmtScrutins->fetchAll(PDO::FETCH_ASSOC);
 
