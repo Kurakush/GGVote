@@ -59,8 +59,19 @@ $electeurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($e['type']) ?></td>
                         <td>
                             <?php
-                                $actif = isset($e['actif']) ? (int)$e['actif'] : 1;
-                                echo $actif ? "Actif" : "Désactivé";
+                                $actif  = isset($e['actif']) ? (int)$e['actif'] : 1;
+                                $adminCreator = $e['idadmin'] ?? null;
+
+                                if ($actif) {
+                                    echo "Actif";
+                                } else {
+                                    // compte pas encore activé
+                                    if ($adminCreator === null) {
+                                        echo "En attente de validation";
+                                    } else {
+                                        echo "Désactivé";
+                                     }
+                                }
                             ?>
                         </td>
                         <td>
