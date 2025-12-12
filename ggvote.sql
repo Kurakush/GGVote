@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 11 déc. 2025 à 16:11
+-- Généré le : ven. 12 déc. 2025 à 10:23
 -- Version du serveur : 8.0.43
 -- Version de PHP : 8.3.14
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `electeur` (
   `actif` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idelecteur`),
   KEY `fk_electeur_admin` (`idadmin`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `electeur`
@@ -125,7 +125,8 @@ CREATE TABLE IF NOT EXISTS `electeur` (
 
 INSERT INTO `electeur` (`idelecteur`, `email`, `mot_de_passe`, `type`, `idadmin`, `actif`) VALUES
 (1, 'test@ggvote.fr', '$2y$10$lJpSMpfMa4HD2c.vKA7yf.tVtf3v4UWTu7vNqLqR07Djpmv7XsFOS', 'Staff', 1, 1),
-(3, 'test2@ggvote.fr', '$2y$10$hnMn5z05Knw909EnL6fJWOM.afm25YdWtwbkiZwlaTB/TkNXjIQiC', 'Joueur', 1, 1);
+(3, 'test2@ggvote.fr', '$2y$10$hnMn5z05Knw909EnL6fJWOM.afm25YdWtwbkiZwlaTB/TkNXjIQiC', 'Joueur', 1, 1),
+(9, 'thomas.degrelle88@orange.fr', '$2y$10$1nWtnbVR3lUzN9oAHKPNiO6vWY4hc2cE.BGMDbEw6i4wShQMO2uw6', 'Staff', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -171,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `joueur` (
   `poste` varchar(45) DEFAULT NULL,
   `idadmin` int NOT NULL,
   `idcompetition` int NOT NULL,
-  `photo` varchar(255) NOT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `email_candidat` varchar(255) DEFAULT NULL,
   `mdp_candidat` varchar(255) DEFAULT NULL,
   `bio_candidat` text,
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `joueur` (
   PRIMARY KEY (`idjoueur`),
   KEY `fk_joueur_admin` (`idadmin`),
   KEY `fk_joueur_compet` (`idcompetition`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `joueur`
@@ -228,9 +229,9 @@ INSERT INTO `joueur` (`idjoueur`, `pseudo`, `equipe`, `age`, `nationalite`, `pos
 (40, 'keria', 'T1', 23, 'Sud Coréen', 'Support', 2, 5, 'keria.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (41, 'elk', 'BLG', 24, 'Chinois', 'ADC', 2, 5, 'elk.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (42, 'hope', 'AL', 25, 'Chinois', 'ADC', 2, 5, 'hope.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(43, 'zeka', 'HLE', 23, 'Sud Coréen', 'Mid-laner', 2, 6, '', NULL, NULL, NULL, NULL, 1, 1),
+(43, 'zeka', 'HLE', 23, 'Sud Coréen', 'Mid-laner', 1, 6, 'zeka.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (44, 'zeus', 'HLE', 21, 'Sud Coréen', 'Top-laner', 2, 6, 'zeus.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(45, 'viper', 'HLE', NULL, 'Sud Coréen', 'ADC', 2, 6, '', NULL, NULL, NULL, NULL, 1, 1),
+(45, 'viper', 'HLE', 25, 'Sud Coréen', 'ADC', 1, 6, 'viper.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (46, 'delight', 'HLE', 23, 'Sud Coréen', 'ADC', 2, 6, 'delight.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (47, 'peanut', 'HLE', 27, 'Sud Coréen', 'Jungler', 2, 6, 'peanut.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (48, 'kanavi', 'TES', 25, 'Sud Coréen', 'Jungler', 2, 6, 'kanavi.jpg', NULL, NULL, NULL, NULL, 1, 1),
@@ -285,9 +286,9 @@ INSERT INTO `joueur` (`idjoueur`, `pseudo`, `equipe`, `age`, `nationalite`, `pos
 (97, 'thomashd', 'ASTRALIS', 23, 'Danois', '', 2, 12, 'thomas.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (98, 'veno', 'XSET', 21, 'Anglais', '', 2, 12, 'veno.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (99, 'JL', 'NAVI', 26, 'Lituanien', '', 2, 13, 'jl.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(100, 'monesy', 'FALCONS', 20, 'Russe', '', 2, 13, '', NULL, NULL, NULL, NULL, 1, 1),
+(100, 'monesy', 'FALCONS', 20, 'Russe', '', 1, 13, 'monesy.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (101, 'donk', 'TEAM SPIRIT', 18, 'Russe', '', 2, 13, 'donk.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(102, 'niko', 'G2', 28, 'Bosnien', '', 2, 13, '', NULL, NULL, NULL, NULL, 1, 1),
+(102, 'niko', 'G2', 28, 'Bosnien', '', 1, 13, 'niko.avif', NULL, NULL, NULL, NULL, 1, 1),
 (103, 'zywoo', 'VITALITY', 25, 'Français', '', 2, 13, 'zywoo.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (104, 'broky', 'FAZE CLAN', 20, 'Letton', '', 2, 13, 'broky.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (105, 'b1t', 'NAVI', 22, 'Ukrainien', '', 2, 13, 'bit.jpg', NULL, NULL, NULL, NULL, 1, 1),
@@ -302,7 +303,7 @@ INSERT INTO `joueur` (`idjoueur`, `pseudo`, `equipe`, `age`, `nationalite`, `pos
 (114, 'simple', 'FAZE CLAN', 28, 'Ukrainien', '', 2, 14, 'simple.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (115, 'donk', 'TEAM SPIRIT', 18, 'Russe', '', 2, 15, 'donk.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (116, 'zywoo', 'VITALITY', 25, 'Français', '', 2, 15, 'zywoo.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(117, 'niko', 'G2', 28, 'Bosnien', '', 2, 15, '', NULL, NULL, NULL, NULL, 1, 1),
+(117, 'niko', 'G2', 28, 'Bosnien', '', 1, 15, 'niko.avif', NULL, NULL, NULL, NULL, 1, 1),
 (118, 'monesy', 'G2', 20, 'Russe', '', 2, 15, 'monesy.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (119, 'icy', 'CLOUD9', 20, ' Kazakhstanais', '', 2, 15, 'icy.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (120, 'fame', 'VIRTUS.PRO', 22, 'Russe', '', 2, 15, 'fame.jpg', NULL, NULL, NULL, NULL, 1, 1),
@@ -363,10 +364,10 @@ CREATE TABLE IF NOT EXISTS `scrutin` (
 
 INSERT INTO `scrutin` (`idscrutin`, `nom_scrutin`, `date_ouverture`, `date_cloture`, `etat_scrutin`, `idadmin`, `idcompetition`) VALUES
 (1, 'MVP Champions Valorant', '2025-12-01', '2025-12-14', 'cloture', 1, 1),
-(2, 'MVP First Stand LoL', '2025-12-01', '2025-12-14', 'en_attente', 1, 6),
-(3, 'MVP Major RL', '2025-12-01', '2025-12-14', 'en_attente', 1, 8),
-(4, 'MVP Major Solo Fortnite', '2025-12-01', '2025-12-14', 'en_attente', 1, 10),
-(5, 'MVP Major CSGO:2', '2025-12-01', '2025-12-14', 'en_attente', 1, 13);
+(2, 'MVP First Stand LoL', '2025-12-10', '2025-12-31', 'ouvert', 1, 6),
+(3, 'MVP Major RL', '2025-12-11', '2025-12-31', 'ouvert', 1, 8),
+(4, 'MVP Major Solo Fortnite', '2025-12-11', '2025-12-31', 'ouvert', 1, 10),
+(5, 'MVP Major CSGO:2', '2025-12-11', '2025-12-31', 'ouvert', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -387,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `token` (
   PRIMARY KEY (`idtoken`),
   KEY `fk_token_admin` (`idadmin`),
   KEY `fk_token_electeur` (`idelecteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `token`
@@ -395,7 +396,15 @@ CREATE TABLE IF NOT EXISTS `token` (
 
 INSERT INTO `token` (`idtoken`, `etat`, `date_generation`, `idadmin`, `idelecteur`, `code_token`, `token_hash`, `idcompetition`) VALUES
 (1, '1', '2025-12-10', NULL, 1, '5d682f1b11d594ea179082c5a67c510d', '$2y$10$c6sMkmi80vXezDWfNl4SRej3dJ1MZONWuxtJ6yhJp/qAq2kaWe/Ga', 1),
-(2, '0', '2025-12-11', NULL, 3, 'cf8c8bb1c31e801b8711256c2b44ef2d', '$2y$10$8/NH06v5GlPiWezVQ0e.8OKeUdc83BK2D/s6PWwEIMJTYMfI1VyYG', 1);
+(2, '0', '2025-12-11', NULL, 3, 'cf8c8bb1c31e801b8711256c2b44ef2d', '$2y$10$8/NH06v5GlPiWezVQ0e.8OKeUdc83BK2D/s6PWwEIMJTYMfI1VyYG', 1),
+(3, '0', '2025-12-11', NULL, 1, '9dfd02d2ed071a93f9579d4c98bbb373', '$2y$10$183iUTjVwMQY4V8itB3MRunXUbbr7kJ3xP1GUv1tczvgK3p9qmIU.', 6),
+(4, '0', '2025-12-11', NULL, 1, 'd6d238db49bfe0d05d89b48b34dee8c2', '$2y$10$jDoAXAYkPtKl8au5//jzGOVyISXRXHO15tZ3o1fPpPcjJ2kbfHL2.', 8),
+(5, '0', '2025-12-11', NULL, 1, '5c6efc6c88a57947c2cb661c49996f78', '$2y$10$CSkRlmXsOnZaqI.5dFrbLOupjkTaImIADqNcwtI77amqfJ0ziq1t2', 10),
+(6, '0', '2025-12-11', NULL, 1, '2fb5badd03b87acdab5d7972aeffe26b', '$2y$10$q9uVifITNfQnzcFr2SFwA.jNsML.XEqGevREzZcaF2WelOVZ8gWLO', 13),
+(7, '0', '2025-12-12', NULL, 9, 'bb90cce93ee75eb84d8e02fc905df44f', '$2y$10$tsnhuy3vyIz7TuYhtmthYu1ca7p7dgfUB5K92ayFK6L6QzkyLwkXe', 6),
+(8, '0', '2025-12-12', NULL, 9, 'cd43182f63156bfde53d985ffb3ed744', '$2y$10$tEY9Ojtm9wvWMrMPFyme0eiGwJLxO8s3G.NfH18lEiQgbW9oDiicu', 8),
+(9, '0', '2025-12-12', NULL, 9, '4dc67634d9e09703b4ce23e3504cb5dd', '$2y$10$bRekjrBCoomrE0yKqnnmcengXo4AyJfFjrcmHoky22s27Bs.QXnK.', 10),
+(10, '0', '2025-12-12', NULL, 9, 'f39dd088a1c4cef8b1ad1fb34a437c4e', '$2y$10$oRJwDThPNLfGKT0SA6OWDOdHJGBGNdUDoPODr4MQ9RYoZzuq/lb9m', 13);
 
 -- --------------------------------------------------------
 
