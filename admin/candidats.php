@@ -84,10 +84,10 @@ $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($joueurs as $j): ?>
                     <tr>
                         <td><?= htmlspecialchars($j['pseudo']) ?></td>
-                        <td><?= htmlspecialchars($j['equipe']) ?></td>
+                        <td><?= htmlspecialchars($j['equipe'] ?? '') ?></td>
                         <td><?= htmlspecialchars($j['poste'] ?? '') ?></td>
                         <td><?= (int)$j['age'] ?></td>
-                        <td><?= htmlspecialchars($j['nationalite']) ?></td>
+                        <td><?= htmlspecialchars($j['nationalite'] ?? '') ?></td>
                         <td><?= htmlspecialchars($j['nom_compet']) ?></td>
                         <td>
                             <a href="candidat_form.php?id=<?= $j['idjoueur'] ?>">Éditer</a> ·

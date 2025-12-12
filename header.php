@@ -326,8 +326,16 @@ $candidat = isset($_SESSION["idjoueur_candidat"]);
 
             <?php
             if (!$admin && !$electeur && !$candidat) { ?>
-                <li style="float:right"><a href="inscription_electeur.php">INSCRIPTION</a></li>
+                <li style="float:right"><a href="inscription_electeur.php">INSCRIPTION ELECTEUR</a></li>
             <?php } ?>
+
+            <?php 
+            if (!$admin && !$electeur && !$candidat): ?>
+                <li style="float:right"><a href="inscription_candidat.php">INSCRIPTION CANDIDAT</a></li>
+            <?php 
+            endif; 
+            ?>
+
 
             <?php
             if ($admin) { 

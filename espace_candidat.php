@@ -44,6 +44,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     $equipe     = trim($_POST['equipe'] ?? '');
     $bio        = trim($_POST['bio'] ?? '');
     $lien_media = trim($_POST['lien_media'] ?? '');
+    $age         = (int)($_POST['age'] ?? 0);
+    $nationalite = trim($_POST['nationalite'] ?? '');
+
+    $photo_filename = $cand['photo'] ?? null;
+
+if (!empty($_FILES['photo']['name']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+
+    $tmp  = $_FILES['photo']['tmp_name'];
+    $name = $_FILES['photo']['name'];
+
+    $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+    $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+
+    if (!in_array($ext, $allowed, true)) {
+        $message_error = "Format de photo invalide (jpg, jpeg, png, webp).";
+    } else {
+
+        $photo_filename = basename($name);
+
+        $dest = __DIR__ . '/images/' . $photo_filename;
+
+        if (!move_uploaded_file($tmp, $dest)) {
+            $message_error = "Impossible d'enregistrer la photo.";
+        }
+    }
+}
+
 
     if ($pseudo === '') {
         $message_error = "Le pseudo ne peut pas être vide.";
@@ -51,16 +78,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
         $sqlUpdate = "UPDATE joueur
                       SET pseudo = :pseudo,
                           equipe = :equipe,
+                          age = :age,
+                          nationalite = :nationalite,
                           bio_candidat = :bio,
-                          lien_media = :lien
+                          lien_media = :lien,
+                          photo = :photo
                       WHERE idjoueur = :id";
 
         $stmtUp = $connexion->prepare($sqlUpdate);
         $stmtUp->execute([
             ':pseudo' => $pseudo,
             ':equipe' => $equipe ?: null,
+            ':age'    => $age > 0 ? $age : null,
+            ':nationalite' => ($nationalite !== '' ? $nationalite : null),
             ':bio'    => $bio ?: null,
             ':lien'   => $lien_media ?: null,
+            ':photo'  => $photo_filename ?: null,
             ':id'     => $idjoueur
         ]);
 
@@ -68,8 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
         // mettre à jour les données locales
         $cand['pseudo']       = $pseudo;
         $cand['equipe']       = $equipe;
+        $cand['age'] = ($age > 0 ? $age : null);
+        $cand['nationalite'] = ($nationalite !== '' ? $nationalite : null);
         $cand['bio_candidat'] = $bio;
         $cand['lien_media']   = $lien_media;
+        $cand['photo'] = $photo_filename ?: null;
+
     }
 }
 
@@ -107,7 +144,7 @@ if (isset($_POST['submit_candidature'])) {
     <section class="profil-card">
         <h2 class="profil-card-title">Mon profil</h2>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 
             <div class="vote-token-field">
                 <label>Pseudo</label>
@@ -118,7 +155,19 @@ if (isset($_POST['submit_candidature'])) {
             <div class="vote-token-field">
                 <label>Équipe</label>
                 <input type="text" name="equipe"
-                       value="<?= htmlspecialchars($cand['equipe']) ?>">
+                       value="<?= htmlspecialchars($cand['equipe'] ?? '') ?>">
+            </div>
+
+            <div class="vote-token-field">
+                <label>Âge</label>
+                <input type="number" name="age" min="0" max="120"
+                        value="<?= htmlspecialchars($cand['age'] ?? '') ?>">
+            </div>
+
+            <div class="vote-token-field">
+                <label>Nationalité</label>
+                <input type="text" name="nationalite"
+                        value="<?= htmlspecialchars($cand['nationalite'] ?? '') ?>">
             </div>
 
             <div class="vote-token-field">
@@ -130,6 +179,20 @@ if (isset($_POST['submit_candidature'])) {
                 <label>Lien média / highlight</label>
                 <input type="text" name="lien_media"
                        value="<?= htmlspecialchars($cand['lien_media'] ?? '') ?>">
+            </div>
+
+            <div class="vote-token-field">
+                <label>Photo (jpg / png / webp)</label>
+
+                <?php if (!empty($cand['photo'])): ?>
+                    <div style="margin-bottom:10px;">
+                        <img src="images/<?= htmlspecialchars($cand['photo']) ?>"
+                            alt="Photo candidat"
+                            style="width:120px;height:120px;object-fit:cover;border-radius:12px;border:1px solid #545454;">
+                    </div>
+                <?php endif; ?>
+
+                <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp">
             </div>
 
             <button type="submit" name="update_profile" class="vote-btn">
@@ -147,19 +210,6 @@ if (isset($_POST['submit_candidature'])) {
             Votre candidature a été validée ✔<br>
             Vous participez officiellement aux scrutins.
         </p>
-
-    <?php elseif ($cand['candidature_refusee'] == 1): ?>
-
-        <p class="error-box">
-            Votre candidature a été refusée par un administrateur.<br>
-            Vous pouvez la modifier puis la soumettre à nouveau.
-        </p>
-
-        <form method="post">
-            <button type="submit" name="submit_candidature" class="vote-btn">
-                Renvoyer la candidature
-            </button>
-        </form>
 
     <?php elseif ($complete == 1): ?>
 
