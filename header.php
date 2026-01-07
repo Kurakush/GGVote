@@ -302,6 +302,43 @@ $candidat = isset($_SESSION["idjoueur_candidat"]);
             modal.style.display = "none";
         }
     }
+
+    function openInscription() {
+        const modal = document.getElementById('inscriptionModal');
+        modal.style.display = 'flex';
+        switchSignupTab('electeur');
+    }
+
+    function closeInscription() {
+        document.getElementById('inscriptionModal').style.display = 'none';
+    }
+
+    function switchInscriptionTab(type) {
+        const tabE = document.getElementById('tabInscriptionElecteur');
+        const tabC = document.getElementById('tabInscriptionCandidat');
+
+        const paneE = document.getElementById('inscriptionElecteur');
+        const paneC = document.getElementById('inscriptionCandidat');
+
+        tabE.classList.remove('active');
+        tabC.classList.remove('active');
+        paneE.classList.remove('active');
+        paneC.classList.remove('active');
+
+        if (type === 'electeur') {
+            tabE.classList.add('active');
+            paneE.classList.add('active');
+        } else {
+            tabC.classList.add('active');
+            paneC.classList.add('active');
+        }
+    }
+
+    // Fermer la modale inscription si clic en dehors
+    window.addEventListener('click', function(event) {
+        const signup = document.getElementById('inscriptionModal');
+        if (event.target === signup) signup.style.display = "none";
+    });
     </script>
 </head>
 
@@ -325,15 +362,11 @@ $candidat = isset($_SESSION["idjoueur_candidat"]);
             ?>
 
             <?php
-            if (!$admin && !$electeur && !$candidat) { ?>
-                <li style="float:right"><a href="inscription_electeur.php">INSCRIPTION ELECTEUR</a></li>
-            <?php } ?>
-
-            <?php 
-            if (!$admin && !$electeur && !$candidat): ?>
-                <li style="float:right"><a href="inscription_candidat.php">INSCRIPTION CANDIDAT</a></li>
-            <?php 
-            endif; 
+            if (!$admin && !$electeur && !$candidat){
+                ?>
+                <li style="float:right"><a href="#" onclick="openInscription()">INSCRIPTION</a></li>
+                <?php
+            }
             ?>
 
 
@@ -448,10 +481,53 @@ $candidat = isset($_SESSION["idjoueur_candidat"]);
                     <?php } ?>
                 </form>
             </div>
-    </form>
-</div>
         </div>
     </div>
+
+    <!-- MODAL INSCRIPTION (électeur + candidat) -->
+    <div id="inscriptionModal" class="modal">
+    <div class="modal-content animate">
+        <div class="dlgheadcontainer">
+            <span onclick="closeInscription()" class="close" title="Close Modal">&times;</span>
+            <h1>Inscrivez-vous !</h1>
+        </div>
+
+        <!-- Onglets inscription -->
+        <div class="tab-menu">
+            <button type="button" id="tabInscriptionElecteur" class="active" onclick="switchInscriptionTab('electeur')">Électeur</button>
+            <button type="button" id="tabInscriptionCandidat" onclick="switchInscriptionTab('candidat')">Candidat</button>
+        </div>
+
+        <!-- Contenu inscription ÉLECTEUR -->
+        <div id="inscriptionElecteur" class="tab-content active">
+            <div class="dlgcontainer">
+                <p style="margin-bottom:16px;">
+                    Créez un compte électeur (validation admin avant de voter).
+                </p>
+
+                <a href="inscription_electeur.php" class="okbtn" style="display:block;text-align:center;text-decoration:none;">
+                    Continuer
+                </a>
+                <button type="button" onclick="closeInscription()" class="cancelbtn">Annuler</button>
+            </div>
+        </div>
+
+        <!-- Contenu inscription CANDIDAT -->
+        <div id="inscriptionCandidat" class="tab-content">
+            <div class="dlgcontainer">
+                <p style="margin-bottom:16px;">
+                    Créez un compte candidat et choisissez votre compétition.
+                </p>
+
+                <a href="inscription_candidat.php" class="okbtn" style="display:block;text-align:center;text-decoration:none;">
+                    Continuer
+                </a>
+                <button type="button" onclick="closeInscription()" class="cancelbtn">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <?php if (isset($_SESSION['flash_message'])): ?>
     <div class="flash-message success">
