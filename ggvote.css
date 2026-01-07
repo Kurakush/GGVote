@@ -1349,28 +1349,61 @@ h3 {
 }
 
 /* --- MENTIONS LEGALES + CGU --- */
-.legal-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #303030;
-    color: #D9D9D9;
-    border-radius: 10px;
+.legal-container{
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #303030;
+  color: #D9D9D9;
+  border-radius: 12px;
 }
 
-.legal-container h1 {
-    color: #e31919;
-    margin-bottom: 20px;
-    font-family: 'Exo 2', sans-serif;
+.legal-header h1{
+  margin: 0 0 8px 0;
+  color: #e31919;
+  font-family: 'Exo 2', sans-serif;
 }
 
-.legal-container h2 {
-    margin-top: 25px;
-    color: #e31919;
-    font-family: 'Exo 2', sans-serif;
+.legal-subtitle{
+  margin: 0 0 24px 0;
+  color: #D9D9D9;
+  opacity: 0.9;
 }
 
-.legal-container p {
-    line-height: 1.6;
-    font-family: 'Exo 2', sans-serif;
+.legal-section{
+  margin-top: 22px;
+}
+
+.legal-section h2{
+  color: #e31919;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.legal-section p{
+  line-height: 1.7;
+  margin: 8px 0;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.legal-card{
+  background: #545454;
+  border-left: 4px solid #e31919;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+
+.legal-card a{
+  color: #D9D9D9;
+  text-decoration: underline;
+}
+
+.legal-footer{
+  margin-top: 30px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(217,217,217,0.2);
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
