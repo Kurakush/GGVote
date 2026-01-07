@@ -23,7 +23,7 @@ if (!$connexion) {
   <section class="legal-section">
     <h2>1. Cadre légal</h2>
     <p>
-      Conformément aux obligations légales applicables aux services numériques et à la loi pour la confiance dans l’économie numérique,
+      Conformément aux obligations légales applicables aux services numériques et à la loi pour la confiance dans l’économie numérique (LCEN),
       l’application GGVote doit comporter des mentions légales accessibles aux utilisateurs.
     </p>
     <p>
