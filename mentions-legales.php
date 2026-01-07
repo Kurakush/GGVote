@@ -19,14 +19,14 @@ if (!$connexion) {
         <p>
             Nom du projet : <strong>GGVote</strong><br>
             Projet réalisé dans le cadre d’un projet pédagogique (SAÉ S3).<br>
-            Établissement : [Nom de ton IUT / Université]
+            Établissement : IUT de Saint-dié-des-Vosges / Université de Lorraine.
         </p>
     </section>
 
     <section>
         <h2>Responsable de la publication</h2>
         <p>
-            [Nom(s) des étudiants]
+            DEGRELLE Thomas & LACROIX Eve<br>
         </p>
     </section>
 

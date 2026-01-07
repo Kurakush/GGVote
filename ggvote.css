@@ -1361,13 +1361,16 @@ h3 {
 .legal-container h1 {
     color: #e31919;
     margin-bottom: 20px;
+    font-family: 'Exo 2', sans-serif;
 }
 
 .legal-container h2 {
     margin-top: 25px;
     color: #e31919;
+    font-family: 'Exo 2', sans-serif;
 }
 
 .legal-container p {
     line-height: 1.6;
+    font-family: 'Exo 2', sans-serif;
 }

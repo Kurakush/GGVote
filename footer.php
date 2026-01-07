@@ -15,7 +15,7 @@
         <div class="footer-links">
             <a href="index.php">Accueil</a>
             <a href="contact.php">Contact</a>
-            <a href="legales.php">Mentions légales</a>
+            <a href="mentions-legales.php">Mentions légales</a>
             <a href="cgu.php">CGU</a>
         </div>
     </div>
