@@ -107,6 +107,12 @@ if (!$connexion) {
             </p>
         </section>
 
+        <p class="legal-link-bottom">
+            Les informations légales relatives à l’éditeur de l’application sont disponibles
+            dans les
+            <a href="mentions-legales.php">Mentions légales</a>.
+        </p>
+
         <footer class="legal-footer">
             <p>Dernière mise à jour : <strong>07/01/2026</strong></p>
         </footer>

@@ -23,7 +23,7 @@ if (!$connexion) {
   <section class="legal-section">
     <h2>1. Cadre légal</h2>
     <p>
-      Conformément aux obligations légales applicables aux services numériques et à la loi de confiance dans l’économie numérique,
+      Conformément aux obligations légales applicables aux services numériques et à la loi pour la confiance dans l’économie numérique,
       l’application GGVote doit comporter des mentions légales accessibles aux utilisateurs.
     </p>
     <p>
@@ -85,6 +85,12 @@ if (!$connexion) {
       au fonctionnement de l’application sont utilisés. Ces cookies ne nécessitent pas le consentement préalable de l’utilisateur.
     </p>
   </section>
+
+  <p class="legal-link-bottom">
+    Pour plus d’informations concernant les conditions d’utilisation du service,
+    veuillez consulter les
+    <a href="cgu.php">Conditions Générales d’Utilisation</a>.
+</p>
 
   <footer class="legal-footer">
     <p>Dernière mise à jour : <strong>07/01/2026</strong></p>
