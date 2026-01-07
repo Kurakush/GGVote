@@ -9,7 +9,7 @@
 
         <div class="footer-authors">
             <p>Développé par <strong>DEGRELLE Thomas</strong> & <strong>LACROIX Eve</strong></p>
-            <p>© 2025 — Tous droits réservés.</p>
+            <p>2026 — Tous droits réservés.</p>
         </div>
 
         <div class="footer-links">
