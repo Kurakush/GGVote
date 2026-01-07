@@ -1347,3 +1347,27 @@ h3 {
     background-color: #b41515;
     transform: translateY(-1px);
 }
+
+/* --- MENTIONS LEGALES --- */
+.legal-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #303030;
+    color: #D9D9D9;
+    border-radius: 10px;
+}
+
+.legal-container h1 {
+    color: #e31919;
+    margin-bottom: 20px;
+}
+
+.legal-container h2 {
+    margin-top: 25px;
+    color: #e31919;
+}
+
+.legal-container p {
+    line-height: 1.6;
+}
