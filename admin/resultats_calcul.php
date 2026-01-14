@@ -11,7 +11,7 @@ if (!$connexion) {
 
 /*
  * 1) Récupérer les scrutins FERMÉS
- *    (adapter la valeur de etat_scrutin si tu utilises autre chose que 'clos')
+ * 
  */
 $sqlScrutins = "SELECT idscrutin, nom_scrutin
                 FROM scrutin
@@ -37,7 +37,6 @@ foreach ($scrutins as $scrutin) {
     $stmtDel->execute([':idscrutin' => $idscrutin]);
 
     // b) On regroupe les votes par joueur
-    //    adapte le nom de ta table de votes et des colonnes si besoin
     $sqlVotes = "SELECT idjoueur, COUNT(*) AS nb_votes
                  FROM vote
                  WHERE idscrutin = :idscrutin
