@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 12 déc. 2025 à 10:23
+-- Généré le : mer. 14 jan. 2026 à 14:21
 -- Version du serveur : 8.0.43
 -- Version de PHP : 8.3.14
 
@@ -127,6 +127,31 @@ INSERT INTO `electeur` (`idelecteur`, `email`, `mot_de_passe`, `type`, `idadmin`
 (1, 'test@ggvote.fr', '$2y$10$lJpSMpfMa4HD2c.vKA7yf.tVtf3v4UWTu7vNqLqR07Djpmv7XsFOS', 'Staff', 1, 1),
 (3, 'test2@ggvote.fr', '$2y$10$hnMn5z05Knw909EnL6fJWOM.afm25YdWtwbkiZwlaTB/TkNXjIQiC', 'Joueur', 1, 1),
 (9, 'thomas.degrelle88@orange.fr', '$2y$10$1nWtnbVR3lUzN9oAHKPNiO6vWY4hc2cE.BGMDbEw6i4wShQMO2uw6', 'Staff', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `emargement`
+--
+
+DROP TABLE IF EXISTS `emargement`;
+CREATE TABLE IF NOT EXISTS `emargement` (
+  `idemargement` int NOT NULL AUTO_INCREMENT,
+  `idelecteur` int NOT NULL,
+  `idscrutin` int NOT NULL,
+  `date_vote` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idemargement`),
+  UNIQUE KEY `uniq_emargement` (`idelecteur`,`idscrutin`),
+  KEY `fk_emargement_scrutin` (`idscrutin`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `emargement`
+--
+
+INSERT INTO `emargement` (`idemargement`, `idelecteur`, `idscrutin`, `date_vote`) VALUES
+(1, 1, 6, '2026-01-14 15:02:03'),
+(2, 3, 6, '2026-01-14 15:03:57');
 
 -- --------------------------------------------------------
 
@@ -295,7 +320,7 @@ INSERT INTO `joueur` (`idjoueur`, `pseudo`, `equipe`, `age`, `nationalite`, `pos
 (106, 'frozen', 'FAZE CLAN', 23, 'Slovaque', '', 2, 13, 'frozen.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (107, 'zywoo', 'VITALITY', 25, 'Français', '', 2, 14, 'zywoo.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (108, 'donk', 'TEAM SPIRIT', 18, 'Russe', '', 2, 14, 'donk.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(109, 'senzu', 'THE MONGOLZ', 19, 'Mongole', '', 2, 14, '', NULL, NULL, NULL, NULL, 1, 1),
+(109, 'senzu', 'THE MONGOLZ', 19, 'Mongole', '', 1, 14, 'senzu.avif', NULL, NULL, NULL, NULL, 1, 1),
 (110, 'ropz', 'VITALITY', 25, 'Estonien', '', 2, 14, 'ropz.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (111, 'mezii', 'VITALITY', 27, 'Anglais', '', 2, 14, 'mezi.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (112, '910', 'THE MONGOLZ', 23, 'Mongole', '', 2, 14, '910.jpg', NULL, NULL, NULL, NULL, 1, 1),
@@ -329,14 +354,16 @@ CREATE TABLE IF NOT EXISTS `resultat` (
   KEY `fk_resultat_admin` (`idadmin`),
   KEY `fk_resultat_scrutin` (`idscrutin`),
   KEY `fk_resultat_joueur` (`idjoueur`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `resultat`
 --
 
 INSERT INTO `resultat` (`idresultat`, `nb_votes`, `date_calcul`, `rang`, `idadmin`, `idscrutin`, `idjoueur`) VALUES
-(10, 1, '2025-12-11', 1, 1, 1, 9);
+(144, 1, '2026-01-14', 1, 1, 1, 9),
+(145, 1, '2026-01-14', 1, 1, 6, 34),
+(146, 1, '2026-01-14', 2, 1, 6, 30);
 
 -- --------------------------------------------------------
 
@@ -356,7 +383,7 @@ CREATE TABLE IF NOT EXISTS `scrutin` (
   PRIMARY KEY (`idscrutin`),
   KEY `fk_scrutin_admin` (`idadmin`),
   KEY `fk_scrutin_compet` (`idcompetition`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `scrutin`
@@ -364,10 +391,11 @@ CREATE TABLE IF NOT EXISTS `scrutin` (
 
 INSERT INTO `scrutin` (`idscrutin`, `nom_scrutin`, `date_ouverture`, `date_cloture`, `etat_scrutin`, `idadmin`, `idcompetition`) VALUES
 (1, 'MVP Champions Valorant', '2025-12-01', '2025-12-14', 'cloture', 1, 1),
-(2, 'MVP First Stand LoL', '2025-12-10', '2025-12-31', 'ouvert', 1, 6),
-(3, 'MVP Major RL', '2025-12-11', '2025-12-31', 'ouvert', 1, 8),
-(4, 'MVP Major Solo Fortnite', '2025-12-11', '2025-12-31', 'ouvert', 1, 10),
-(5, 'MVP Major CSGO:2', '2025-12-11', '2025-12-31', 'ouvert', 1, 13);
+(2, 'MVP First Stand LoL', '2025-12-10', '2025-12-31', 'cloture', 1, 6),
+(3, 'MVP Major RL', '2025-12-11', '2025-12-31', 'cloture', 1, 8),
+(4, 'MVP Major Solo Fortnite', '2025-12-11', '2025-12-31', 'cloture', 1, 10),
+(5, 'MVP Major CSGO:2', '2025-12-11', '2025-12-31', 'cloture', 1, 13),
+(6, 'MVP Worlds LoL', '2026-01-07', '2026-01-19', 'cloture', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -381,30 +409,29 @@ CREATE TABLE IF NOT EXISTS `token` (
   `etat` varchar(45) NOT NULL,
   `date_generation` date NOT NULL,
   `idadmin` int DEFAULT NULL,
-  `idelecteur` int NOT NULL,
-  `code_token` varchar(255) DEFAULT NULL,
   `token_hash` varchar(255) NOT NULL,
   `idcompetition` int NOT NULL,
   PRIMARY KEY (`idtoken`),
-  KEY `fk_token_admin` (`idadmin`),
-  KEY `fk_token_electeur` (`idelecteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_token_admin` (`idadmin`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `token`
 --
 
-INSERT INTO `token` (`idtoken`, `etat`, `date_generation`, `idadmin`, `idelecteur`, `code_token`, `token_hash`, `idcompetition`) VALUES
-(1, '1', '2025-12-10', NULL, 1, '5d682f1b11d594ea179082c5a67c510d', '$2y$10$c6sMkmi80vXezDWfNl4SRej3dJ1MZONWuxtJ6yhJp/qAq2kaWe/Ga', 1),
-(2, '0', '2025-12-11', NULL, 3, 'cf8c8bb1c31e801b8711256c2b44ef2d', '$2y$10$8/NH06v5GlPiWezVQ0e.8OKeUdc83BK2D/s6PWwEIMJTYMfI1VyYG', 1),
-(3, '0', '2025-12-11', NULL, 1, '9dfd02d2ed071a93f9579d4c98bbb373', '$2y$10$183iUTjVwMQY4V8itB3MRunXUbbr7kJ3xP1GUv1tczvgK3p9qmIU.', 6),
-(4, '0', '2025-12-11', NULL, 1, 'd6d238db49bfe0d05d89b48b34dee8c2', '$2y$10$jDoAXAYkPtKl8au5//jzGOVyISXRXHO15tZ3o1fPpPcjJ2kbfHL2.', 8),
-(5, '0', '2025-12-11', NULL, 1, '5c6efc6c88a57947c2cb661c49996f78', '$2y$10$CSkRlmXsOnZaqI.5dFrbLOupjkTaImIADqNcwtI77amqfJ0ziq1t2', 10),
-(6, '0', '2025-12-11', NULL, 1, '2fb5badd03b87acdab5d7972aeffe26b', '$2y$10$q9uVifITNfQnzcFr2SFwA.jNsML.XEqGevREzZcaF2WelOVZ8gWLO', 13),
-(7, '0', '2025-12-12', NULL, 9, 'bb90cce93ee75eb84d8e02fc905df44f', '$2y$10$tsnhuy3vyIz7TuYhtmthYu1ca7p7dgfUB5K92ayFK6L6QzkyLwkXe', 6),
-(8, '0', '2025-12-12', NULL, 9, 'cd43182f63156bfde53d985ffb3ed744', '$2y$10$tEY9Ojtm9wvWMrMPFyme0eiGwJLxO8s3G.NfH18lEiQgbW9oDiicu', 8),
-(9, '0', '2025-12-12', NULL, 9, '4dc67634d9e09703b4ce23e3504cb5dd', '$2y$10$bRekjrBCoomrE0yKqnnmcengXo4AyJfFjrcmHoky22s27Bs.QXnK.', 10),
-(10, '0', '2025-12-12', NULL, 9, 'f39dd088a1c4cef8b1ad1fb34a437c4e', '$2y$10$oRJwDThPNLfGKT0SA6OWDOdHJGBGNdUDoPODr4MQ9RYoZzuq/lb9m', 13);
+INSERT INTO `token` (`idtoken`, `etat`, `date_generation`, `idadmin`, `token_hash`, `idcompetition`) VALUES
+(1, '1', '2025-12-10', NULL, '$2y$10$c6sMkmi80vXezDWfNl4SRej3dJ1MZONWuxtJ6yhJp/qAq2kaWe/Ga', 1),
+(2, '0', '2025-12-11', NULL, '$2y$10$8/NH06v5GlPiWezVQ0e.8OKeUdc83BK2D/s6PWwEIMJTYMfI1VyYG', 1),
+(3, '0', '2025-12-11', NULL, '$2y$10$183iUTjVwMQY4V8itB3MRunXUbbr7kJ3xP1GUv1tczvgK3p9qmIU.', 6),
+(4, '0', '2025-12-11', NULL, '$2y$10$jDoAXAYkPtKl8au5//jzGOVyISXRXHO15tZ3o1fPpPcjJ2kbfHL2.', 8),
+(5, '0', '2025-12-11', NULL, '$2y$10$CSkRlmXsOnZaqI.5dFrbLOupjkTaImIADqNcwtI77amqfJ0ziq1t2', 10),
+(6, '0', '2025-12-11', NULL, '$2y$10$q9uVifITNfQnzcFr2SFwA.jNsML.XEqGevREzZcaF2WelOVZ8gWLO', 13),
+(7, '0', '2025-12-12', NULL, '$2y$10$tsnhuy3vyIz7TuYhtmthYu1ca7p7dgfUB5K92ayFK6L6QzkyLwkXe', 6),
+(8, '0', '2025-12-12', NULL, '$2y$10$tEY9Ojtm9wvWMrMPFyme0eiGwJLxO8s3G.NfH18lEiQgbW9oDiicu', 8),
+(9, '0', '2025-12-12', NULL, '$2y$10$bRekjrBCoomrE0yKqnnmcengXo4AyJfFjrcmHoky22s27Bs.QXnK.', 10),
+(10, '0', '2025-12-12', NULL, '$2y$10$oRJwDThPNLfGKT0SA6OWDOdHJGBGNdUDoPODr4MQ9RYoZzuq/lb9m', 13),
+(19, '1', '2026-01-14', NULL, '$2y$10$/p86cWwsqpAU7UOEKe8iZuFExwF09qh3PUhrhJgQkrJiGLmmpNflm', 4),
+(20, '1', '2026-01-14', NULL, '$2y$10$0yXRpIPVXjnmk1flB5Zy0eo8KW2HC6c16z7r4EaVSyrwsfSajlglW', 4);
 
 -- --------------------------------------------------------
 
@@ -424,14 +451,16 @@ CREATE TABLE IF NOT EXISTS `vote` (
   KEY `fk_vote_scrutin` (`idscrutin`),
   KEY `fk_vote_joueur` (`idjoueur`),
   KEY `fk_vote_token` (`idtoken`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `vote`
 --
 
 INSERT INTO `vote` (`idvote`, `date_vote`, `heure_vote`, `idscrutin`, `idjoueur`, `idtoken`) VALUES
-(1, '2025-12-11', '2025-12-11 11:40:15', 1, 9, 1);
+(1, '2025-12-11', '2025-12-11 11:40:15', 1, 9, 1),
+(6, '2026-01-14', '2026-01-14 15:02:03', 6, 34, 19),
+(7, '2026-01-14', '2026-01-14 15:03:57', 6, 30, 20);
 
 --
 -- Contraintes pour les tables déchargées
@@ -456,6 +485,13 @@ ALTER TABLE `concerne`
 --
 ALTER TABLE `electeur`
   ADD CONSTRAINT `fk_electeur_admin` FOREIGN KEY (`idadmin`) REFERENCES `admin` (`idadmin`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `emargement`
+--
+ALTER TABLE `emargement`
+  ADD CONSTRAINT `fk_emargement_electeur` FOREIGN KEY (`idelecteur`) REFERENCES `electeur` (`idelecteur`),
+  ADD CONSTRAINT `fk_emargement_scrutin` FOREIGN KEY (`idscrutin`) REFERENCES `scrutin` (`idscrutin`);
 
 --
 -- Contraintes pour la table `jeu`
@@ -489,8 +525,7 @@ ALTER TABLE `scrutin`
 -- Contraintes pour la table `token`
 --
 ALTER TABLE `token`
-  ADD CONSTRAINT `fk_token_admin` FOREIGN KEY (`idadmin`) REFERENCES `admin` (`idadmin`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_token_electeur` FOREIGN KEY (`idelecteur`) REFERENCES `electeur` (`idelecteur`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_token_admin` FOREIGN KEY (`idadmin`) REFERENCES `admin` (`idadmin`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `vote`
