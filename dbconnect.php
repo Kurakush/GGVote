@@ -3,6 +3,7 @@ define('USER',"root");
 define('PASSWD',"");
 define('SERVER',"localhost");
 define('BASE',"ggvote");
+define('TOKEN_SECRET', 'ChangeMoi_Par_UneChaineLongueRandom_2026!');
 
 function dbconnect(){
     $dsn="mysql:dbname=".BASE.";host=".SERVER;

@@ -72,13 +72,12 @@ if (isset($_POST['role']) && $_POST['role'] === 'admin') {
 // ==========================
 if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
 
-    if (!empty($_POST['email']) && !empty($_POST["password"])){
+    if (!empty($_POST['email']) && !empty($_POST["password"])) {
 
-        $connexion = dbconnect(); 
-        if(!$connexion) {
-            echo "Pb d'accès à la bdd"; 
-        }
-        else{
+        $connexion = dbconnect();
+        if (!$connexion) {
+            echo "Pb d'accès à la bdd";
+        } else {
 
             // On récupère l'électeur par son email
             $sql = "SELECT * FROM electeur WHERE email = :email LIMIT 1";
@@ -87,27 +86,22 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
             $query->execute();
             $member_row = $query->fetch(PDO::FETCH_ASSOC);
 
-            $password_ok   = false;
-            $error_electeur = $error_electeur ?? '';
+            $password_ok = false;
+            $error_electeur = '';
 
             if ($member_row) {
-
-                $actif        = isset($member_row['actif']) ? (int)$member_row['actif'] : 1;
+                $actif = isset($member_row['actif']) ? (int)$member_row['actif'] : 1;
                 $adminCreator = $member_row['idadmin'] ?? null;
 
-                // Compte non actif : on bloque AVANT de tester le mot de passe
+                // Compte non actif
                 if ($actif === 0) {
-
                     if ($adminCreator === null) {
-                        // inscrit tout seul -> en attente
                         $error_electeur = "Votre compte est en attente de validation par un administrateur.";
                     } else {
-                        // compte désactivé par un admin
                         $error_electeur = "Votre compte électeur a été désactivé. Veuillez contacter un administrateur.";
                     }
-
                 } else {
-                    // Compte actif : on vérifie le mot de passe
+                    // Compte actif : vérif mdp
                     $hash_en_bdd = $member_row['mot_de_passe'];
                     $mdp_saisi   = $_POST['password'];
 
@@ -118,71 +112,23 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
             }
 
             if ($password_ok) {
-
                 $_SESSION['electeur_email'] = $member_row['email'];
                 $_SESSION['idelecteur']     = $member_row['idelecteur'];
                 $_SESSION['flash_message']  = "Connexion réussie en tant qu'électeur !";
 
-                $idelecteur = (int)$member_row['idelecteur'];
-
-                // =======================================
-                // GENERATION DES TOKENS PAR COMPETITION
-                // =======================================
-
-                // On récupère les compétitions qui ont AU MOINS un scrutin ouvert
-                $sqlC = "SELECT DISTINCT c.idcompetition
-                         FROM scrutin s
-                         JOIN competition c ON c.idcompetition = s.idcompetition
-                         WHERE s.etat_scrutin = 'ouvert'
-                           AND s.date_ouverture <= NOW()
-                           AND s.date_cloture   >= NOW()";
-                $stmtC = $connexion->query($sqlC);
-                $competitions = $stmtC->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($competitions as $comp) {
-                    $idcompetition = (int)$comp['idcompetition'];
-
-                    // Vérifier si un token existe déjà pour cet électeur et cette compétition
-                    $sqlCheck = "SELECT idtoken
-                                 FROM token
-                                 WHERE idelecteur = :idelecteur
-                                   AND idcompetition = :idcompetition";
-                    $stmtCheck = $connexion->prepare($sqlCheck);
-                    $stmtCheck->execute([
-                        ':idelecteur'    => $idelecteur,
-                        ':idcompetition' => $idcompetition
-                    ]);
-
-                    if ($stmtCheck->rowCount() == 0) {
-
-                        // Génération du jeton
-                        $token_code = bin2hex(random_bytes(16));
-                        $token_hash = password_hash($token_code, PASSWORD_DEFAULT);
-
-                        $sqlInsert = "INSERT INTO token (code_token, token_hash, idelecteur, idcompetition, etat, date_generation)
-                                      VALUES (:code, :hash, :idelecteur, :idcompetition, 0, NOW())";
-                        $stmtI = $connexion->prepare($sqlInsert);
-                        $stmtI->execute([
-                            ':code'         => $token_code,
-                            ':hash'         => $token_hash,
-                            ':idelecteur'   => $idelecteur,
-                            ':idcompetition'=> $idcompetition
-                        ]);
-
-                        // Optionnel : stocker le token en clair pour affichage
-                        $_SESSION['token_comp_'.$idcompetition] = $token_code;
-                    }
-                }
+                header('Location: profil_electeur.php');
+                exit;
 
             } else {
-                // Aucun member_row OU mauvais mdp OU compte inactif
-                if (empty($error_electeur)) {
-                    // si pas déjà un message de type "en attente" / "désactivé"
+                // Message personnalisé si compte inactif, sinon identifiants incorrects
+                if (!empty($error_electeur)) {
+                    $_SESSION['flash_error'] = $error_electeur;
+                } else {
                     $_SESSION['flash_error'] = "Identifiants incorrects (Électeur)";
                 }
             }
-
         }
+
         $connexion = null;
     }
 }

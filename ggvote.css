@@ -1577,3 +1577,33 @@ h3 {
 .legal-link-bottom a:hover{
   color: #e31919;
 }
+
+.btn-token{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:10px;
+  background:#e31919;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+.btn-token:hover{
+  opacity:0.9;
+}
+
+.token-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid #545454;
+  background:#303030;
+}
+
+.token-box code{
+  font-size:16px;
+  user-select:all;
+  word-break:break-all;
+}
