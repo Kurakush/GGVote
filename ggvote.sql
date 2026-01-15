@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 14 jan. 2026 à 14:21
+-- Généré le : jeu. 15 jan. 2026 à 14:51
 -- Version du serveur : 8.0.43
 -- Version de PHP : 8.3.14
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `electeur` (
   `actif` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idelecteur`),
   KEY `fk_electeur_admin` (`idadmin`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `electeur`
@@ -126,7 +126,33 @@ CREATE TABLE IF NOT EXISTS `electeur` (
 INSERT INTO `electeur` (`idelecteur`, `email`, `mot_de_passe`, `type`, `idadmin`, `actif`) VALUES
 (1, 'test@ggvote.fr', '$2y$10$lJpSMpfMa4HD2c.vKA7yf.tVtf3v4UWTu7vNqLqR07Djpmv7XsFOS', 'Staff', 1, 1),
 (3, 'test2@ggvote.fr', '$2y$10$hnMn5z05Knw909EnL6fJWOM.afm25YdWtwbkiZwlaTB/TkNXjIQiC', 'Joueur', 1, 1),
-(9, 'thomas.degrelle88@orange.fr', '$2y$10$1nWtnbVR3lUzN9oAHKPNiO6vWY4hc2cE.BGMDbEw6i4wShQMO2uw6', 'Staff', NULL, 1);
+(9, 'thomas.degrelle88@orange.fr', '$2y$10$1nWtnbVR3lUzN9oAHKPNiO6vWY4hc2cE.BGMDbEw6i4wShQMO2uw6', 'Staff', NULL, 1),
+(11, 'test3@ggvote.fr', '$2y$10$gO7l9sooPYBXKVVG69a9MOS7mqXhSiECbf4lpogFXPSS5YsnVclQC', 'Public', NULL, 1),
+(12, 'test4@ggvote.fr', '$2y$10$K8PJlCu89ESZ76imOdsM8.0uzsWv6gybXAIlU5MYgb8xaNVn9gpDe', 'Staff', NULL, 1),
+(13, 'test5@ggvote.fr', '$2y$10$UJPuneHzngs2Iusu06xlmuagZ2brbxAEUkw6VTIBJCBsGsOpfektK', 'Staff', NULL, 1),
+(14, 'test6@ggvote.fr', '$2y$10$d8SrNzYC2A9Ss3Q9xgkzPuafBnUyWaIcCZHajiha3EeNIhzAYNOBq', 'Joueur', NULL, 1),
+(15, 'test7@ggvote.fr', '$2y$10$cFXOs7Ki9w/A4rWDEuobhOOzdX6xhBqHHU1wYfgdAsn3nAvpPoR4W', 'Joueur', NULL, 1),
+(16, 'test8@ggvote.fr', '$2y$10$bFsUuJVcOmfWyfiIWplgg.AzPE4hWotOGTOHuTZG8bvACPnn73qLy', 'Staff', NULL, 1),
+(17, 'test9@ggvote.fr', '$2y$10$YrXSWd0kDLIFWMkvla6H6ua7pLLhyFT.4KyjG4.u8JMucWaLTA2Cm', 'Staff', NULL, 1),
+(18, 'test10@ggvote.fr', '$2y$10$Aqa/VoAtyNTYneHe05TUeuGTg107wjefkDlH4O6/.0pxdkaK9mLke', 'Staff', NULL, 1),
+(19, 'test11@ggvote.fr', '$2y$10$pCXKlRrtyMxU5FjhsoyXJ.aJtFfCEPBxSUEyurG4v5IbTTj.CbzeS', 'Public', NULL, 1),
+(20, 'test12@ggvote.fr', '$2y$10$.ePQaWI3iZ2S6ms4CN67aemtteLA48v5cxrXGeVTeE91sm7aw8Z3a', 'Public', NULL, 1),
+(21, 'test13@ggvote.fr', '$2y$10$d1r.1kYv7MW5vAyKtkww5ecdMBR2EQuu6UN/acmxAYgO7KgYlW2DG', 'Public', NULL, 1),
+(22, 'test14@ggvote.fr', '$2y$10$F7MyD7sOCxLZYMosI540web4SBGUgQlFeKNhHLMcdniz75SUgM/0S', 'Staff', NULL, 1),
+(23, 'test15@ggvote.fr', '$2y$10$xPtUNHAyoz6Jee39X5wgwObemfnWLYInTSGzHu/T1Na3AEa1uDm1W', 'Staff', NULL, 1),
+(24, 'test16@ggvote.fr', '$2y$10$i8Dfo82lE4juqpFnvQcTkOdfOsKqN3xWe5srJYeE7FXmsBlQzRgku', 'Staff', NULL, 1),
+(25, 'test17@ggvote.fr', '$2y$10$Mb6WK77nTXawsjGfi1R2aOQkv2qKsKqcu5UL4fcui98JA3GNnLmde', 'Staff', NULL, 1),
+(26, 'test18@ggvote.fr', '$2y$10$wcxp0sSaXQE0yle4TntjPO3kr7XqVHNuoHUkrOgzxxRpmM8ffkb0a', 'Joueur', NULL, 1),
+(27, 'test19@ggvote.fr', '$2y$10$CzYfjk/MZNmH2pbPzzgY6.42bQV9VbqtEyYUTYxLVI2.aSFYSrU4G', 'Joueur', NULL, 1),
+(28, 'test20@ggvote.fr', '$2y$10$MTZEqQ3UThZuqShiUfpQrelLjwKpVpW0Qx3LiCPvRqXXOghAxtDIS', 'Joueur', NULL, 1),
+(29, 'test21@ggvote.fr', '$2y$10$8VJk1d85CBlDg7OUUEzvR.IwuvPd1BEWc5POKYnrJxvN3B9U0hEGq', 'Joueur', NULL, 1),
+(30, 'test22@ggvote.fr', '$2y$10$Ju7ukJfxhOy2Lar/bmJuXuo4VA2zAIAaeoaTEVlVTo5L.8yUKBalS', 'Joueur', NULL, 1),
+(31, 'test23@ggvote.fr', '$2y$10$QfuULgwPEiIr89W7ObwGEeqjt4BhW67RMfOIYH01CdUi9odDbmw.2', 'Public', NULL, 1),
+(33, 'demo@ggvote.fr', '$2y$10$iTgYTI/MpohBbzJXY5sJa./IeC2Y5j4odjVzyrevENeoZtSR5vQhK', 'Staff', NULL, 1),
+(34, 'demo2@ggvote.fr', '$2y$10$T5ShMS1APmE6FDrrQ4SoDOoZf87GhDvlKIPpVMkbm71NPl.LjmVRK', 'Staff', 1, 1),
+(35, 'demoFinal@ggvote.fr', '$2y$10$9AuRjM/jJgdS25P2KPS6vu1fMChfoMhght.R8E3RrLTT6NRrXZBsO', 'Public', NULL, 1),
+(36, 'thomas@ggvote.fr', '$2y$10$x5mAHQyFqRS5lxSjNQYdveWN.ahhCqu7I5OuIwbXAvwGKveC8L9DO', 'Staff', NULL, 1),
+(37, 'thomas2@ggvote.fr', '$2y$10$kSTq2iHHdPjVlA0VXQTTle8NpS0zp2g6JLE1aooFw8mCExSANUx/2', 'Spectateur', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -143,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `emargement` (
   PRIMARY KEY (`idemargement`),
   UNIQUE KEY `uniq_emargement` (`idelecteur`,`idscrutin`),
   KEY `fk_emargement_scrutin` (`idscrutin`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `emargement`
@@ -151,7 +177,31 @@ CREATE TABLE IF NOT EXISTS `emargement` (
 
 INSERT INTO `emargement` (`idemargement`, `idelecteur`, `idscrutin`, `date_vote`) VALUES
 (1, 1, 6, '2026-01-14 15:02:03'),
-(2, 3, 6, '2026-01-14 15:03:57');
+(2, 3, 6, '2026-01-14 15:03:57'),
+(3, 11, 7, '2026-01-15 14:28:02'),
+(4, 12, 7, '2026-01-15 14:29:26'),
+(5, 13, 7, '2026-01-15 14:30:14'),
+(6, 14, 7, '2026-01-15 14:31:26'),
+(7, 15, 7, '2026-01-15 14:32:07'),
+(8, 16, 7, '2026-01-15 14:32:51'),
+(9, 17, 7, '2026-01-15 14:33:39'),
+(10, 18, 7, '2026-01-15 14:34:13'),
+(11, 19, 7, '2026-01-15 14:35:08'),
+(12, 20, 7, '2026-01-15 14:35:43'),
+(13, 21, 7, '2026-01-15 14:36:38'),
+(14, 22, 7, '2026-01-15 14:37:11'),
+(15, 23, 7, '2026-01-15 14:37:39'),
+(16, 24, 7, '2026-01-15 14:38:15'),
+(17, 25, 7, '2026-01-15 14:38:52'),
+(18, 26, 7, '2026-01-15 14:39:41'),
+(19, 27, 7, '2026-01-15 14:40:04'),
+(20, 28, 7, '2026-01-15 14:40:31'),
+(21, 29, 7, '2026-01-15 14:41:04'),
+(22, 30, 7, '2026-01-15 14:41:43'),
+(23, 31, 7, '2026-01-15 14:42:09'),
+(24, 33, 7, '2026-01-15 14:47:26'),
+(25, 35, 7, '2026-01-15 15:13:48'),
+(26, 36, 7, '2026-01-15 15:23:21');
 
 -- --------------------------------------------------------
 
@@ -207,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `joueur` (
   PRIMARY KEY (`idjoueur`),
   KEY `fk_joueur_admin` (`idadmin`),
   KEY `fk_joueur_compet` (`idcompetition`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `joueur`
@@ -333,7 +383,9 @@ INSERT INTO `joueur` (`idjoueur`, `pseudo`, `equipe`, `age`, `nationalite`, `pos
 (119, 'icy', 'CLOUD9', 20, ' Kazakhstanais', '', 2, 15, 'icy.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (120, 'fame', 'VIRTUS.PRO', 22, 'Russe', '', 2, 15, 'fame.jpg', NULL, NULL, NULL, NULL, 1, 1),
 (121, 'flamez', 'VITALITY', 22, 'Israélien ', '', 2, 15, 'flamez.jpg', NULL, NULL, NULL, NULL, 1, 1),
-(122, 'spinx', 'VITALITY', 25, 'Israélien ', '', 2, 15, 'spinx.jpg', NULL, NULL, NULL, NULL, 1, 1);
+(122, 'spinx', 'VITALITY', 25, 'Israélien ', '', 2, 15, 'spinx.jpg', NULL, NULL, NULL, NULL, 1, 1),
+(128, 'Caps', 'G2 Esport', 27, 'Danois', 'Mid-laner', 1, 5, 'caps.jpg', 'caps@orange.fr', '$2y$10$Jtsnu.HtCd9TgI39sk0VQ.PaEJFgpjGfyy72suMOyWeth5TymReOO', 'Salut, c\'est pour la démo !', NULL, 1, 1),
+(130, 'Caliste', 'KC', 24, 'Français', 'ADC', 1, 5, 'caliste.webp', 'caliste@orange.fr', '$2y$10$ZdHnhWbkqeO86tA94AcAY.Rs2dO6B7VwTp34qrNvFtRdkmAa9Vw.K', NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -354,16 +406,19 @@ CREATE TABLE IF NOT EXISTS `resultat` (
   KEY `fk_resultat_admin` (`idadmin`),
   KEY `fk_resultat_scrutin` (`idscrutin`),
   KEY `fk_resultat_joueur` (`idjoueur`)
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `resultat`
 --
 
 INSERT INTO `resultat` (`idresultat`, `nb_votes`, `date_calcul`, `rang`, `idadmin`, `idscrutin`, `idjoueur`) VALUES
-(144, 1, '2026-01-14', 1, 1, 1, 9),
-(145, 1, '2026-01-14', 1, 1, 6, 34),
-(146, 1, '2026-01-14', 2, 1, 6, 30);
+(161, 1, '2026-01-15', 1, 1, 1, 9),
+(162, 1, '2026-01-15', 1, 1, 6, 34),
+(163, 1, '2026-01-15', 2, 1, 6, 30),
+(164, 18, '2026-01-15', 1, 1, 7, 35),
+(165, 5, '2026-01-15', 2, 1, 7, 40),
+(166, 1, '2026-01-15', 3, 1, 7, 38);
 
 -- --------------------------------------------------------
 
@@ -375,27 +430,29 @@ DROP TABLE IF EXISTS `scrutin`;
 CREATE TABLE IF NOT EXISTS `scrutin` (
   `idscrutin` int NOT NULL AUTO_INCREMENT,
   `nom_scrutin` varchar(45) NOT NULL,
-  `date_ouverture` date NOT NULL,
-  `date_cloture` date NOT NULL,
+  `date_ouverture` datetime NOT NULL,
+  `date_cloture` datetime NOT NULL,
   `etat_scrutin` varchar(45) NOT NULL,
   `idadmin` int NOT NULL,
   `idcompetition` int NOT NULL,
   PRIMARY KEY (`idscrutin`),
   KEY `fk_scrutin_admin` (`idadmin`),
   KEY `fk_scrutin_compet` (`idcompetition`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `scrutin`
 --
 
 INSERT INTO `scrutin` (`idscrutin`, `nom_scrutin`, `date_ouverture`, `date_cloture`, `etat_scrutin`, `idadmin`, `idcompetition`) VALUES
-(1, 'MVP Champions Valorant', '2025-12-01', '2025-12-14', 'cloture', 1, 1),
-(2, 'MVP First Stand LoL', '2025-12-10', '2025-12-31', 'cloture', 1, 6),
-(3, 'MVP Major RL', '2025-12-11', '2025-12-31', 'cloture', 1, 8),
-(4, 'MVP Major Solo Fortnite', '2025-12-11', '2025-12-31', 'cloture', 1, 10),
-(5, 'MVP Major CSGO:2', '2025-12-11', '2025-12-31', 'cloture', 1, 13),
-(6, 'MVP Worlds LoL', '2026-01-07', '2026-01-19', 'cloture', 1, 4);
+(1, 'MVP Champions Valorant', '2025-12-01 00:00:00', '2025-12-14 00:00:00', 'cloture', 1, 1),
+(2, 'MVP First Stand LoL', '2025-12-10 00:00:00', '2025-12-31 00:00:00', 'cloture', 1, 6),
+(3, 'MVP Major RL', '2025-12-11 00:00:00', '2025-12-31 00:00:00', 'cloture', 1, 8),
+(4, 'MVP Major Solo Fortnite', '2025-12-11 00:00:00', '2025-12-31 00:00:00', 'cloture', 1, 10),
+(5, 'MVP Major CSGO:2', '2025-12-11 00:00:00', '2025-12-31 00:00:00', 'cloture', 1, 13),
+(6, 'MVP Worlds LoL', '2026-01-07 00:00:00', '2026-01-19 00:00:00', 'cloture', 1, 4),
+(7, 'MVP MSI', '2026-01-15 00:00:00', '2026-01-15 23:59:00', 'cloture', 1, 5),
+(10, 'MVP RLCS', '2026-01-15 14:00:00', '2026-01-23 14:00:00', 'ouvert', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -413,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `token` (
   `idcompetition` int NOT NULL,
   PRIMARY KEY (`idtoken`),
   KEY `fk_token_admin` (`idadmin`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `token`
@@ -431,7 +488,31 @@ INSERT INTO `token` (`idtoken`, `etat`, `date_generation`, `idadmin`, `token_has
 (9, '0', '2025-12-12', NULL, '$2y$10$bRekjrBCoomrE0yKqnnmcengXo4AyJfFjrcmHoky22s27Bs.QXnK.', 10),
 (10, '0', '2025-12-12', NULL, '$2y$10$oRJwDThPNLfGKT0SA6OWDOdHJGBGNdUDoPODr4MQ9RYoZzuq/lb9m', 13),
 (19, '1', '2026-01-14', NULL, '$2y$10$/p86cWwsqpAU7UOEKe8iZuFExwF09qh3PUhrhJgQkrJiGLmmpNflm', 4),
-(20, '1', '2026-01-14', NULL, '$2y$10$0yXRpIPVXjnmk1flB5Zy0eo8KW2HC6c16z7r4EaVSyrwsfSajlglW', 4);
+(20, '1', '2026-01-14', NULL, '$2y$10$0yXRpIPVXjnmk1flB5Zy0eo8KW2HC6c16z7r4EaVSyrwsfSajlglW', 4),
+(21, '1', '2026-01-15', NULL, '$2y$10$z7.4hqU5e0/GOhmdPuvc8u1pYtV8wQNf9S8dS5dXpGu8Qw6WV2oeq', 5),
+(22, '1', '2026-01-15', NULL, '$2y$10$E2BmyL3n.NFkk15oLb1KQesVkHUHPXKrVHyALrz3uC9garhmKAm7m', 5),
+(23, '1', '2026-01-15', NULL, '$2y$10$OTaIph3sf2bktgYNTnPxru1LdyE1XkT29rbtTTUrma9yPi7tvxHQG', 5),
+(24, '1', '2026-01-15', NULL, '$2y$10$QSls.FeLxKIGftup1mYPX.LBGodWAA2.xMLD/z6jOYkbKOyNtofZO', 5),
+(25, '1', '2026-01-15', NULL, '$2y$10$k0N/aeQnP1ouQVBTD9OARONvpTvIek43.n5OypJTvH2c8Su35rc/.', 5),
+(26, '1', '2026-01-15', NULL, '$2y$10$04ZkrcR4Lc8tqmkT1BUkDu5GO.SLxfjgGuaqFlHkNhztPbNpQtIby', 5),
+(27, '1', '2026-01-15', NULL, '$2y$10$cN4y0lHlhH/Uk4dMm.oW2uvT30/pe6GheE3sjp/yGQxwZXUYS1/wy', 5),
+(28, '1', '2026-01-15', NULL, '$2y$10$8qN1vRu3PFT5ZTkhvYJR5uuMfJveonUj7436.TnT6IuSI0igcvf7O', 5),
+(29, '1', '2026-01-15', NULL, '$2y$10$2PUQiVGha7AUye73NG9auuVROj9tNyEYPK./92AOk3Bb9nsifwNc.', 5),
+(30, '1', '2026-01-15', NULL, '$2y$10$yCW.0vO/8fv3Kwl0czfGlOfFLTCs.QYdYqKMGa9NI6YDxOUo6EXxy', 5),
+(31, '1', '2026-01-15', NULL, '$2y$10$EZhiVKE44doIyzdaqW7mieEg1xYCxLIUkN/Wo1AkAg4fGUv9KVNQG', 5),
+(32, '1', '2026-01-15', NULL, '$2y$10$0SwIvsrZ9jVoRxRR6HPvyem4ruSJ9XldnOS5hiQt/c17qiPP.jEcW', 5),
+(33, '1', '2026-01-15', NULL, '$2y$10$T0dYJJGxOfZ9dbj83aS24uXPKbqZbmuJl7rWTOFpdDQuXwAIXVjn2', 5),
+(34, '1', '2026-01-15', NULL, '$2y$10$plEm6hmzmePGtPpXn5LEzeaBRq.GBFRhWKF9IyHE91gz7hiA4W0ji', 5),
+(35, '1', '2026-01-15', NULL, '$2y$10$Ya8yJfpBiq5BLdVEDFVpsOINz7BDRpbLhSd4ZxrW9EGML43rdl4x6', 5),
+(36, '1', '2026-01-15', NULL, '$2y$10$FTfyaNtccObcGzMw.vkGnevGkW418w22s.cE5Ip04k14t5/oxmZ6q', 5),
+(37, '1', '2026-01-15', NULL, '$2y$10$kJdQaCF3hc/F0plpJl52iu5rzpTQy7JGLO3Cid7ggxZBTUqN2VYb6', 5),
+(38, '1', '2026-01-15', NULL, '$2y$10$Hlj83ReHYm6k4NQXPQVGxuIxle24SKAf5sB6fyYCiHukp6seo/AY6', 5),
+(39, '1', '2026-01-15', NULL, '$2y$10$raFrHywjG0gC52xB6S.9R.htFK09IuE52Jfv8oCkaI4c8XJiJZuXi', 5),
+(40, '1', '2026-01-15', NULL, '$2y$10$4Q7YpMJkNFbLJHQcyrTRTeLItQcbIqVhFZjWbZJDnyiSEVi0TedHW', 5),
+(41, '1', '2026-01-15', NULL, '$2y$10$Si23v7VV/ySCZNBJoJ1Gzub0ytMKN9e.dVALiY8y47R/dRr8iXeU2', 5),
+(42, '1', '2026-01-15', NULL, '$2y$10$LGYyyKcPrsu3y7ykFpSUXed/UO1IxahUTanTqADKT8Namc4GdoyJ2', 5),
+(43, '1', '2026-01-15', NULL, '$2y$10$F6rXFl6nGX58/GmgXrzoxeKBLMADgOTM3M7Xn9MrDTFEhLTq7f6K2', 5),
+(44, '1', '2026-01-15', NULL, '$2y$10$ghEyya6D3RpnlySiN1tlf.JAZ2PM06CkVqX6hcNy8MC5yr8UETj0u', 5);
 
 -- --------------------------------------------------------
 
@@ -451,7 +532,7 @@ CREATE TABLE IF NOT EXISTS `vote` (
   KEY `fk_vote_scrutin` (`idscrutin`),
   KEY `fk_vote_joueur` (`idjoueur`),
   KEY `fk_vote_token` (`idtoken`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `vote`
@@ -460,7 +541,31 @@ CREATE TABLE IF NOT EXISTS `vote` (
 INSERT INTO `vote` (`idvote`, `date_vote`, `heure_vote`, `idscrutin`, `idjoueur`, `idtoken`) VALUES
 (1, '2025-12-11', '2025-12-11 11:40:15', 1, 9, 1),
 (6, '2026-01-14', '2026-01-14 15:02:03', 6, 34, 19),
-(7, '2026-01-14', '2026-01-14 15:03:57', 6, 30, 20);
+(7, '2026-01-14', '2026-01-14 15:03:57', 6, 30, 20),
+(8, '2026-01-15', '2026-01-15 14:28:02', 7, 35, 21),
+(9, '2026-01-15', '2026-01-15 14:29:26', 7, 35, 22),
+(10, '2026-01-15', '2026-01-15 14:30:14', 7, 35, 23),
+(11, '2026-01-15', '2026-01-15 14:31:26', 7, 40, 24),
+(12, '2026-01-15', '2026-01-15 14:32:07', 7, 35, 25),
+(13, '2026-01-15', '2026-01-15 14:32:51', 7, 40, 26),
+(14, '2026-01-15', '2026-01-15 14:33:39', 7, 35, 27),
+(15, '2026-01-15', '2026-01-15 14:34:13', 7, 35, 28),
+(16, '2026-01-15', '2026-01-15 14:35:08', 7, 35, 29),
+(17, '2026-01-15', '2026-01-15 14:35:43', 7, 35, 30),
+(18, '2026-01-15', '2026-01-15 14:36:38', 7, 35, 31),
+(19, '2026-01-15', '2026-01-15 14:37:11', 7, 40, 32),
+(20, '2026-01-15', '2026-01-15 14:37:39', 7, 40, 33),
+(21, '2026-01-15', '2026-01-15 14:38:15', 7, 35, 34),
+(22, '2026-01-15', '2026-01-15 14:38:52', 7, 35, 35),
+(23, '2026-01-15', '2026-01-15 14:39:41', 7, 35, 36),
+(24, '2026-01-15', '2026-01-15 14:40:04', 7, 40, 37),
+(25, '2026-01-15', '2026-01-15 14:40:31', 7, 35, 38),
+(26, '2026-01-15', '2026-01-15 14:41:04', 7, 35, 39),
+(27, '2026-01-15', '2026-01-15 14:41:43', 7, 35, 40),
+(28, '2026-01-15', '2026-01-15 14:42:09', 7, 35, 41),
+(29, '2026-01-15', '2026-01-15 14:47:26', 7, 35, 42),
+(30, '2026-01-15', '2026-01-15 15:13:48', 7, 38, 43),
+(31, '2026-01-15', '2026-01-15 15:23:21', 7, 35, 44);
 
 --
 -- Contraintes pour les tables déchargées
