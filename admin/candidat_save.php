@@ -9,6 +9,8 @@ if (!$connexion) {
 
 $mode          = $_POST['mode'] ?? 'ajout';
 $pseudo        = $_POST['pseudo'] ?? '';
+$email_candidat = trim($_POST['email_candidat'] ?? '');
+$mdp_candidat   = $_POST['mdp_candidat'] ?? '';
 $equipe        = $_POST['equipe'] ?? '';
 $age           = $_POST['age'] ?? null;
 $nationalite   = $_POST['nationalite'] ?? '';
@@ -44,13 +46,28 @@ if (!empty($_FILES['photo']['name'])) {
     }
 }
 
+/* =========================
+   Hash du mdp (si rempli)
+   ========================= */
+$mdp_hash = null;
+if (!empty($mdp_candidat)) {
+    $mdp_hash = password_hash($mdp_candidat, PASSWORD_DEFAULT);
+}
+
 if ($mode === "ajout") {
 
-    $sql = "INSERT INTO joueur (pseudo, equipe, age, nationalite, poste, idadmin, idcompetition, photo)
-            VALUES (:pseudo, :equipe, :age, :nationalite, :poste, :idadmin, :idcomp, :photo)";
+// En ajout : on exige email + mdp
+    if (empty($email_candidat) || empty($mdp_candidat)) {
+        die("Email et mot de passe candidat obligatoires.");
+    }
+
+    $sql = "INSERT INTO joueur (pseudo, email_candidat, mdp_candidat, equipe, age, nationalite, poste, idadmin, idcompetition, photo)
+            VALUES (:pseudo, :email_candidat, :mdp_candidat, :equipe, :age, :nationalite, :poste, :idadmin, :idcomp, :photo)";
     $stmt = $connexion->prepare($sql);
     $stmt->execute([
         ':pseudo'      => $pseudo,
+        ':email_candidat' => $email_candidat,
+        ':mdp_candidat'   => $mdp_hash,
         ':equipe'      => $equipe,
         ':age'         => ($age !== '' ? $age : null),
         ':nationalite' => $nationalite,
@@ -62,10 +79,13 @@ if ($mode === "ajout") {
 
 } else { // edition
 
+// En édition : si mdp vide => on ne modifie pas mdp_candidat
     $idcandidat = (int) ($_POST['idjoueur'] ?? 0);
 
     $sql = "UPDATE joueur
             SET pseudo = :pseudo,
+                email_candidat = :email_candidat,
+                mdp_candidat = :mdp_candidat,
                 equipe = :equipe,
                 age = :age,
                 nationalite = :nationalite,
@@ -76,6 +96,8 @@ if ($mode === "ajout") {
     $stmt = $connexion->prepare($sql);
     $stmt->execute([
         ':pseudo'      => $pseudo,
+        ':email_candidat' => $email_candidat,
+        ':mdp_candidat' => $mdp_hash,
         ':equipe'      => $equipe,
         ':age'         => ($age !== '' ? $age : null),
         ':nationalite' => $nationalite,
