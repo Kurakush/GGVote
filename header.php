@@ -20,161 +20,140 @@ if (isset($_GET["disconnect"]) && $_GET["disconnect"] == 1){
     unset($_SESSION["candidat_pseudo"]);
     unset($_SESSION["candidature_complete"]);
     unset($_SESSION["candidature_validee"]);
+
+    $_SESSION['flash_message'] = "Vous êtes déconnecté.";
+    header("Location: index.php");
+    exit;
 }
 
 // ==========================
 //  CONNEXION ADMIN
 // ==========================
-if (isset($_POST['role']) && $_POST['role'] === 'admin') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['role'] ?? '') === 'admin') {
 
-    if (!empty($_POST['login']) && !empty($_POST["password"])) {
+    $login    = trim($_POST['login'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-        $connexion = dbconnect(); 
-        if(!$connexion) {
-            echo "Pb d'accès à la bdd"; 
-        }
-        else {
-
-            // On récupère l’admin par son login
-            $sql = "SELECT * FROM admin WHERE login_admin = :login LIMIT 1";
-            $query = $connexion->prepare($sql);
-            $query->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
-            $query->execute();
-            $member_row = $query->fetch(PDO::FETCH_ASSOC);
-
-            $password_ok = false;
-
-            if ($member_row) {
-                $hash_en_bdd = $member_row['mot_de_passe'];
-                $mdp_saisi   = $_POST['password'];
-
-                // Vérification du mot de passe hashé
-                if (password_verify($mdp_saisi, $hash_en_bdd)) {
-                    $password_ok = true;
-                }
-            }
-
-            if ($password_ok) {
-                $_SESSION['login']    = $member_row['login_admin'];
-                $_SESSION['admin_id'] = $member_row['idadmin'];
-                $_SESSION['flash_message'] = "Connexion réussie en tant qu'administrateur !";
-            } else {
-                $_SESSION['flash_error'] = "Identifiants incorrects (Admin)";
-            }
-            
-        }
-        $connexion = null;
+    if ($login === '' || $password === '') {
+        $_SESSION['flash_error'] = "Veuillez remplir tous les champs (Admin).";
+        header("Location: index.php");
+        exit;
     }
+
+    $connexion = dbconnect();
+    if (!$connexion) {
+        $_SESSION['flash_error'] = "Erreur de connexion à la base de données.";
+        header("Location: index.php");
+        exit;
+    }
+
+    $sql = "SELECT * FROM admin WHERE login_admin = :login LIMIT 1";
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute([':login' => $login]);
+    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($admin && password_verify($password, $admin['mot_de_passe'])) {
+        $_SESSION['login']    = $admin['login_admin'];
+        $_SESSION['admin_id'] = $admin['idadmin'];
+        $_SESSION['flash_message'] = "Connexion réussie (Administrateur).";
+    } else {
+        $_SESSION['flash_error'] = "Identifiants incorrects (Admin).";
+    }
+
+    header("Location: index.php");
+    exit;
 }
 
 // ==========================
 //  CONNEXION ELECTEUR
 // ==========================
-if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
-
-    if (!empty($_POST['email']) && !empty($_POST["password"])) {
-
-        $connexion = dbconnect();
-        if (!$connexion) {
-            echo "Pb d'accès à la bdd";
-        } else {
-
-            // On récupère l'électeur par son email
-            $sql = "SELECT * FROM electeur WHERE email = :email LIMIT 1";
-            $query = $connexion->prepare($sql);
-            $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
-            $query->execute();
-            $member_row = $query->fetch(PDO::FETCH_ASSOC);
-
-            $password_ok = false;
-            $error_electeur = '';
-
-            if ($member_row) {
-                $actif = isset($member_row['actif']) ? (int)$member_row['actif'] : 1;
-                $adminCreator = $member_row['idadmin'] ?? null;
-
-                // Compte non actif
-                if ($actif === 0) {
-                    if ($adminCreator === null) {
-                        $error_electeur = "Votre compte est en attente de validation par un administrateur.";
-                    } else {
-                        $error_electeur = "Votre compte électeur a été désactivé. Veuillez contacter un administrateur.";
-                    }
-                } else {
-                    // Compte actif : vérif mdp
-                    $hash_en_bdd = $member_row['mot_de_passe'];
-                    $mdp_saisi   = $_POST['password'];
-
-                    if (password_verify($mdp_saisi, $hash_en_bdd)) {
-                        $password_ok = true;
-                    }
-                }
-            }
-
-            if ($password_ok) {
-                $_SESSION['electeur_email'] = $member_row['email'];
-                $_SESSION['idelecteur']     = $member_row['idelecteur'];
-                $_SESSION['flash_message']  = "Connexion réussie en tant qu'électeur !";
-
-            } else {
-                // Message personnalisé si compte inactif, sinon identifiants incorrects
-                if (!empty($error_electeur)) {
-                    $_SESSION['flash_error'] = $error_electeur;
-                } else {
-                    $_SESSION['flash_error'] = "Identifiants incorrects (Électeur)";
-                }
-            }
-        }
-
-        $connexion = null;
-    }
-}
-
-/* ==========================================================
- *  CONNEXION CANDIDAT
- *  (via le formulaire / modal avec role="candidat")
- * ========================================================== */
-if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['role'] ?? '') === 'electeur') {
 
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
     if ($email === '' || $password === '') {
-        $error_candidat = "Veuillez saisir un email et un mot de passe.";
-    } else {
-
-        $connexion = dbconnect();
-        if (!$connexion) {
-            $error_candidat = "Problème d'accès à la base de données.";
-        } else {
-
-            $sql = "SELECT idjoueur, email_candidat, mdp_candidat, pseudo,
-                           candidature_complete, candidature_validee
-                    FROM joueur
-                    WHERE email_candidat = :email
-                    LIMIT 1";
-            $stmt = $connexion->prepare($sql);
-            $stmt->execute([':email' => $email]);
-            $cand = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (
-                $cand &&
-                !empty($cand['mdp_candidat']) &&
-                password_verify($password, $cand['mdp_candidat'])
-            ) {
-                // connexion OK
-                $_SESSION['idjoueur_candidat']   = (int)$cand['idjoueur'];
-                $_SESSION['candidat_email']      = $cand['email_candidat'];
-                $_SESSION['candidat_pseudo']     = $cand['pseudo'];
-                $_SESSION['candidature_complete'] = (int)$cand['candidature_complete'];
-                $_SESSION['candidature_validee']  = (int)$cand['candidature_validee'];
-                $_SESSION['flash_message']  = "Connexion réussie en tant que candidat !";
-
-            } else {
-                $_SESSION['flash_error'] = "Identifiants incorrects (Candidat)";
-            }
-        }
+        $_SESSION['flash_error'] = "Veuillez remplir tous les champs (Électeur).";
+        header("Location: index.php");
+        exit;
     }
+
+    $connexion = dbconnect();
+    if (!$connexion) {
+        $_SESSION['flash_error'] = "Erreur de connexion à la base de données.";
+        header("Location: index.php");
+        exit;
+    }
+
+    $sql = "SELECT * FROM electeur WHERE email = :email LIMIT 1";
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $electeur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($electeur) {
+
+        if ((int)$electeur['actif'] === 0) {
+            $_SESSION['flash_error'] = "Votre compte électeur n'est pas actif.";
+        }
+        elseif (password_verify($password, $electeur['mot_de_passe'])) {
+            $_SESSION['electeur_email'] = $electeur['email'];
+            $_SESSION['idelecteur']     = $electeur['idelecteur'];
+            $_SESSION['flash_message'] = "Connexion réussie (Électeur).";
+        }
+        else {
+            $_SESSION['flash_error'] = "Identifiants incorrects (Électeur).";
+        }
+
+    } else {
+        $_SESSION['flash_error'] = "Identifiants incorrects (Électeur).";
+    }
+
+    header("Location: index.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['role'] ?? '') === 'candidat') {
+
+    $email    = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if ($email === '' || $password === '') {
+        $_SESSION['flash_error'] = "Veuillez remplir tous les champs (Candidat).";
+        header("Location: index.php");
+        exit;
+    }
+
+    $connexion = dbconnect();
+    if (!$connexion) {
+        $_SESSION['flash_error'] = "Erreur de connexion à la base de données.";
+        header("Location: index.php");
+        exit;
+    }
+
+    $sql = "SELECT idjoueur, email_candidat, mdp_candidat, pseudo,
+                   candidature_complete, candidature_validee
+            FROM joueur
+            WHERE email_candidat = :email
+            LIMIT 1";
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $candidat = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($candidat && password_verify($password, $candidat['mdp_candidat'])) {
+
+        $_SESSION['idjoueur_candidat']    = (int)$candidat['idjoueur'];
+        $_SESSION['candidat_email']       = $candidat['email_candidat'];
+        $_SESSION['candidat_pseudo']      = $candidat['pseudo'];
+        $_SESSION['candidature_complete'] = (int)$candidat['candidature_complete'];
+        $_SESSION['candidature_validee']  = (int)$candidat['candidature_validee'];
+
+        $_SESSION['flash_message'] = "Connexion réussie (Candidat).";
+    } else {
+        $_SESSION['flash_error'] = "Identifiants incorrects (Candidat).";
+    }
+
+    header("Location: index.php");
+    exit;
 }
 
 
