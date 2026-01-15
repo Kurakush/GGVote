@@ -45,21 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idcompetition <= 0
     ) {
         $message_error = "Tous les champs doivent être remplis.";
-    }
-
-    elseif (!$accept_cgu) {
+    } elseif (!$accept_cgu) {
         $message_error = "Vous devez accepter les conditions d'utilisation et les mentions légales.";
-    }
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message_error = "L'email n'est pas valide.";
-    }
-    elseif ($password !== $confirm) {
+    } elseif ($password !== $confirm) {
         $message_error = "Les mots de passe ne correspondent pas.";
-    }
-    elseif (strlen($password) < 8) {
+    } elseif (strlen($password) < 8) {
         $message_error = "Le mot de passe doit contenir au moins 8 caractères.";
-    }
-    else {
+    } else {
 
         // Vérifier que la compétition existe
         $sqlCompOk = "SELECT idcompetition
@@ -93,8 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      candidature_complete, candidature_validee, idadmin)
                     VALUES
                     (:pseudo, :email, :mdp, :idcompetition, 0, 0, :idadmin)";
-                
-                $idadmin_defaut = 1; 
+
+                $idadmin_defaut = 1;
                 $stmtInsert = $connexion->prepare($sqlInsert);
                 $stmtInsert->execute([
                     ':pseudo'        => $pseudo,
@@ -139,47 +133,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="auth-field">
                 <label class="auth-label" for="pseudo">Pseudo</label>
                 <input type="text"
-                       id="pseudo"
-                       name="pseudo"
-                       class="auth-input"
-                       required
-                       value="<?= htmlspecialchars($_POST['pseudo'] ?? '') ?>">
+                    id="pseudo"
+                    name="pseudo"
+                    class="auth-input"
+                    required
+                    value="<?= htmlspecialchars($_POST['pseudo'] ?? '') ?>">
             </div>
 
             <div class="auth-field">
                 <label class="auth-label" for="email">Email</label>
                 <input type="email"
-                       id="email"
-                       name="email"
-                       class="auth-input"
-                       required
-                       value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                    id="email"
+                    name="email"
+                    class="auth-input"
+                    required
+                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             </div>
 
             <div class="auth-field">
                 <label class="auth-label" for="password">Mot de passe</label>
                 <input type="password"
-                       id="password"
-                       name="password"
-                       class="auth-input"
-                       required>
+                    id="password"
+                    name="password"
+                    class="auth-input"
+                    required>
             </div>
 
             <div class="auth-field">
                 <label class="auth-label" for="confirm">Confirmation du mot de passe</label>
                 <input type="password"
-                       id="confirm"
-                       name="confirm"
-                       class="auth-input"
-                       required>
+                    id="confirm"
+                    name="confirm"
+                    class="auth-input"
+                    required>
             </div>
 
             <div class="auth-field">
                 <label class="auth-label" for="idcompetition">Compétition</label>
                 <select id="idcompetition"
-                        name="idcompetition"
-                        class="auth-input"
-                        required>
+                    name="idcompetition"
+                    class="auth-input"
+                    required>
                     <option value="">-- Choisissez une compétition --</option>
                     <?php foreach ($competitions as $c): ?>
                         <option value="<?= (int)$c['idcompetition'] ?>"
@@ -196,17 +190,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="auth-field auth-checkbox">
                 <label class="auth-checkbox-label">
-                <input type="checkbox"
-                    name="accept_cgu"
-                    value="1"
-                    required
-                    <?= isset($_POST['accept_cgu']) ? 'checked' : '' ?>>
-        <span>
-            J'accepte les
-            <a href="mentions_legales.php" target="_blank">mentions légales</a>
-            et les
-            <a href="cgu.php" target="_blank">conditions d'utilisation</a>
-        </span>
+                    <input type="checkbox"
+                        name="accept_cgu"
+                        value="1"
+                        required
+                        <?= isset($_POST['accept_cgu']) ? 'checked' : '' ?>>
+                    <span>
+                        J'accepte les
+                        <a href="mentions_legales.php" target="_blank">mentions légales</a>
+                        et les
+                        <a href="cgu.php" target="_blank">conditions d'utilisation</a>
+                    </span>
                 </label>
             </div>
 
