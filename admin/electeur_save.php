@@ -21,7 +21,7 @@ $password = trim($password);
 
 if ($mode === "ajout") {
 
-    // 🔐 hachage du mot de passe s'il est fourni
+    // hachage du mot de passe s'il est fourni
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO electeur (email, mot_de_passe, type, actif, idadmin)
