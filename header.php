@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['role'] ?? '') === 'admin')
         $_SESSION['flash_message'] = "Connexion réussie (Administrateur).";
     } else {
         $_SESSION['flash_error'] = "Identifiants incorrects (Admin).";
+        $_SESSION['open_login_modal'] = 'admin';
     }
 
     header("Location: index.php");
@@ -106,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['role'] ?? '') === 'electeu
 
     } else {
         $_SESSION['flash_error'] = "Identifiants incorrects (Électeur).";
+        $_SESSION['open_login_modal'] = 'electeur';
     }
 
     header("Location: index.php");
@@ -150,6 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['role'] ?? '') === 'candida
         $_SESSION['flash_message'] = "Connexion réussie (Candidat).";
     } else {
         $_SESSION['flash_error'] = "Identifiants incorrects (Candidat).";
+        $_SESSION['open_login_modal'] = 'candidat';
     }
 
     header("Location: index.php");

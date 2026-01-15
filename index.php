@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('header.php');
 ?>
 
@@ -28,13 +28,13 @@ require('header.php');
         </p>
 
         <p>Notre système garantit un vote <strong>unique</strong>, <strong>anonyme</strong> et
-        <strong>sécurisé</strong> afin d'assurer un classement transparent et fiable. Que vous soyez
-        visiteur ou électeur, GGVote vous offre une expérience simple et intuitive.
+            <strong>sécurisé</strong> afin d'assurer un classement transparent et fiable. Que vous soyez
+            visiteur ou électeur, GGVote vous offre une expérience simple et intuitive.
         </p>
     </div>
 
     <div class="titre-section">
-    <h1>Jeux disponibles</h1>
+        <h1>Jeux disponibles</h1>
     </div>
     <div class="sections-jeux">
         <div class="tuiles" onclick="openVideo('https://www.youtube.com/embed/vlcIs06x7A8')">
@@ -69,20 +69,20 @@ require('header.php');
     </div>
 
     <div id="videoModal" class="modal-video">
-    <div class="modal-video-content">
-        <span class="video-close" onclick="closeVideo()">&times;</span>
-        <iframe id="gameVideo" width="560" height="315"
-            src=""
-            title="Gameplay"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
+        <div class="modal-video-content">
+            <span class="video-close" onclick="closeVideo()">&times;</span>
+            <iframe id="gameVideo" width="560" height="315"
+                src=""
+                title="Gameplay"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
     <br><br>
-    
+
     <div class="modeVote">
         <h1>Comment est élu le meilleur joueur ?</h1>
         <p>Dans GGVote, nous avons retenu un <strong>scrutin uninominal majoritaire à un tour</strong>, un mode de vote simple, transparent et parfaitement adapté aux compétitions e-sport. </p>
@@ -92,38 +92,56 @@ require('header.php');
     </div>
 
     <div class="cta-vote">
-    <div class="cta-vote-text">
-        <h2>Prêt à voter pour votre champion ?</h2>
-        <p>
-            Connectez-vous, choisissez votre jeu préféré et soutenez le joueur 
-            qui mérite le titre de MVP. Chaque vote compte&nbsp;!
-        </p>
-    </div>
+        <div class="cta-vote-text">
+            <h2>Prêt à voter pour votre champion ?</h2>
+            <p>
+                Connectez-vous, choisissez votre jeu préféré et soutenez le joueur
+                qui mérite le titre de MVP. Chaque vote compte&nbsp;!
+            </p>
+        </div>
 
-    <?php
-    if ($electeur) { ?>
-        <a href="voter.php" class="cta-vote-btn">Aller voter</a>
-    <?php } 
-    else { ?>
-        <a href="#" class="cta-vote-btn" onclick="authenticate()">Aller voter</a>
-    <?php } ?>
-</div>
+        <?php
+        if ($electeur) { ?>
+            <a href="voter.php" class="cta-vote-btn">Aller voter</a>
+        <?php } else { ?>
+            <a href="#" class="cta-vote-btn" onclick="authenticate()">Aller voter</a>
+        <?php } ?>
+    </div>
 
 
     <script>
-    function openVideo(url) {
-        // on ajoute ?autoplay=1 pour lancer la vidéo direct
-        const urlAvecAutoplay = url + '?autoplay=1&rel=0';
+        function openVideo(url) {
+            // on ajoute ?autoplay=1 pour lancer la vidéo direct
+            const urlAvecAutoplay = url + '?autoplay=1&rel=0';
 
-        document.getElementById("videoModal").style.display = "flex";
-        document.getElementById("gameVideo").src = urlAvecAutoplay;
-    }
+            document.getElementById("videoModal").style.display = "flex";
+            document.getElementById("gameVideo").src = urlAvecAutoplay;
+        }
 
-    function closeVideo() {
-        document.getElementById("videoModal").style.display = "none";
-        document.getElementById("gameVideo").src = "";
-    }
+        function closeVideo() {
+            document.getElementById("videoModal").style.display = "none";
+            document.getElementById("gameVideo").src = "";
+        }
     </script>
+
+    <?php if (isset($_SESSION['open_login_modal'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('loginModal');
+
+                if (modal) {
+                    modal.style.display = 'flex';
+
+                    // Sélection du bon onglet
+                    const role = "<?= $_SESSION['open_login_modal'] ?>";
+                    if (typeof switchTab === 'function') {
+                        switchTab(role);
+                    }
+                }
+            });
+        </script>
+        <?php unset($_SESSION['open_login_modal']); ?>
+    <?php endif; ?>
 </div>
 
 
@@ -131,6 +149,3 @@ require('header.php');
 <?php
 require('footer.php');
 ?>
-
-
-
