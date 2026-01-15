@@ -104,7 +104,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </div>
 
+            
+
             <button type="submit" class="auth-submit">Créer mon compte</button>
+
+            <div class="auth-field auth-checkbox">
+                <label class="auth-checkbox-label">
+                    <input type="checkbox"
+                        name="accept_cgu"
+                        value="1"
+                        required
+                        <?= isset($_POST['accept_cgu']) ? 'checked' : '' ?>>
+                    <span>
+                        J'accepte les
+                        <a href="mentions_legales.php" target="_blank">mentions légales</a>
+                        et les
+                        <a href="cgu.php" target="_blank">conditions d'utilisation</a>
+                    </span>
+                </label>
+            </div>
+
+            
 
         </form>
     </div>
