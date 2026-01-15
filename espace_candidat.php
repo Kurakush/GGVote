@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
 
     $pseudo     = trim($_POST['pseudo'] ?? '');
     $equipe     = trim($_POST['equipe'] ?? '');
+    $poste = trim($_POST['poste'] ?? '');
     $bio        = trim($_POST['bio'] ?? '');
     $lien_media = trim($_POST['lien_media'] ?? '');
     $age         = (int)($_POST['age'] ?? 0);
@@ -78,6 +79,7 @@ if (!empty($_FILES['photo']['name']) && $_FILES['photo']['error'] === UPLOAD_ERR
         $sqlUpdate = "UPDATE joueur
                       SET pseudo = :pseudo,
                           equipe = :equipe,
+                          poste = :poste,
                           age = :age,
                           nationalite = :nationalite,
                           bio_candidat = :bio,
@@ -89,6 +91,7 @@ if (!empty($_FILES['photo']['name']) && $_FILES['photo']['error'] === UPLOAD_ERR
         $stmtUp->execute([
             ':pseudo' => $pseudo,
             ':equipe' => $equipe ?: null,
+            ':poste'  => $poste ?: null,
             ':age'    => $age > 0 ? $age : null,
             ':nationalite' => ($nationalite !== '' ? $nationalite : null),
             ':bio'    => $bio ?: null,
@@ -101,6 +104,7 @@ if (!empty($_FILES['photo']['name']) && $_FILES['photo']['error'] === UPLOAD_ERR
         // mettre à jour les données locales
         $cand['pseudo']       = $pseudo;
         $cand['equipe']       = $equipe;
+        $cand['poste'] = ($poste !== '' ? $poste : null);
         $cand['age'] = ($age > 0 ? $age : null);
         $cand['nationalite'] = ($nationalite !== '' ? $nationalite : null);
         $cand['bio_candidat'] = $bio;
@@ -156,6 +160,12 @@ if (isset($_POST['submit_candidature'])) {
                 <label>Équipe</label>
                 <input type="text" name="equipe"
                        value="<?= htmlspecialchars($cand['equipe'] ?? '') ?>">
+            </div>
+
+            <div class="vote-token-field">
+                <label>Poste</label>
+                <input type="text" name="poste"
+                       value="<?= htmlspecialchars($cand['poste'] ?? '') ?>">
             </div>
 
             <div class="vote-token-field">
