@@ -88,7 +88,7 @@ require('header.php');
         <p>Dans GGVote, nous avons retenu un <strong>scrutin uninominal majoritaire à un tour</strong>, un mode de vote simple, transparent et parfaitement adapté aux compétitions e-sport. </p>
         <p>Chaque électeur dispose d’un unique vote, qu’il attribue au joueur qu’il considère comme le meilleur.</p>
         <p>À la fin de la période de vote, le candidat ayant obtenu le plus grand nombre de voix est déclaré vainqueur.</p>
-        <p>Ce système garantit une compréhension immédiate des résultats, une participation intuitive pour les utilisateurs, et respecte les principes fondamentaux d’un vote sécurisé : unicité, anonymat, et intégrité du dépouillement. </p>
+        <p>Ce système garantit une compréhension immédiate des résultats, une participation intuitive pour les utilisateurs, et respecte les principes fondamentaux d’un vote sécurisé : <strong>unicité</strong>, <strong>anonymat</strong>, et <strong>intégrité</strong> du dépouillement. </p>
     </div>
 
     <div class="cta-vote">
