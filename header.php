@@ -116,9 +116,6 @@ if (isset($_POST['role']) && $_POST['role'] === 'electeur') {
                 $_SESSION['idelecteur']     = $member_row['idelecteur'];
                 $_SESSION['flash_message']  = "Connexion réussie en tant qu'électeur !";
 
-                header('Location: profil_electeur.php');
-                exit;
-
             } else {
                 // Message personnalisé si compte inactif, sinon identifiants incorrects
                 if (!empty($error_electeur)) {
