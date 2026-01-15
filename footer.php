@@ -1,4 +1,4 @@
-<!-- Footer -->
+
     <footer class="gg-footer">
     <div class="footer-content">
         <h2 class="footer-title">GGVote</h2>
@@ -53,4 +53,4 @@ const backToTop = document.getElementById("backToTop");
     });
 </script>
 </body>
-<!-- End Footer -->
+

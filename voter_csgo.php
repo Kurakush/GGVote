@@ -26,7 +26,7 @@ if (!$connexion) {
 $idjeu = 5; // CSGO
 $now   = date('Y-m-d H:i:s');
 
-/* --- Vérifier qu'il existe AU MOINS un scrutin ouvert pour LoL --- */
+/* --- Vérifier qu'il existe AU MOINS un scrutin ouvert pour CSGO --- */
 $sqlCheck = "SELECT COUNT(*)
              FROM scrutin s
              JOIN competition c ON c.idcompetition = s.idcompetition

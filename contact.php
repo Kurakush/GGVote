@@ -11,7 +11,7 @@ $row_count = $query->rowCount();
 $message_ok ="";
 $message_erreur="";
 
-// Check the number of rows that match the SELECT statement 
+
 if($row_count!=1) 
 {
   echo "Pb d'accès à la bdd"; 
@@ -85,7 +85,6 @@ else{
 &nbsp;
     </div>
 
-<!--Section: Contact v.2-->
 <?php
 }
 

@@ -182,7 +182,7 @@ if (isset($_POST['role']) && $_POST['role'] === 'candidat') {
 
 
 
-// set admin / electeur vars
+
 $admin    = isset($_SESSION["login"]);
 $electeur = isset($_SESSION["electeur_email"]);
 $candidat = isset($_SESSION["idjoueur_candidat"]);
