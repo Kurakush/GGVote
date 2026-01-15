@@ -33,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm       = $_POST['confirm'] ?? '';
     $idcompetition = (int)($_POST['idcompetition'] ?? 0);
 
+    // Checkbox CGU / Mentions légales
+    $accept_cgu = isset($_POST['accept_cgu']);
+
     // Vérifications
     if (
         $pseudo === '' ||
@@ -42,6 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idcompetition <= 0
     ) {
         $message_error = "Tous les champs doivent être remplis.";
+    }
+
+    elseif (!$accept_cgu) {
+        $message_error = "Vous devez accepter les conditions d'utilisation et les mentions légales.";
     }
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message_error = "L'email n'est pas valide.";
@@ -186,6 +193,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="auth-submit">
                 Créer mon compte
             </button>
+
+            <div class="auth-field auth-checkbox">
+                <label class="auth-checkbox-label">
+                <input type="checkbox"
+                    name="accept_cgu"
+                    value="1"
+                    required
+                    <?= isset($_POST['accept_cgu']) ? 'checked' : '' ?>>
+        <span>
+            J'accepte les
+            <a href="mentions_legales.php" target="_blank">mentions légales</a>
+            et les
+            <a href="cgu.php" target="_blank">conditions d'utilisation</a>
+        </span>
+                </label>
+            </div>
+
         </form>
 
     </div>
