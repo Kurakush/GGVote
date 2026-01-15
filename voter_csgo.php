@@ -79,7 +79,7 @@ $competitions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php
     // Joueurs de cette compétition
     $sqlJ = "SELECT * FROM joueur
-             WHERE idcompetition = :idcomp
+             WHERE idcompetition = :idcomp AND candidature_validee = 1
              ORDER BY pseudo";
     $stmtJ = $connexion->prepare($sqlJ);
     $stmtJ->execute([':idcomp' => $comp['idcompetition']]);
