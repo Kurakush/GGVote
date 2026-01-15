@@ -13,7 +13,7 @@ $idcompetition  = (int) ($_POST['idcompetition'] ?? 0);
 $date_ouverture = $_POST['date_ouverture'] ?? '';
 $date_cloture   = $_POST['date_cloture'] ?? '';
 
-// datetime-local arrive sous forme "YYYY-MM-DDTHH:MM" → on remet un espace
+
 $date_ouverture = str_replace('T', ' ', $date_ouverture) . ':00';
 $date_cloture   = str_replace('T', ' ', $date_cloture) . ':00';
 
