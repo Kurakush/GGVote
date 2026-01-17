@@ -339,9 +339,9 @@ $candidat = isset($_SESSION["idjoueur_candidat"]);
 
             <!-- Onglets -->
             <div class="tab-menu">
-                <button type="button" id="tabElecteur" class="active" onclick="switchTab('electeur')">Électeur</button>
-                <button type="button" id="tabAdmin" onclick="switchTab('admin')">Admin</button>
-                <button type="button" id="tabCandidat" onclick="switchTab('candidat')">Candidat</button>
+                <button type="button" id="tabElecteur" class="active" onclick="switchTab('electeur')">Electeur</button>
+                <button type="button" id="tabAdmin" onclick="switchTab('admin')">Candidat</button>
+                <button type="button" id="tabCandidat" onclick="switchTab('candidat')">Admin</button>
             </div>
 
             <!-- Contenu onglet ÉLECTEUR -->
